@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,WAAU;EACT,MAAM,EAAE,CAAC;EACN,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,UAAU",
+"sources": ["../../_form-placeholders.scss"],
+"names": [],
+"file": "config1.css"
+}

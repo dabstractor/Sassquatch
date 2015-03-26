@@ -1,0 +1,49 @@
+@import "vita-list";
+
+$config: (
+	options: (
+		// max-width: 400,
+		// position: left,
+		// align: left,
+		size: 3,
+		spacing: 8,
+	),
+	header: (
+		// spacing: crunch,
+	),
+	content: (
+		minRows: 1,
+		divider: 9 center,
+		// useWidget: info,
+
+		// divider-position: right, //optional. for clarity
+		interactive: true,
+		selectable: true,
+		// align: right,
+		// rows: 1,
+		// spacing: crunch,
+		// content:(
+		// 	someElement: (
+				
+		// 		.Xwidth : 150
+		// 	)
+
+		// )
+	),
+	footer: (
+		// align: right,
+		// spacing: crunch,
+		// align: left,
+		// includeButton: true,
+		// buttonIcon: search,
+	)
+);
+
+
+// @include vita-list( $config, #current-filters );
+
+.vita-list {
+	@include vita-list( $config );
+}
+
+// both of these syntaxes work ^^^^^^

@@ -1,0 +1,408 @@
+@function addOpacity($color:black, $opacity: null){
+    
+    $thisRed: red($color);
+    $thisGreen: green($color);
+    $thisBlue: blue($color);
+
+    @if ($opacity) {
+        @return rgba($thisRed,$thisGreen,$thisBlue,$opacity)
+    } @else {
+       	@return rgba($thisRed,$thisGreen,$thisBlue,1)
+    }
+}
+
+// _mixins.scss
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
+      @content;
+    }
+  }
+ 
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+@mixin custom-respond-to($breakpoint) {
+  // Retrieves the value from the key
+  $value: map-get($custom-breakpoints, $breakpoint);
+ 
+  // If the key exists in the map
+  @if $value != null {
+    // Prints a media query based on the value
+    @media (min-width: $value) {
+      @content;
+    }
+  }
+ 
+  // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+@mixin mySize($width: auto, $min-width: auto, $height: auto, $min-height: auto){
+	
+    width: $width;
+    min-width: $min-width;
+    height: $height;
+    min-height: $min-height;
+
+}
+
+@mixin myPosition($pos,$op,$p1:auto,$p2:auto) {
+
+	@if $pos == abs {
+		position: absolute;
+	} @else if $pos == rel {
+		position: relative;
+	} @else if $pos == fix {
+		position: fixed;
+	}
+
+	@if $op == t-l {
+		top: $p1;
+		left: $p2;
+
+	} @else if $op == t-r {
+		top: $p1;
+		right: $p2;
+
+	} @else if $op == b-l {
+		bottom: $p1;
+		left: $p2;
+
+	} @else if $op == b-r {
+		bottom: $p1;
+		right: $p2;
+	}	
+}
+
+
+@mixin addCornerRadius($corner, $rad) {
+
+
+	@if $corner == t-l {
+
+             -moz-border-radius-topleft: $rad;
+         -webkit-border-top-left-radius: $rad;
+  			     border-top-left-radius: $rad;
+
+	} @else if $corner == t-r {
+
+		    -moz-border-radius-topright: $rad;
+        -webkit-border-top-right-radius: $rad;
+  			    border-top-right-radius: $rad;
+
+	} @else if $corner == b-l {
+
+	      -moz-border-radius-bottomleft: $rad;
+	  -webkit-border-bottom-left-radius: $rad;
+	          border-bottom-left-radius: $rad;
+
+	} @else if $corner == b-r {
+
+	     -moz-border-radius-bottomright: $rad;
+	 -webkit-border-bottom-right-radius: $rad;
+	         border-bottom-right-radius: $rad;
+
+	}
+}
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $color;
+    -moz-box-shadow:inset $top $left $blur $color;
+    box-shadow:inset $top $left $blur $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $color;
+    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
+}
+
+@mixin font-size($size) {
+	font-size: $size;
+	font-size: calculateRem($size);
+}
+
+@mixin letterpress($color, $opacity){
+    text-shadow:addOpacity($color, $opacity) 0 1px 0;
+}
+
+@mixin linear-gradient($start: #f1f1f1, $from: 0%, $stop: #d9d9d9, $to: 100%) { 
+	background: $start;
+	background: -webkit-gradient(linear, left top, left bottom, from($start), to($stop));
+	background: -moz-linear-gradient(center top, $start $from, $stop $to);
+	background: -moz-gradient(center top, $start $from, $stop $to);
+	background: -webkit-linear-gradient(top, $start $from,$stop $to);
+	background: -o-linear-gradient(top, $start $from,$stop $to);
+	background: -ms-linear-gradient(top, $start $from,$stop $to);
+	background: linear-gradient(to bottom, $start $from,$stop $to);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$start}', endColorstr='#{$stop}',GradientType=0 );
+}
+
+@mixin clearfix() {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+
+@mixin addTransition( $prop: all, $time: 200ms, $timing-fn: linear) { //adds hardware-accelerated transition
+	transition: $prop $time $timing-fn;
+	-webkit-transition: $prop $time $timing-fn;
+	-moz-transition: $prop $time $timing-fn;
+	-o-transition: $prop $time $timing-fn;
+}
+
+@mixin addCustomTransition( $values ) { //adds hardware-accelerated transition
+	transition: $values;
+	-webkit-transition: $values;
+	-moz-transition: $values;
+	-o-transition: $values;
+}
+
+@mixin addTextStroke( $color: #000,	$width: 1px, $fade: 0 ) { //uses 4 text-shadows instead of text-stroke for cross-browser compatibility
+	text-shadow:
+		$width*-1 $width*-1 $fade $color,
+		$width $width*-1 $fade $color,
+		$width*-1 $width $fade $color,
+		$width $width $fade $color; 
+}
+
+@mixin addTextShadow( $depth: 2px, $color: #ddd, $pos: b-r, $fade: $depth*2 ) {
+	@if $pos == t-r {	
+		text-shadow: $depth $depth*-1 $fade $color;
+	} @else if $pos == t-l {	
+		text-shadow: $depth*-1 $depth*-1 $fade $color;
+	} @else	if $pos == b-l {
+		text-shadow: $depth*-1 $depth $fade $color;
+	} @else if $pos == b-r {	
+		text-shadow: $depth $depth $fade $color;
+	}
+}
+
+@mixin addFont( $name, $url ) {
+	@font-face {
+		font-family: $name;
+		font-style: normal;
+		font-weight: 400;
+		src: url($url + ".ttf");
+		src: url($url + ".otf") format('embedded-opentype'),
+			url($url + ".woff") format('woff'),
+			url($url + ".ttf") format('truetype'),
+			url($url + ".svg#webfont") format('svg');
+	}
+}
+
+
+@mixin buttonText() {
+	
+	&>span:first-child {
+		display: block;
+		float: left;
+		font-size: 0.8rem;
+		line-height: 23px;
+		width: 73%;
+		height: 100%;
+		margin: auto;
+		text-transform: uppercase;
+		@include letterpress( white, 100%);
+        font-family: formFont;
+                
+        &:active {
+            @include letterpress( rgb(80,80,80), 100%);
+        }
+	}
+}
+
+@mixin centerMe($p, $w, $h) {
+    position: $p;
+    margin-top: -$h * 0.5;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: -$w * 0.5;
+    top: 50%;
+    left: 50%;
+}
+
+
+@mixin vitaForm(){
+    
+    @at-root .vita-form {
+
+        input{
+
+                &[type="text"], &[type="password"], &[type="email"]{
+                    background-color: #fff;
+                    border: 1px solid #adadad;
+                    border-radius: 3px;
+                    height: 22px;
+
+                    &:focus {
+                        border-color: #505050;
+                    }
+                }
+
+                &[type="radio"], &[type="checkbox"]{
+                    display: none;
+                }
+
+                &[type="checkbox"] + label, &[type="radio"] + label {
+                    color: rgb(80,80,80);
+
+                }
+
+                &[type="checkbox"] + label span {
+                    display: inline-block;
+                    background: url("../img/sprites/sprites_reg_2.svg") no-repeat -86px -118px;
+                    width: 15px;
+                    height: 14px;
+                    cursor: pointer;
+                    margin: 0 1px -2px 2px;
+                }
+
+                &[type="checkbox"]:checked + label span {
+                    background: url("../img/sprites/sprites_reg_2.svg") no-repeat -86px -135px;
+                }
+
+                &[type="radio"] + label span {
+                    display: inline-block;
+                    background: url("../img/sprites/sprites_reg_2.svg") no-repeat -105px -118px; 
+                    width: 15px; 
+                    height: 15px;
+                    cursor: pointer;
+                    margin: 0px 2px -2px 1px;
+                }
+
+                &[type="radio"]:checked + label span {
+                    background: url("../img/sprites/sprites_reg_2.svg") no-repeat -105px -134px;
+                }
+
+                &[type="textarea"]{
+
+                }
+
+        }
+
+    @at-root .select-container{
+
+            position: relative;
+
+            #vita-select {
+                background: none repeat scroll 0 0 rgb(244, 244, 244);
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                height: 34px;
+                overflow: hidden;
+                width: 240px;
+
+                .dropdown-button{
+                    background: #40afff; /* Old browsers */
+                    background: -moz-linear-gradient(top,  #40afff 45%, #407dff 100%); /* FF3.6+ */
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(45%,#40afff), color-stop(100%,#407dff)); /* Chrome,Safari4+ */
+                    background: -webkit-linear-gradient(top,  #40afff 45%,#407dff 100%); /* Chrome10+,Safari5.1+ */
+                    background: -o-linear-gradient(top,  #40afff 45%,#407dff 100%); /* Opera 11.10+ */
+                    background: -ms-linear-gradient(top,  #40afff 45%,#407dff 100%); /* IE10+ */
+                    background: linear-gradient(to bottom,  #40afff 45%,#407dff 100%); /* W3C */
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40afff', endColorstr='#407dff',GradientType=0 ); /* IE6-9 */
+                    border-bottom-right-radius: 3px;
+                    border-left: 1px solid rgb(17, 181, 255);
+                    border-top-right-radius: 3px;
+                    float: right;
+                    height: 100%;
+                    position: relative;
+                    right: 0;
+                    top: 0;
+                    width: 36px;
+
+                    .arrow{
+                        background: none repeat scroll 0 0 transparent;
+                        border-left: 8px solid transparent;
+                        border-right: 8px solid transparent;
+                        border-top: 12px solid rgb(200,200,200);
+                        height: auto;
+                        margin: 0 auto;
+                        position: absolute;
+                        right: 11px;
+                        top: 12px;
+                        width: auto;
+                        .inner-arrow {
+                            background: none repeat scroll 0 0 transparent;
+                            border-left: 6px solid transparent;
+                            border-right: 6px solid transparent;
+                            border-top: 9.9px solid rgb(244, 244, 244);
+                            height: auto;
+                            margin: 0 auto;
+                            position: absolute;
+                            right: -5.5px;
+                            top: -11px;
+                            width: auto;
+                        } // End .inner-arrow
+                    }// End arrow
+                }// End .dropdown-button
+            }// End #vita-select
+
+            #vita-dropdown{
+                background: none repeat scroll 0 0 #f4f4f4;
+                border: 2px solid #40afff;
+                border-radius: 4px;
+                height: 160px;
+                left: 8px;
+                position: absolute;
+                top: 55px;
+                width: 227px;
+
+                .dropdown-arrow {
+                    background: none repeat scroll 0 0 transparent;
+                    border-bottom: 19px solid rgb(64, 175, 255);
+                    border-left: 11px solid transparent;
+                    border-right: 11px solid transparent;
+                    height: 0;
+                    position: absolute;
+                    right: 4px;
+                    top: -20px;
+                    width: 0;
+                }
+
+                .dropdown-list {
+                    float: left;
+                    height: 100%;
+                    list-style: outside none none;
+                    margin: 0;
+                    overflow: hidden;
+                    padding: 0;
+                    position: absolute;
+                    top: 0;
+                    width: 100%; 
+
+                    li {
+                        position: relative;
+                        width: 223px;
+                        height: 30px;
+
+                        &:hover {
+                            background: rgb(230,230,230);
+                            border-left: 5px solid rgb(64, 175, 255);
+                        }
+                        span {
+                            font-family: montserrat;
+                            height: 100%;
+                            left: 5px;
+                            position: absolute;
+                            top: 4px;
+                        } // End span
+                    } // End li
+                } // End .dropdown-list
+            }// End #vita-dropdown
+        }// End .dropdown-container
+
+    } //End .vita-form
+      
+}

@@ -1,0 +1,24 @@
+$form-default-config: (
+	options: (
+		elementsUsed: all,
+		containerWidth: 100%,
+		containerHeight: 100%,
+		size: 5,
+		boxed: false,
+		border: false,
+		shadow: false,
+		rounded: false,
+	),
+	header: (
+		width: 100%,
+		height: 10%,
+	),
+	content: (
+	),
+	footer: (
+		width: 100%,
+		height: 10%,
+		useButton: false,
+	),
+
+);

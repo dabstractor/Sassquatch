@@ -1,0 +1,193 @@
+@import "functions";
+@import "config";
+
+@each $panelSize in getOption( panelSizes ) { // builds out panel sizes from config.scss > $gallery-template-config > panelSizes
+	$multiplier: $panelSize;
+
+	@if( $multiplier == 33 ) {
+		$multiplier: 33.333333;
+	} @elseif ( $multiplier == 66 ) {
+		$multiplier: 66.666667;
+	}
+	%#{ getPrefix() }-panel-#{ $panelSize } {
+		@if ( $multiplier == auto ) {
+			height: auto;
+			margin-bottom: 20px !important;
+		} @else {
+			height: getOption( containerSize )*$multiplier/100 - getOption( panelMargin )*2;
+		}
+	}
+}
+
+%#{ getPrefix() }-base {
+	// main: base;
+	// display: flex;
+	// flex-direction: column;
+	display: block;
+	// margin: auto;
+}
+
+%#{ getPrefix() }-wrapper-base {
+	// wrapper: base; // todo
+	// height: auto;
+	display: flex;
+	flex-flow: row wrap;
+	// justify-content: space-around; 
+	margin: auto;
+}
+
+%#{ getPrefix() }-column-base {
+	column: base; // todo
+	// min-width: 273px;
+	// max-width: 273px;
+	// margin: auto;
+	width: 280px;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	overflow: hidden;
+}
+
+%#{ getPrefix() }-panel-base {
+	display: flex;
+	flex-flow: column nowrap;
+	box-sizing: border-box;
+	border: 2px solid $gallery-template-blue;
+	border-radius: 3px;
+	margin: 5px;
+	overflow: hidden;
+	padding: 0;
+	background-color: rgb( 244, 244, 255 );
+	position: relative;
+	// justify-content: center; //todo fixme value in question
+	justify-content: flex-start;
+}
+
+%#{ getPrefix() }-panel-clear {
+	background-color: transparent;
+	border-color: transparent;
+}
+
+%#{ getPrefix() }-panel-with-header {
+	background-color: inherit;
+	height: 100%;
+}
+
+
+//widget base styles
+
+
+%#{ getPrefix() }-widget-container { //only applies to non-header widgets
+	display: table;
+	flex-flow: column nowrap;
+	justify-content: center;  
+	align-items: center;
+	text-align: center;
+	box-sizing: border-box;
+	position: relative;
+	width: 100%;
+	margin: 0;
+	position: relative;
+	border-top: 0px;
+	border-bottom: 0px;
+	background-color: inherit;
+}
+
+%#{ getPrefix() }-widget-header {
+	display: block;
+	text-align: center;
+	font-size: 1.3rem;
+	letter-spacing: -.02em;
+	margin: getOption( panelMargin ) auto;
+	width: 100% !important;
+	text-align: center !important;
+	z-index: 1;
+	position: relative;
+}
+
+%#{ getPrefix() }-widget-content-base { // base styles for content when widget has header
+	display: flex;
+	flex-flow: column nowrap;
+	position: relative;
+	height: 90%;
+	width: 100%;
+	align-self: center; 
+	justify-content: center;
+	text-align: center;
+	background-color: inherit;
+}						
+
+%#{ getPrefix() }-widget-base { // for widgets without headers
+	width: 100%;
+	box-sizing: border-box;
+	height: 0%;
+	position: relative;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	align-self: center;
+	background-color: inherit;
+}
+
+%#{ getPrefix() }-widget-divider { // optional dividing line between widgets
+	nothing: to see here;
+	// &:before {
+	// 	position: relative;
+	// 	top: -2px;
+	// 	width: 90%;
+	// 	height: 0px;
+	// 	margin: 0 auto;
+	// 	content: "\00a0 ";
+	// 	border-top: 2px solid $color1;// $main-gray;
+	// }
+}
+
+%gallery-template-multi-widget-panel {
+	height: auto;
+	min-height: 85%;
+	max-height: 85%;
+	align-items: flex-start;
+	@media screen and (-webkit-min-device-pixel-ratio:0) {
+		min-height: 50%;
+		max-height: 70%;
+		height: 70%;
+	}
+}
+
+%blue {
+	background-color: #00afff; // generated
+}
+%green {
+	background-color: #0cc904; // generated
+}
+%orange {
+	background-color: #ff7000; // generated
+}
+%red {
+	background-color: #e61818; // generated 
+}
+%purple {
+	background-color: #6f50bf; // generated
+}
+
+%white-overlay {
+	@extend %blank-content;	
+	background-color: rgba( 255, 255, 255, .5 );
+	position: absolute;
+	right: 0px;
+	width: 50%;
+	height: 100%;
+}
+
+%green-text {
+	.green-text {
+		color: #00b540;
+	}
+}
+
+%red-text {
+	.red-text {
+		color: #b52020;
+	}
+}

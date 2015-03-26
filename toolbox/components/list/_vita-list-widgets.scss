@@ -1,0 +1,227 @@
+%vita-list-widgets-checkbox {
+
+	justify-content: flex-start;
+	text-align: left;
+
+	&:not(.listExtender) {
+		&>div {
+			box-sizing: content-box;
+			display: inline-block;
+			position: relative;
+			// background-color: $color4;
+			margin: 5px;
+			border: 2px solid $color4;
+			@include addCornerRadius( all, 2px );
+			// border-radius: 10px;
+			width: 12px;
+			max-width: 12px;
+			min-width: 12px;
+			height: 12px;
+			max-height: 12px;
+			min-height: 12px;
+			margin-right: 9px;
+
+			&:before {
+				position: absolute;
+				top: 1px;
+				left: 1px;
+				content: "";
+				display: inline-block;
+				background-color: transparent;
+				min-height: 10px;
+				max-height: 10px;
+				height: 10px;
+				min-width: 10px;
+				max-width: 10px;
+				width: 10px;
+			}
+		}
+
+		&:hover {
+			&>div {
+				border-color: lighten( $color4, 10% );
+				&:before {
+					background-color: lighten( $color4, 50% );
+				}	
+			}
+			&.checked>div {
+				border-color: lighten( $color5, 10% );
+				&:before {
+					background-color: darken( $color4, 6% );
+				}	
+			}
+		}
+		&.checked>div {
+			border-color: $color5;
+			&:before {
+				background-color: $color4;
+			}
+		}
+	}
+} // end checkbox
+
+%vita-list-widgets-info {
+	flex-direction: column;
+	min-width: 260px;
+	width: 100%;
+	display: flex;
+	// flex: 1 0 auto;
+	// background-color: blue !important;
+	&>div { // contains img, columns, values underneath header (content)
+		
+		display: flex;
+		flex-flow: row nowrap;
+		align-self: flex-start;
+		align-items: center;
+		width: 100%;
+
+		&:nth-of-type( 1 ) { // header, for Name in template
+			display: block;
+			white-space: nowrap;
+			align-self: center;
+			letter-spacing: -1.2px; 
+			margin-bottom: 10px;
+			// background-color: red;
+		}
+
+		&:nth-of-type( 2 )>div { // row containing div>img, and div>div>spans
+			// background-color: green;
+			display: flex;
+			width: 100%;
+			max-width: 100%;
+			overflow: hidden;
+			width: 100px;
+			height: 100px;
+			min-width: 100px;
+			min-height: 100px;
+
+			&:nth-of-type( 1 ) {
+				// flex: 1 1 100px;
+				&>img {
+					width: 100px;
+					height: 100px;
+				}
+			}
+
+
+			&:nth-of-type( 2 ) {
+				flex: 1 0 50%;
+				display: flex;
+				flex-flow: column nowrap;
+				justify-content: space-around;
+				height: 100px;
+
+				&>div {
+					display: flex;
+					flex-flow: row nowrap;
+					margin: 0;
+					padding: 0;
+					width: 100%;
+					height: 100%;
+
+					&>span {
+						display: inline-block;
+						font-size: 12px;
+						letter-spacing: -0.8px;
+						flex: 1 0 50%;
+						padding: 0 0 0 5px;
+						text-align: left;
+						height: 100%;
+
+						&:nth-of-type( 2 ) {
+							border-left: 1px solid $main-grey;
+						}
+					}
+				}
+			}
+		}
+		// &>div {
+		// 	display: flex;
+		// 	margin: 10px 0;
+
+		// 	&>img {
+		// 		// width: auto;
+		// 		// height: auto;
+		// 		height: 100px;
+		// 		width: 100px;
+		// 		flex: 1 0 100px;
+		// 		// height: 100%;;
+		// 	}
+
+		// 	&>div {
+		// 		display: flex;
+		// 		flex-direction: column;
+		// 		justify-content: flex-end;
+		// 		// align-items: center;
+		// 		margin: 5px;
+		// 		flex: 1 0 auto;
+		// 		// max-width: 30%;
+		// 		// flex: 0 2 auto;
+		// 		font-size: 9pt;
+		// 		letter-spacing: .05em;
+
+		// 		&>span {
+		// 			// flex: 1 0 auto;
+		// 			text-align: left !important;
+		// 			max-width: 50%;
+		// 			// float: right;
+
+
+
+		// 			// white-space: nowrap;
+		// 		}
+			
+		// 	}
+		// 	&>div:nth-child( 1 ) {
+		// 		padding-right: 10px;
+		// 		border-right: 1px solid $main-grey;
+		// 	}
+		// }
+	}
+}
+
+%extender {
+	@extend %blank-content;
+	cursor: pointer;
+
+	&>div {
+		// padding: 0px;
+		margin: 5px auto;
+		position: relative;
+		background-color: $color2;
+		border: 2px solid $color4;
+		width: 31px;
+		max-width: 31px;
+		min-width: 31px;
+		height: 31px;
+		max-height: 31px;
+		min-height: 31px;
+		border-radius: 50%;
+		letter-spacing: 2px;
+
+		&:after {
+			box-sizing: border-box;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			color: $color5;
+			left: 1px;
+			top: 7px;
+			font-size: 32px;
+			line-height: 16px;
+			text-align: center;
+			content: "+";
+			margin: auto;
+			@include letterpress( $color4, .5 );
+		}
+	}
+
+}
+
+%vita-list-widgets-extender {
+	&.listExtender {
+		@extend %extender;
+		width: 100%;
+		// display: flex !important;
+	}
+}

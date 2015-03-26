@@ -1,0 +1,98 @@
+@import "../../../../toolbox";
+
+.formExtender { 
+	@extend %extender;
+}
+section.formTemplate {
+	
+	display: none !important;
+	background-color: red;
+}
+section.formTemplateClone {
+	background-color: $color4 !important;
+	border: 2px solid $color5 !important;
+}
+section.formTemplateAnimation {
+	box-sizing: border-box;
+	// transition: background-color 600ms linear,
+	// 			border 600ms linear;
+	background-color: transparent;
+	// border: 2px solid $color1;
+	border-radius: 10px;
+}
+// #new-project-form {
+// 	& input {
+// 		text-align: right !important;
+// 	}
+// }
+
+$config: (
+	options: (
+		elementsUsed: all,
+		// width: 500px,
+		containerHeight: 100%,
+		containerWidth: 100%,
+		// height: 100%,
+		boxed: true,
+		border: false,
+		accent: 2,
+		shadow: true,
+		rounded: false,
+		styles: (
+			// "&" : (
+			// 	margin: 10px,
+			// 	// border: 4px solid lighten( green, 30% ),
+			// 	// border-width: 20px,
+			// 	// background-color: lighten( red, 40% ) !important,
+			// 	// width: 474px,
+			// 	// height: 500px,
+			// 	// #{ @include addCornerRadius( ) },
+			// ),
+			// ">div:nth-of-type( 3 )": (
+			// 	// display: none, 
+			// ),
+			// "&>div": (
+			// 	// background-color: blue !important,
+			// ),
+			// input: (
+			// 	// background-color: orange !important,
+			// ),
+		),
+	),
+	header: (
+		// height: 40px,
+		// height: 600px,
+		// width: 99%,
+		height: 8%,
+		// styles: (
+		// 	"&": (
+		// 		background-color: blue,
+		// 	),
+		// ),
+
+		// styles: (
+			// "&": (
+			// 	width: 50% !important,
+			// )
+		// ),
+		
+	),
+	content: (
+		
+	),
+	footer: (
+		useButton: true,
+		// height: 6%,
+		// boxed: true,
+		// accent: 3,
+		// boxed: 1,
+		// styles: (
+		// 	span: (
+		// 		background-color: green,
+		// 	),
+		// ),
+	)
+);
+
+@include form( $config, #new-project-form );
+@include modal((), #new-project);

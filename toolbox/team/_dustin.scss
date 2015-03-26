@@ -1,0 +1,337 @@
+$button-grey: darken( $main-grey, 37.1% );
+$border-blue: #4caefd;
+$hover-blue: lighten( $border-blue, 12% );
+$background-grey: lighten( $main-grey, 15.8% );
+
+$background-white: #f7f7f7;
+
+$color1: $main-grey;
+$color2: $background-grey;
+$color3: $background-white;
+$color4: $button-grey;
+$color5: $border-blue;
+
+
+//begin mixins
+
+@mixin custom-box-shadow( $values ) { 
+	-webkit-box-shadow: #{ $values };
+	   -moz-box-shadow: #{ $values };
+		    box-shadow: #{ $values };
+}
+
+@mixin addCornerRadius($corner, $rad) { //altered from _mixins 
+
+
+	@if $corner == t-l {
+
+             -moz-border-radius-topleft: $rad;
+         -webkit-border-top-left-radius: $rad;
+  			     border-top-left-radius: $rad;
+
+	} @else if $corner == t-r {
+
+		    -moz-border-radius-topright: $rad;
+        -webkit-border-top-right-radius: $rad;
+  			    border-top-right-radius: $rad;
+
+	} @else if $corner == b-l {
+
+	      -moz-border-radius-bottomleft: $rad;
+	  -webkit-border-bottom-left-radius: $rad;
+	          border-bottom-left-radius: $rad;
+
+	} @else if $corner == b-r {
+
+	     -moz-border-radius-bottomright: $rad;
+	 -webkit-border-bottom-right-radius: $rad;
+	         border-bottom-right-radius: $rad;
+
+	} @else if $corner == all { //*addition*
+								// shouldn't this have been in there the whole time?
+
+	     -moz-border-radius: $rad;
+	 -webkit-border-radius: $rad;
+	         border-radius: $rad;
+	}
+}
+
+
+// \/\/ added for custom styles passed through component config
+@mixin addStyles( $styles ) { //accepts a map of css properties/values
+	@if( type-of( $styles ) == map ) {
+		@each $selector, $style in $styles {
+			#{ $selector } {
+				@include useStyleMap( $style );
+			}
+		}
+	} @else {
+		@warn( "Mixin addStyles accepts only a single map as parameters" );
+	}
+}
+
+@mixin useStyleMap( $styles ) {
+	@each $prop, $val in $styles {
+		#{ $prop }: #{ $val };
+	}	
+}
+
+// overloading from mixins.scss, thought it could use a rewrite
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+	@if $inset == true {
+		$inset: inset;
+	} @else {
+		$inset: "";
+	}
+    -webkit-box-shadow: $inset $top $left $blur $color;
+    -moz-box-shadow: $inset $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+}
+
+
+@mixin custom-button( $icon: null, $activeIcon: null ) {
+	@extend %custom-button;
+
+	$active: null;
+	@if( $activeIcon ) { // if they specify activeIcon explicity, use that value
+		$active: $activeIcon;
+	} @elseif( $icon ) { // but if they specify icon without explicitly specifying
+		$active: $icon;	 // activeIcon, use icon for active
+	}
+	@if( $icon ) {
+		&>span:nth-of-type( 2 ) {
+			icon: $icon;
+			@include icon( $icon, 1.2 );
+		}
+	}
+	@if( $active ) {
+		&:active>span:nth-of-type( 2 ) {
+			activeIcon: $active;
+			@include icon( $active );
+		}
+	}
+	//flesh this out...
+}
+//end mixins
+
+//begin placeholders
+%strike-through-heading {
+	position: relative;
+	background-color: inherit;
+	text-align: center;
+	
+	&>span {
+		border-left: 1px solid $color1;
+		border-right: 1px solid $color1;
+		padding: 0 5%;
+		background-color: inherit;
+		position: relative;
+		// margin: 0 auto;
+
+	}
+
+	&:before { // strike-through bar
+		height: 2px;
+		width: 100%;
+		margin: auto;
+		right: 0;
+		left: 0;
+		background-color: $color1;
+		content: " ";
+		position: absolute;
+		left: 0;
+		top: 50%;
+		line-height: 100%;
+	}
+}
+
+%blank-content {
+	content: "\00a0 ";
+}
+
+%custom-checkbox {
+
+}
+
+%custom-button-base {
+	@extend %no-select;
+	position: relative;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: stretch;
+	align-items: center;
+	position: relative;
+	cursor: pointer;
+	margin: 0 10px;
+	min-height: 36px;
+	max-height: 200px;
+	max-width: 100%;
+	min-width: 160px;
+	border: 1px solid $color1; 
+	@include addTransition( background-color );
+	overflow: hidden;
+	border-radius: 4px;
+	// font-size: 15px;
+}
+
+%button-hover {
+	
+	@include linear-gradient( #f4f4f4, 25%, #afafaf, 100% );
+		@include box-shadow( 0px, 1px, 3px, darken( $color5, 5% ) );
+		// &>span:nth-of-type(1) {
+			// text-shadow: 0px 0px 13px lighten( $color4, 5% );
+	// }
+}
+
+%custom-button {
+	@extend %custom-button-base;
+
+	@include box-shadow( 0px, 1px, 3px, $color5 );
+	@include addTransition( all, 100ms );
+	@include linear-gradient( #ffffff, 0%, #afafaf, 100% );
+	span {
+		font-size: 16px;
+	}
+
+	&:hover {
+		@extend %button-hover;
+	}
+
+	&:focus {
+		@extend %button-hover;
+	}
+
+	&:active {
+
+		@include linear-gradient(#408aff , 0%, #40afff, 100% );
+		@include box-shadow( 0px, 2px, 2px, $color1 );
+
+ 		&>span {
+			&:nth-of-type(1) {
+				color: white;
+				text-shadow: 0px 0px 15px $color4,
+							 0px 0px 15px $color4;
+			}
+	 		&:nth-of-type(2) {
+	 			// @include icon("blue-right-arrow");
+	 			&::after {
+	 				background-color: #ddd;	
+	 			}
+	 		}
+ 		}
+	}
+
+	&>span {
+		&:nth-of-type(1) {
+			flex: 1 0 0;
+			display: inline-block;
+			text-align: center;
+			word-wrap: break-word;
+			padding: 0 10px;
+			margin: 0 auto;
+			text-shadow: 0px 0px 5px $color1;
+		}
+
+ 		&:nth-of-type(2) {
+ 			flex: 0 0 1;
+ 			margin: 0 12px;
+ 			align-self: center;
+ 			overflow: visible;
+ 			max-height: 36px;
+			@include icon("white-right-arrow", 1.2); //default icon
+ 			display: block;
+
+			&::after {
+				display: inline-block;	
+				content: "\00a0 ";
+				width: 1px;
+				height: 200px;
+				background-color: $color1;
+				position: relative;
+				margin-right: 100%;
+				right: 6px;
+				top: -58px;
+			}
+		}
+	}
+}
+
+%no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;	
+}
+
+%selectable {
+    -webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;	
+}
+//end placeholders
+
+// general classes begin here
+
+.transparent {
+	color: transparent;
+	background-color: transparent;
+}
+
+
+//end classes 
+
+//begin functions
+
+@function customZip( $list, $delim: " " ) {
+	$return: "";
+	@each $item in $list {
+		$return: $return + $item + $delim;
+	}
+	@return $return;
+}
+
+@function stringify( $val, $delim: " " ) {
+	@if( type-of( $val ) == map ) {
+		// @if( $val == () ) { @return #{ "" }; }
+		$return: #{ "" };
+		@each $key, $value in $val {
+			$return: #{ $return + stringify($key) + $delim + stringify( $value, $delim ) };
+		}
+		@return $return;
+	} @elseif ( type-of( $val ) == list ) {
+		@return customZip( $val, $delim );
+	} @else {
+		@return $val + $delim;
+	}
+}
+
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+  
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  
+  @return $string;
+}
+
+@function ppm_debug($prefix, $vars...) {
+  $result: '';
+  @each $item in $vars {
+    $type: type-of($item);
+    @if 'list' == $type {
+      @debug 'list of #{length($item)} values:';
+      $result: ppm_debug('  - ', $item...);
+    }
+    @else {
+      @debug '#{$prefix}(#{$type})  #{$item}';
+    }
+  }
+ 
+  @return "";
+}

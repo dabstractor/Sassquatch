@@ -1,0 +1,406 @@
+
+.vitacon {
+
+    background: url("#{$vitacon_path_old}") no-repeat;
+
+    &.search {
+            background-position: 0 0px;
+            width: 17px;
+            height: 18px;
+    }
+    &.search-active {
+            background-position: -19px 0;
+            width: 17px;
+            height: 18px;	
+    }
+    &.user {
+            background-position: 0 -24px;
+            width: 16px;
+            height: 15px;
+    }
+
+    &.user-active {
+            background-position: -20px -24px;
+            width: 16px;
+            height: 15px;
+    }
+    &.password {
+            background-position: 0 -43px;
+            width: 16px;
+            height: 8px;
+    }
+    &.password-active {
+            background-position: -18px -44px;
+            width: 15px;
+            height: 8px;
+    }
+
+    &.gear {
+            background-position: 0 -82px;
+            width: 13px;
+            height: 14px;
+
+            &:hover {
+                background-position: 0 -98px;
+                width: 13px;
+                height: 13px;
+            }
+    }
+
+    &.trash {
+            background-position: 0 -114px;
+            width: 13px;
+            height: 15px;
+
+            &:hover {
+                background-position: 0 -138px;
+                width: 12px;
+                height: 15px;
+            }
+
+    }
+
+    &.leftarrow {
+            background-position:-37px -78px;
+            width: 32px;
+            height: 34px;
+            transform: scale(.7);
+
+            &:hover {
+                background-position:-37px -39px;
+            }
+
+    }
+
+    &.rightarrow {
+            background-position: -73px -38px;
+            width: 32px;
+            height: 34px;
+            transform: scale(.7);
+
+            &:hover {
+                background-position: -74px -78px;
+            }
+
+    }
+
+    &.checkmarkButton {
+            background-position: 0 -160px;
+            width: 129px;
+            height: 32px;
+            cursor: pointer;
+            -webkit-touch-callout: none; 
+            -webkit-user-select: none; 
+            -khtml-user-select: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+            user-select: none;
+
+            @include buttonText;
+
+            &:active {
+                    background-position: 0 -196px;
+                    width: 129px;
+                    height: 32px;
+                    color: #FFF;
+
+            }
+
+    }
+
+    &.xButton {
+            background-position: 0 -231px;
+            width: 129px;
+            height: 32px;
+            cursor: pointer;
+            -webkit-touch-callout: none; 
+            -webkit-user-select: none; 
+            -khtml-user-select: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+            user-select: none;
+
+            @include buttonText;
+
+            &:active {
+                    background-position: 0 -267px;
+                    width: 129px;
+                    height: 32px;
+                    color: #FFF;
+            }
+
+    }
+
+    &.usbButton {
+            background-position: 0 -301px;
+            width: 129px;
+            height: 32px;
+            cursor: pointer;
+            -webkit-touch-callout: none; 
+            -webkit-user-select: none; 
+            -khtml-user-select: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+            user-select: none;
+
+            @include buttonText;
+
+            &:active {
+                    background-position: 0 -334px;
+                    width: 129px;
+                    height: 32px;
+                    color: #FFF;
+            }
+
+    }
+
+    &.add {
+
+            background-position: -41px -2px;
+            width: 31px;
+            height: 31px;
+    }
+
+    &.remove {
+            background-position: -73px -1px;
+            width: 31px;
+            height: 31px;
+    }
+
+    &.calendar {
+            background-position: 0 -56px;
+            width: 21px;
+            height: 21px;
+    }
+    
+    
+
+}
+
+.lineBreak {
+        background-image: url('../img/sprites/linebreak.svg');
+        background-repeat: repeat-x;
+        background-attachment: inherit;
+        background-position: 0 50%; 
+        background-size: 2px 2px;
+        margin: auto;
+}
+
+
+.vita-form {
+
+    input{
+
+            &[type="text"], &[type="password"], &[type="email"]{
+                background-color: #fff;
+                border: 1px solid #adadad;
+                border-radius: 3px;
+                height: 22px;
+
+                &:focus {
+                    border-color: #505050;
+                }
+            }
+
+            &[type="radio"], &[type="checkbox"]{
+                display: none;
+            }
+
+            &[type="checkbox"] + label, &[type="radio"] + label {
+                color: rgb(80,80,80);
+
+            }
+
+            &[type="checkbox"] + label span {
+                display: inline-block;
+                background: url("../img/sprites/sprites_reg_2.svg") no-repeat -86px -118px;
+                width: 15px;
+                height: 14px;
+                cursor: pointer;
+                margin: 0 1px -2px 2px;
+            }
+
+            &[type="checkbox"]:checked + label span {
+                background: url("../img/sprites/sprites_reg_2.svg") no-repeat -86px -135px;
+            }
+
+            &[type="radio"] + label span {
+                display: inline-block;
+                background: url("../img/sprites/sprites_reg_2.svg") no-repeat -105px -118px; 
+                width: 15px; 
+                height: 15px;
+                cursor: pointer;
+                margin: 0px 2px -2px 1px;
+            }
+
+            &[type="radio"]:checked + label span {
+                background: url("../img/sprites/sprites_reg_2.svg") no-repeat -105px -134px;
+            }
+
+            &[type="textarea"]{
+
+            }
+  
+    }
+    
+    #select-container {
+        
+        position: relative;
+        
+        #vita-select {
+            background: none repeat scroll 0 0 rgb(244, 244, 244);
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            height: 34px;
+            overflow: hidden;
+            width: 240px;
+
+            .dropdown-button{
+                background: #40afff; /* Old browsers */
+                background: -moz-linear-gradient(top,  #40afff 45%, #407dff 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(45%,#40afff), color-stop(100%,#407dff)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  #40afff 45%,#407dff 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  #40afff 45%,#407dff 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  #40afff 45%,#407dff 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  #40afff 45%,#407dff 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40afff', endColorstr='#407dff',GradientType=0 ); /* IE6-9 */
+                border-bottom-right-radius: 3px;
+                border-left: 1px solid rgb(17, 181, 255);
+                border-top-right-radius: 3px;
+                float: right;
+                height: 100%;
+                position: relative;
+                right: 0;
+                top: 0;
+                width: 36px;
+
+                .arrow{
+                    background: none repeat scroll 0 0 transparent;
+                    border-left: 8px solid transparent;
+                    border-right: 8px solid transparent;
+                    border-top: 12px solid rgb(200,200,200);
+                    height: auto;
+                    margin: 0 auto;
+                    position: absolute;
+                    right: 11px;
+                    top: 12px;
+                    width: auto;
+                    .inner-arrow {
+                        background: none repeat scroll 0 0 transparent;
+                        border-left: 6px solid transparent;
+                        border-right: 6px solid transparent;
+                        border-top: 9.9px solid rgb(244, 244, 244);
+                        height: auto;
+                        margin: 0 auto;
+                        position: absolute;
+                        right: -5.5px;
+                        top: -11px;
+                        width: auto;
+                    } // End .inner-arrow
+                }// End arrow
+            }// End .dropdown-button
+        }// End #vita-select
+        
+        #vita-dropdown{
+            background: none repeat scroll 0 0 #f4f4f4;
+            border: 2px solid #40afff;
+            border-radius: 4px;
+            height: 160px;
+            left: 8px;
+            position: absolute;
+            top: 55px;
+            width: 227px;
+
+            .dropdown-arrow {
+                background: none repeat scroll 0 0 transparent;
+                border-bottom: 19px solid rgb(64, 175, 255);
+                border-left: 11px solid transparent;
+                border-right: 11px solid transparent;
+                height: 0;
+                position: absolute;
+                right: 4px;
+                top: -20px;
+                width: 0;
+            }
+
+            .dropdown-list {
+                float: left;
+                height: 100%;
+                list-style: outside none none;
+                margin: 0;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+                top: 0;
+                width: 100%; 
+
+                li {
+                    position: relative;
+                    width: 223px;
+                    height: 30px;
+
+                    &:hover {
+                        background: rgb(230,230,230);
+                        border-left: 5px solid rgb(64, 175, 255);
+                    }
+                    span {
+                        font-family: montserrat;
+                        height: 100%;
+                        left: 5px;
+                        position: absolute;
+                        top: 4px;
+                    } // End span
+                } // End li
+            } // End .dropdown-list
+        }// End #vita-dropdown
+    }// End .dropdown-container
+    
+} //End .vita-form
+
+.sprite-input-container{
+ 
+    position: relative;
+    width: auto;
+
+    .sprite-container {
+    	border-left: 1px solid #505050;
+        height: 18px;
+        position: absolute;
+        right: 2px;
+        top: 4px;
+        width: 21px;
+
+        div {
+
+            left: 3px;
+            position: relative;	    	
+        }
+
+        .user {
+            left: 4px !important;
+            top: 1.5px !important;
+
+        }
+
+        .password {
+            left: 4px !important;
+            top: 4.6px;
+
+        }
+
+        .user-active {
+            left: 4px !important;
+            top: 0.5px !important;
+        }
+        .password-active {
+            left: 4px !important;
+            top: 4.6px;
+        }
+
+        .calendar {
+                bottom: 2px;
+                left: 2px !important;
+        }
+    }
+
+}

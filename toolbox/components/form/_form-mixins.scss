@@ -1,0 +1,334 @@
+@mixin useFormElements( $elementsUsed: all ) {
+	@if ( $elementsUsed == all ) {
+		$elementsUsed: radio checkbox text email password tel textarea dropdown-select number;
+	}
+	@if ( type-of $elementsUsed == list ) {
+		@each $element in $elementsUsed {
+			@extend %form-#{ $element } !optional;
+		}
+	}
+}
+
+@mixin form-base( $config ) {
+
+            @include useFormElements( map-get( $config, elementsUsed ) );
+            // Width
+            @include form-width( map-get( $config, width ) );
+            
+            @include form-location( map-get( $config, location ) );
+
+            @include form-size( map-get( $config, containerWidth ), map-get( $config, containerHeight ) );
+			
+			@include form-border( map-get( $config, border ) );
+
+			
+			@if( map-get( $config, shadow ) ) {
+				@if( map-get( $config, shadow ) == true ) {
+					$config: map-merge( $config, ( shadow: 5px 5px 5px rgba( 0, 0, 0, .3 ) ) );
+					
+				}
+				// @warn("shadow true");
+
+				box-shadow: map-get( $config, shadow ); 
+				@extend %form-shadow;
+				// @warn(type-of(map-get($config, shadow)));
+			}
+			// content: $config;
+
+			@if( map-get( $config, rounded ) ) {
+				@if( map-get( $config, rounded ) == true ) {
+					$config: map-merge( $config, (rounded: 5px) );
+				}
+				@include addCornerRadius( all, map-get( $config, rounded ) );
+			}
+			
+			@if( map-has-key( $config, styles ) ) {
+
+				@include addStyles( map-get( $config, styles ) );
+				// @each $selector, $styles in map-get( $config, styles ) {
+				// 	#{ $selector } {
+				// 		asdf: asdf;
+				// 	}
+				// }
+			}
+}
+
+@mixin form-border( $border ) {
+	@if( $border ) {
+		@extend %form-border; 
+	}
+}
+
+@mixin form-size( $width: 100%, $height: 100% ) {
+	width: $width;
+	height: $height;
+}
+
+@mixin form-location( $position ) { 
+// this can be specified as specific base styles in config
+
+	// $side: null;
+
+	// @if ( $position == left ) {
+	// 	$side: right;
+	// } @elseif ( $position == right ) {
+	// 	$side: left;
+	// }
+	// @if ( $side ) {
+	// 	// border-#{ $side }: solid $color1 $border-size;
+	// 	// asdf: vita-list-position-#{ $side };
+	// 	@at-root %vita-list-position-#{ $side } {
+	// 		border-#{ $side }: solid $color1 $border-size;
+	// 	}
+
+	// 	@extend %vita-list-position-#{ $side };
+	// }
+}
+
+
+@mixin form-width( $width ){
+
+	// @each $item in $width {
+		
+	// 	something : $item;
+
+	// }
+
+
+}
+
+
+/////////////
+// Header
+/////////////
+@mixin form-header( $config ) {
+
+	@extend %form-header-base;
+
+	min-height: map-get( $config, height );
+
+		// bg-color : define || default
+		// text-color : define || default
+		// height : define || auto
+		// valign : define || left
+		// halign : define || left
+		// boxed? : 0 || 1 (default)
+		// bot-border? : 0(default) || 1 
+	
+	@if map-has-key( $config, bg-color ) {
+		background-color: map-get( $config, bg-color );
+	}	
+
+	@if map-has-key( $config, text-color ) {
+		color: map-get( $config, text-color );
+	}	
+
+
+	@if map-has-key( $config, valign ) {
+		// make it align vertically here
+		align-self: center;
+		justify-content: center;
+		//sequester this to placeholder
+	}	
+
+	@if map-has-key( $config, halign ) {
+		//make it align horizontally here
+	}	
+
+	@if ( map-get( $config, boxed ) ) {
+		border-bottom: 1px solid $color2;
+	}
+
+	@if map-get( $config, accent ) {
+		$accent: map-get( $config, accent );
+		@include form-accent( $accent );
+	}
+
+
+	@if( map-has-key( $config, styles ) ) {
+		@include addStyles( map-get( $config, styles ) );
+	}
+
+
+	// &#{ $element } {
+	// 	$align: null;	
+	// 	@if ( map-has-key( $config, align ) ) {
+	// 		$align: map-get( $config, align );
+	// 	} @else {
+	// 		$align: getDefault( options, align );
+	// 	}
+	// 	@include vita-list-text-align( $align );
+
+	// 	@if ( map-has-key( $config, spacing ) ) {
+	// 		@if ( map-get( $config, spacing ) == crunch ) {
+	// 			@extend %vita-list-header-crunch;
+	// 		}
+	// 	}
+	// 	@if ( map-has-key( $config, size ) ) {
+	// 		@include vita-list-header-size( map-get( $config, size ) );
+	// 	}
+	// }
+} 
+
+// @mixin form-footer( $config ) {
+// 	@extend %form-footer-base;
+// 	@if( not not map-get( $config, boxed ) ) {
+// 		border-top: 1px solid $color2;
+// 	}	
+
+// 	@if map-get( $config, accent ) {
+// 		// @extend %form-cap-darken;
+// 		@include form-accent( map-get( $config, accent ) );
+// 	}
+
+// 	@if( map-has-key( $config, styles ) ) {
+// 		@include addStyles( map-get( $config, styles ) );
+// 	}
+// 	// @if map-get( $config, styles ) {
+// 	// 	@include addStyles( map-get( $config, styles ) );	
+// 	// }
+
+// }
+/////////////
+// Content
+/////////////
+@mixin form-content( $config ) {
+
+	@extend %form-content-base;
+	// @if map-get( $config, styles ) {
+	// 	@include addStyles( map-get( $config, styles ) );	
+	// }
+	
+
+	// &#{ $element } {
+
+	// 	&>ul{
+
+	// 		&>li {
+	// 			$size: getDefault( options, spacing ) !default;
+	// 			$spacing: getDefault( options, spacing ) !default;
+	// 			$align: getDefault( options, align ) !default;
+	// 			@if ( map-has-key( $config, size ) ) {
+	// 				$size: map-get( $config, size );
+	// 			}
+	// 			@if ( map-has-key( $config, spacing ) )  {
+	// 				$spacing: map-get( $config, spacing );
+	// 				// @extend %vita-list-content-crunch;
+	// 			}
+	// 			@if ( map-has-key( $config, align ) ) {
+	// 				$align: map-get( $config, align );
+	// 			}
+	// 			@if ( map-has-key( $config, minRows ) ) {
+	// 				@include vita-list-li-min-rows( map-get( $config, minRows ), $size, $spacing );
+	// 			}	
+	// 			@include vita-list-li-size( $size, $spacing );
+	// 			@include vita-list-li-spacing( $spacing ); //map-get( $config, spacing ), $size );
+	// 			@include vita-list-text-align( $align );
+	// 			$classCollisions: ( 	// these are classes that may need extra information
+	// 							// if other classes are present. this map may be appended 
+	// 							// as long as the appropriate placeholder is available
+	// 				selectable: null,
+	// 				interactive:
+	// 					selectable,
+	// 				divider:
+	// 					selectable
+	// 					interactive,
+	// 			);
+
+	// 			@each $exception, $affectedQualities in $classCollisions {
+	// 				@if ( map-get( $config, $exception ) ) {
+	// 					@extend %vita-list-#{ $exception };
+	// 					@each $quality in $affectedQualities {
+	// 						@if ( map-get( $config, $quality ) ) {
+	// 							@extend %vita-list-#{ $exception }-#{ $quality };
+	// 						}
+	// 					}
+	// 				}
+	// 			}
+
+	// 			@if( map-has-key( $config, divider ) ) { //sets up the divider
+	// 				$divider: map-get( $config, divider );
+	// 				$position: center !default;
+	// 				$divider-size: normal;
+
+	// 				@if( length( $divider ) == 1 ) {
+	// 					$divider-size: map-get( $config, divider );
+	// 					@if( map-has-key( $config, divider-position ) ) {
+	// 						$position: map-get( $config, divider-position );
+	// 					}	
+	// 				} @elseif( length( $divider ) > 1 ) {
+	// 					@each $item in $divider {
+	// 						@if( $item == left or $item == right or $item == center ) {
+	// 							$position: $item;
+	// 						} @else {
+	// 							$divider-size: $item; 
+	// 						}
+	// 					}
+	// 				}  
+	// 				@include vita-list-divider-size( $divider-size, $position );
+	// 				@if( map-has-key( $config, useWidget ) ) {
+	// 					$widgetName: map-get( $config, useWidget );
+	// 					@include useWidget( $widgetName );
+	// 				}
+	// 			}					
+	// 		}
+	// 	}
+	// }
+}
+
+/////////////
+// Footer
+/////////////
+@mixin form-footer( $config ) {
+
+	@extend %form-footer-base;
+	@if map-get( $config, boxed ) {
+		border-top: 1px solid $color2;
+	}
+
+	@include form-accent( map-get( $config, accent ) );
+
+	@if( map-get( $config, useButton ) ) {
+	
+		$icon: "white-right-arrow";
+		$activeIcon: "blue-right-arrow";
+		@if( map-get( $config, buttonIcon ) ) {
+			$icon: map-get( $config, buttonIcon );
+		}
+		@if( map-get( $config, buttonActiveIcon ) ) {
+			$activeIcon: map-get( $config, buttonActiveIcon );
+		}
+		&>div.button>div {
+			@include custom-button( $icon, $activeIcon );
+		}	
+		// span {
+
+			
+		// }
+		// span {
+		// 	display: block;
+		// 	// align-self: center;
+		// 	line-height: 45px;
+		// 	cursor: pointer;
+		// 	width: 75%;
+		// 	// float: left;
+		// 	background-color: rgba( 255, 0, 0, 1 );
+		// 	text-align: center;
+		// 	@include icon( "grey-button" );
+		// 	&:active {
+		// 		@include icon( "blue-button" );
+		// 	}
+		// }
+	}
+
+	min-height: map-get( $config, height );
+	// height: 100%;
+	
+} 
+
+@mixin form-accent( $accent ) {
+	@if( type-of( $accent ) != number ) {
+		$accent: 1;
+	}
+	background-color: rgba( 0, 0, 0, $accent*0.03 );
+}

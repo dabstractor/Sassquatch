@@ -1,0 +1,113 @@
+@import "vita-list-config";
+// @import "../../../toolbox";
+@import "vita-list-placeholders";
+@import "vita-list-mixins";
+@import "vita-list-functions";
+@import "vita-list-widgets";
+
+////////////////////////////////////////////////////////////////////////////
+//the vita-list mixin will achieve the same effect in two different ways: //
+//1. @include vita-list( $list-config, #some-element );                   //
+//2. #some-element {                                                      //
+//		 @include vita-list( $list-config );                              //
+//	 }                                                                    //
+////////////////////////////////////////////////////////////////////////////
+
+
+@mixin vita-list ( $config: $vita-list-default-config, $element: "" ) {
+
+	$blocks: 0; // keep track of nth-child selector for id/class-less selectors
+	$options: (); //map
+
+	@if ( $element == "" ) {
+		$element: &;
+	}
+
+	@at-root #{$element} { 
+	///////////////////////////////////////////////////////////////////////////////////////////
+	//@at-root allows the use of multiple syntaxes without selectors looking
+	// like #current-filters#current-filters > ... when calling vita-list directly as
+	// a constructor, passing the selector as the second argument.
+	// This feels kind of hacky since it could possibly force a vita-list class or id
+	// to be declared at document root, but I haven't been able to find a use-case that
+	// produces undesired effects.
+	// This is not a problem with the header/content/footer mixins that use the same syntax //
+	// because they will never reside at the document root
+	///////////////////////////////////////////////////////////////////////////////////////////
+
+
+		@extend %vita-list-base;
+
+		$optlists: header content footer; // must update with #optlists
+												// there's a better solution here somewhere...
+												// todo fixme
+
+		@if map-has-key( $config, options ) {
+			$options: map-get( $config, options ); // store global vita-list options
+
+			@if map-has-key( $options, position ) {
+				@include vita-list-position( map-get( $options, position ) );
+			}
+			@if map-has-key( $options, color ) {
+				background-color: #{ map-get( $options, color ) };
+			}
+			// handle other choices for entire vita-list here
+		}
+				
+		@each $optlist in $optlists {
+			
+			@if map-has-key( $config, $optlist ) {
+
+				$blocks: $blocks + 1;
+
+				&>div:nth-child( #{ $blocks } ) {
+	
+					@extend %vita-list-#{ $optlist }-base;  //extend the base placeholder for each options group
+
+					$properties: map-merge( $options, map-get( $config, $optlist ) );
+
+					// map-merge argument order matters!
+					// the second map arguments' values take
+					// precendent over the first
+					// which is essential to the desired effect here
+					// (overwriting)
+					
+								
+					///////////////////////////////////////////////////
+					// Sass does not provide interpolation support 	 //
+					// for mixins at this time, so we have to resort //
+					// to some hard-coded if-else statements	 	 //
+					// instead of what we'd like to do:				 //
+					// @include vita-list-#{$optlist}( $properties );//
+					///////////////////////////////////////////////////
+					// as of Sass 3.3 we can call dynamic FUNCTION 	 //
+					// names with call( $fn, $args ) but there is 	 //
+					// no mixin support and mixins cannot be called  //
+					// from functions								 //
+					// A solution I've used elsewhere is to have a 
+					// mixin with a similar name create a placeholder
+					// TODO FIXME
+					///////////////////////////////////////////////////
+
+
+
+					@if ( $optlist == header ) { // must update with #optlists
+						//call header mixin
+						@include vita-list-header( $properties );
+
+					} @elseif ( $optlist == content ) { // must update with #optlists
+						// todo call content mixin
+						@include  vita-list-content( $properties );
+
+					} @elseif ( $optlist == footer ) { // must update with #optlists
+						// todo call footer mixin
+						@include vita-list-footer( $properties );
+
+					} @elseif ( $optlist == colors ) { // must update with #optlists
+						// todo handle color change
+					}
+				}
+			}	
+		} 
+	}
+}

@@ -1,0 +1,246 @@
+@import "placeholders";
+@import "functions";
+@import "config";
+@import "widgets";
+@import "mixins";
+
+// build order:
+// gallery-template is main mixin
+// which calls buildWrapper,
+// which calls buildColumn,
+// which calls buildPanel,
+// which calls buildWidgets,
+// which calls useWidget
+
+@mixin gallery-template( $config: $gallery-template-default-config, $element: "" ) {
+	@if ( $element == "" ) {
+		$element: &;
+	}
+
+	@at-root #{ $element } {
+
+		@extend %#{ getPrefix() }-base; // main css for wrapper
+		
+		@if ( map-has-key( $config, options ) ) {
+			// handle options here
+			$options: map-get( $config, options );
+			$justify: space-around;
+			@if( map-has-key( $options, align ) ) {
+				$align: map-get( $options, align );
+					@if( $align == left ) {
+						$justify: flex-start;
+					} @elseif ( $align == right ) {
+						$justify: flex-end;
+					}
+			}
+			&>div {
+				justify-content: $justify;
+			}
+			
+			@if ( map-has-key( $options, requireColors ) ) {
+				// @warn( " colors: #{ map-get( $options, requireColors ) }");
+				@include requireColors( map-get( $options, requireColors ) );
+			} @else {
+				@include requireColors();
+			}			
+
+			@if( map-has-key( $options, columns ) ) {
+				// @warn ("map options has columns");
+				&>div { //wrapper
+					@include gallery-maxColumns( map-get( $options, columns ) );
+					// @extend %#{ getPrefix() }-columns-#{ map-get( $options, columns ) };
+				}
+			}
+			@if( map-has-key( $options, addStyles ) ) {
+				@include addStyles( map-get( $options, addStyles ) );
+			}
+			
+		}
+
+		@if( map-has-key( $config, wrappers ) ) {
+			$wrappers: map-get( $config, wrappers ); // get wrappers
+			$wrapperCount: 0;
+
+			@each $wrapper, $wrapperValue in $wrappers {
+				$wrapperCount: $wrapperCount + 1;
+				
+				@include buildWrapper( $wrapperValue, $wrapperCount );
+			}
+
+		} @else {
+			@warn( "Gallery config map did not include any wrappers" );
+		}
+	}
+}
+
+@mixin buildWrapper( $wrapperValue, $wrapperCount ) {
+	$columnCount: 0;
+
+	&>div {
+		@extend %#{ getPrefix() }-wrapper-base;	
+	}
+
+	&>div:nth-of-type( #{ $wrapperCount } ) {
+		@if( length( $wrapperValue ) > 0 ) {
+				
+			@each $column, $columnValue in $wrapperValue {
+				$columnCount: $columnCount + 1;
+				
+				@include buildColumn( $columnValue, $columnCount );
+			}
+		
+
+		} @else {
+			@warn ( "There are no columns to display in wrapper #{ $wrapperCount } (check the config used for gallery-template)." );
+		}
+	}
+}
+
+@mixin buildColumn( $columnValue, $count: 1 ) {
+	&>div {
+		@extend %gallery-template-column-base;
+	}
+	$panels: map-get( $columnValue, panels );
+	
+	$panelCount: 0;
+	&>div:nth-of-type( #{ $count } ) {
+		@each $panelKey, $panelValue in $columnValue {
+			$panelCount: $panelCount + 1;
+			@include buildPanel( $panelValue, $panelCount );
+		}
+	}
+}
+
+$panelSizes: getOption( panelSizes );
+
+@mixin buildPanel( $panelValue, $count: 1 ) {
+	//generate placeholder name from panel values (size)
+	$size: 0 !default;
+	@if ( map-has-key( $panelValue, size ) ) {
+		$size: map-get( $panelValue, size );
+		$widgetOrientation: column;
+		@if( map-has-key( $panelValue, widgets ) ) {
+			$widgets: map-get( $panelValue, widgets );	
+
+			@if ( map-has-key( $panelValue, widgetOrientation ) ) {
+				$widgetOrientation: map-get( $panelValue, widgetOrientation )
+			}
+			&>div:nth-of-type( #{ $count } ) {
+				@include buildWidgets( $widgets );
+
+				@if( map-has-key( $panelValue, addStyles ) ) {
+					@include addStyles( map-get( $panelValue, addStyles ) );
+				}
+			}	
+		}
+
+		$isApprovedSize: false;
+
+		@each $panelSize in $panelSizes {
+			@if( $size == $panelSize ) { // check if size pass is approved size
+				$isApprovedSize: true;
+			}
+		}
+		@if ( $isApprovedSize == false ) { // if not, change it to zero so it won't display and warn the developer
+			@warn( "Panel size #{ $size } is not one of the predefined sizes (#{ zip( $panelSizes ) }) and has been set to 0 (display: none)." );
+			$size: 0;
+		}
+	} @else {
+		@warn ( "Panel #{ $count } has no size declared, now set to 0 (display: none).");
+	}
+	 
+	
+
+	&>div:nth-of-type( #{ $count } ) {
+ 		@extend %#{ getPrefix() }-panel-base;
+		@if ( map-has-key( $panelValue, backdrop ) ) {
+			@if( map-get( $panelValue, backdrop ) == clear ) {
+				@extend %#{ getPrefix() }-panel-clear;
+			}
+		}
+	}
+	$placeholderName: #{ getPrefix() }-panel-#{ $size };
+	&>div:nth-of-type( #{ $count } ) {
+		@extend %#{ $placeholderName } !optional;
+	}
+	// todo fixme: this needs to find a home
+	$orientation: row;
+	@if ( map-has-key( $panelValue, widgetOrientation ) ) {
+		$orientation: map-get( $panelValue, widgetOrientation );
+		// @warn( $orientation );
+	}
+	// end todo fixme
+}
+
+@mixin buildWidgets( $widgets ) {
+	// @warn( $widgets );
+	$widgetCount: 0;
+	$totalWidgets: length( map-keys( $widgets ) );
+
+	@each $widget, $widgetConfig in $widgets {
+		$widgetCount: $widgetCount + 1;
+		$options: null;
+		$base: null;
+		&>div:nth-of-type( #{ $widgetCount } )  { // widget container
+
+			@if ( map-has-key( $widgetConfig, name ) ) {
+				$widgetName: map-get( $widgetConfig, name );
+				$widgetConfigMap: null;
+				@if( map-has-key( $widgetConfig, config ) ) {
+					$widgetConfigMap: map-get( $widgetConfig, config );
+				}
+
+				@if ( map-has-key( $widgetConfig, color ) ) { // add optional background color
+					background-color: map-get( $widgetConfig, color ); 
+					&>div {
+						background-color: map-get( $widgetConfig, color );
+					}
+				}	
+
+
+				@if ( map-get( $widgetConfig, hasHeader ) == true ) {
+
+					// background-color: inherit; //todo fixme find a place for this
+					@extend %#{ getPrefix() }-panel-with-header;
+
+					&>div:nth-of-type( 1 ) { // widget header
+						@extend %#{ getPrefix() }-widget-header;
+
+						@if( map-has-key( $widgetConfig, headerConfig ) ) {
+							$headerConfig: map-get( $widgetConfig, headerConfig );
+							@if( map-has-key( $headerConfig, align ) ) {
+								// @warn "found header Config align";
+								@if( map-get( $headerConfig, align ) == left ) {
+									text-align: left !important;
+									padding-left: 5px;
+								}
+							}
+						}
+					}
+					&>div:nth-child( 2 ) {
+						@extend %#{ getPrefix() }-widget-content-base; // not the intended purpose of the function, but works all the same
+						@include useWidget( $widgetName, $widgetConfigMap );
+						@if( $totalWidgets > 1 ) {
+							@extend %gallery-template-multi-widget-panel;
+						}
+					}
+
+					$base: "&>:nth-child( 2 )>div";
+				} @else {
+					$base: "&:nth-child(2)";
+					@extend %#{ getPrefix() }-widget-container;
+					@include useWidget( $widgetName, $widgetConfigMap );
+				}
+
+				@if( $widgetCount > 1 ) {
+					// @warn( "widgetCount: #{ $widgetCount }" );
+					@extend %#{ getPrefix() }-widget-divider;
+				}
+
+			} @else {
+				@warn( "Config asks for widget but does not provide name (near #{ $widget }).");
+			}
+		} // widgetContainer
+	}
+}
+

@@ -1,0 +1,107 @@
+$usedColors: "" !default !global;
+
+@mixin requireColors( $colors: all ) { //accepts a list or string "all" (or no argument, defaults to "all")
+	@if ( type-of( $colors ) == string or type-of( $colors ) == color or ( type-of( $colors ) == bool and $colors == true ) ) {
+		@if ( $colors == all or $colors == true ) {
+			@each $color in getOption( widgetColors ) {
+					@include pickColor( $color );
+					$usedColors: append( $usedColors, $color ) !global;
+			}			
+		} @else {
+			@include pickColor( $colors );
+		}
+	} @elseif( type-of( $colors ) == list ) {
+		@each $color in $colors {
+			@include pickColor( $color );	
+		}
+	}
+
+
+} 
+
+@mixin pickColor( $color ) {
+	@if( index( $usedColors, $color ) == null ) {
+		@if ( $color == red ) { //I'd love to see (as-yet-unsupported) mixin interpolation at work here
+			@include addRed();  // ... ... maybe with a future release of sass?
+		} @elseif( $color == blue ) {
+			@include addBlue();
+		} 
+		@elseif( $color == green ) {
+			@include addGreen();
+		} 
+	 	@elseif( $color == orange ) {
+			@include addOrange();
+		} 
+	 	@elseif ( $color != none ) {
+			@warn( "Color name #{ $color } not in gallery-template color pallatte" );		
+		} 
+	}
+}
+
+@mixin gallery-maxColumns( $size ) {
+	@warn( "maxColumns running at " + $size );
+	@at-root %#{ getPrefix() }-columns-#{ $size } {
+		max-width: (map-get( $gallery-template-config, panelWidth ) + 40) * $size;
+		// @warn( "max-width: " + (map-get( $gallery-template-config, panelWidth ) + 300 ) * $size );
+	}
+
+	& {
+		@extend %#{ getPrefix() }-columns-#{ $size };
+	}
+}
+
+@mixin addRed() {
+	@at-root .widgetColor.red {
+		background-color: #e61818;
+	}
+
+	@at-root .widgetColor.lightred {
+		background-color: #ec4545;
+	}
+
+	@at-root .widgetColor.darkred {
+		background-color: #b81313;
+	}
+}
+
+@mixin addBlue() {
+	@at-root .widgetColor.blue {
+		background-color: #00afff;
+	}
+
+	@at-root .widgetColor.lightblue {
+		background-color: #33bfff;
+	}
+
+	@at-root .widgetColor.darkblue {
+		background-color: #008ccc;
+	}
+}
+	
+@mixin addGreen() {
+	@at-root .widgetColor.green {
+		background-color: #0cc904;
+	}
+
+	@at-root .widgetColor.lightgreen {
+		background-color: #10fa06;
+	}
+
+	@at-root .widgetColor.darkgreen {
+		background-color: #099703;
+	}
+}
+
+@mixin addOrange() {
+	@at-root .widgetColor.orange {
+		background-color: #ff7000;
+	}
+
+	@at-root .widgetColor.lightorange {
+		background-color: #ff8d33;
+	}
+
+	@at-root .widgetColor.darkorange {
+		background-color: #cc5a00;
+	}
+}

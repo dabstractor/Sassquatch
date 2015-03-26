@@ -1,0 +1,15 @@
+@function getPrefix() {
+	@return getOption( prefix );
+}
+
+@function getOption( $value ) {
+	$ret: null;
+	@if( map-has-key( $gallery-template-config, $value ) ) {
+		$ret: map-get( $gallery-template-config, $value );
+		// @return $ret;
+	} @else {
+		@warn ( "Config map did not have key \"#{ $value }\"" );
+		$ret: null; 
+	}
+	@return $ret;		
+}

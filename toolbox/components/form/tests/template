@@ -1,0 +1,33 @@
+$config: (
+	options: (
+		//width : define || width: 280; minWidth: 280;
+			//width:
+			//min-width:  
+		//location : 
+			//pos : rel || abs || fixed || rel(default)
+			//corner : t, l, b, r || t-l, t-b, t-r 
+			// val1 : 
+			// Val2 : 
+		// border : size && style && color || default
+		// elementsUsed: define || all
+	),
+	header: (
+		// bg-color : define || default
+		// text-color : define || default
+		// height : define || auto
+		// valign : define || left
+		// halign : define || left
+		// boxed? : 0 || 1 (default)
+		// bot-border? : 0(default) || 1 
+	),
+	content: (
+		// template : define || default
+		// direction : row || column
+		// height : define || auto (default)
+		// color : define || default
+	),
+	footer: (
+		// boxed? : 0(default) || 1 
+		// top-border? : 0(default) || 1 
+	)
+);

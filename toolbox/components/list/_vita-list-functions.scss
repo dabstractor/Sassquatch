@@ -1,0 +1,33 @@
+@import "vita-list-config";
+
+@function getLineHeight( $size: getGlobal( size ), $spacing: getGlobal( spacing ) ) {
+	@return ( ( $size * $spacing ) / 40 ) + 0.6; //em;
+}
+
+@function getDefault( $group, $option ) {
+	@if( map-has-key( $vita-list-default-config, $group ) ) {
+		@if( map-has-key( map-get( $vita-list-default-config, $group ), $option ) ) {
+			@return map-get( map-get( $vita-list-default-config, $group ), $option );	
+		} @else {
+			@warn( "Vita-List default config does not have a key-value pair for '#{$option}'");
+		}
+	} @else {
+		@warn( "Vita-List default config does not have an optgroup named '#{$group}'");
+	}
+	@return 0;
+}
+
+@function setGlobal( $key, $value, $section: options ) {
+	$globals: map-merge( $globals, map-merge( $section, ( $key, $value ) ) );
+}
+
+@function getGlobal( $key, $section: options ) {
+	@if ( map-has-key( $globals, $section ) ) {
+		@if( map-has-key( map-get( $globals, $section ), $key ) ) {
+			@return map-get( $globals, $key );
+		}
+	} @else {
+		@warn( "Global #{$key} is not defined in Vita-List globals" );
+	}
+	@return null;
+}

@@ -1,0 +1,27 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 18, 2014, 9:03:23 AM
+    Author     : James
+*/
+
+
+@function map-fetch($map, $keys) {
+    $key: nth($keys, 1);
+    $length: length($keys);
+    $value: map-get($map, $key);
+    @if ($length > 1) {
+        $rest: ();
+        @for $i from 2 through $length {
+            $rest: append($rest, nth($keys, $i))
+        }
+        @return map-fetch($value, $rest)
+    } @else {
+        @return $value;
+    }
+}
+
+

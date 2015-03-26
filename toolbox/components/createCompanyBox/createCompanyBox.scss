@@ -1,0 +1,441 @@
+@import "../../../toolbox";
+
+// GENERAL USE MIXINS
+
+// 1. padding()
+// Add padding values for all directions
+// Example: padding: 10px 20px 10px 5px;)
+// Usage: @include padding(10px,5px,8px,10px);
+@mixin padding($top:0,$right:0,$bottom:0,$left:0) {
+    padding-top: $top;
+    padding-right: $right;
+    padding-bottom: $bottom;
+    padding-left: $left;
+}
+// 2. displayFlex()
+// Makes the element a flexbox 
+// Example: display: flex;
+// Usage: @include displayFlex();
+@mixin displayFlex() {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex; 
+}
+// 3. flex()
+// Sets the flex size value 
+// Example: flex: 1;
+// Usage: @include flex(3);
+@mixin flex($value) {
+    -webkit-flex: $value;
+    -moz-flex: $value;
+    -ms-flex: $value;
+    -o-flex: $value;
+    flex: $value;
+}
+// 4. flexFlow()
+// Sets the flex-flow value
+// Example: flex-flow: row wrap;
+// Usage: @include flexFlow(column wrap);
+@mixin flexFlow($direction:row, $wrap:nowrap) {
+    -webkit-flex-flow: $direction $wrap;
+    -moz-flex-flow: $direction $wrap;
+    -ms-flex-flow: $direction $wrap;
+    -o-flex-flow: $direction $wrap;
+    flex-flow: $direction $wrap;
+}
+// 5. flexDirection()
+// Example: flex-direction: column;
+// Syntax: flex-direction: row|row-reverse|column|column-reverse;
+// Usage: @include flexDirection(column);
+@mixin flexDirection($direction:row) {
+    flex-direction: $direction;
+}
+// 6. justifyContent()
+// Example: justify-content: space-around;
+// Syntax:justify-content:flex-start|flex-end|center|space-between|space-around;
+// Usage: @include justifyContent(flex-end);
+@mixin justifyContent($value:flex-start) {
+    -webkit-justify-content: $value;
+    -moz-justify-content: $value;
+    -ms-justify-content: $value;
+    -o-justify-content: $value;
+    justify-content: $value;
+}
+// 7. boxSizing()
+// Adds box-sizing value for an element
+// Example: box-sizing: border-box;
+// Usage: @include boxSizing(border-box);
+@mixin boxSizing($type:border-box) {
+ -webkit-box-sizing:$type;
+ -moz-box-sizing:$type;
+ box-sizing:$type;
+ }
+// 8. borderRadius()
+// Sets a border-radius value with all browser prefixes
+// Example: border-radius: 30px;
+// Usage: @include borderRadius(30px);
+@mixin borderRadius($radius:none) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    -o-border-radius: $radius;
+    border-radius: $radius;
+    background-clip: padding-box;  /* stops bg color from leaking outside the border: */
+}
+// 9. SINGLE SIDE BORDER-RADIUS MIXINS
+    // a. borderTopRadius
+    // Example: border-top-left-radius: 2em;
+    // Syntax: border-top-left-radius: length|% [length|%]|initial|inherit;
+    // Usage: @include borderTopRadius(2);
+@mixin borderTopRadius($radius:none) {
+    -webkit-border-top-left-radius: $radius;
+    -moz-border-top-left-radius: $radius;
+    -ms-border-top-left-radius: $radius;
+    -o-border-top-left-radius: $radius;
+    border-top-left-radius: $radius;
+    background-clip: padding-box; /* stops bg color from leaking outside the border: */
+}
+    // b. borderRightRadius
+    // Example: border-top-right-radius: 2em;
+    // Syntax: border-top-right-radius: length|% [length|%]|initial|inherit;
+    // Usage: @include borderRightRadius(2);
+@mixin borderRightRadius($radius:none) {
+    -webkit-border-top-right-radius: $radius;
+    -moz-border-top-right-radius: $radius;
+    -ms-border-top-right-radius: $radius;
+    -o-border-top-right-radius: $radius;
+    border-top-right-radius: $radius;
+    background-clip: padding-box; /* stops bg color from leaking outside the border: */
+}
+    // c. borderBottomRadius
+    // Example: border-bottom-left-radius: 2em;
+    // Syntax: border-bottom-left-radius: length|% [length|%]|initial|inherit;
+    // Usage: @include borderBottomRadius(2);
+@mixin borderBottomRadius($radius:none) {
+    -webkit-border-bottom-left-radius: $radius;
+    -moz-border-bottom-left-radius: $radius;
+    -ms-border-bottom-left-radius: $radius;
+    -o-border-bottom-left-radius: $radius;
+    border-bottom-left-radius: $radius;
+    background-clip: padding-box; /* stops bg color from leaking outside the border: */
+}
+// 10. allSidesBorder()
+// Set border values for all sides
+// Example: border: 1px solid #fff;
+// Usage: @include allSidesBorder(1px,solid,#000);
+@mixin allSidesBorder($width,$style,$color) {
+    border-width: $width;
+    border-style: $style;
+    border-color: $color;
+}
+// 11. clearfix()
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+// 12. opacity()
+// Example: opacity(0.5);
+// Usage: @include opacity(0.5);
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    filter: alpha(opacity=($opacity * 100));
+ }
+// 13. centerBlock()
+// Quickly center any block-level element within its parent
+// Requires width or max-width
+@mixin centerBlock() {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+// 14. textTruncate()
+// An easy way to truncate text with an ellipsis.
+// Requires the element to be block or inline-block
+@mixin textTruncate() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+// 15. absPos()
+// Pass in the desired location of your target element
+// to produce an absolutely positioned element
+@mixin absPos ($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  position: absolute;
+}
+// 16. fontSize()
+// Font-size in rems
+// Example: font-size: 2rem;
+// Use: fontSize(2); will give you a font-size: 2rem;
+@mixin fontSize($sizeValue: 1.6) {
+  font-size: ($sizeValue * 10) + px;
+  font-size: $sizeValue + rem;
+}
+// 17. lineHeight()
+// Example: line-height: 2rem;
+// Use: lineHeight(2); will give you a line-height: 2rem;
+@mixin lineHeight($heightValue: 20 ){
+    line-height: $heightValue + px; /* fallback for old browsers */
+    line-height: (0.125 * $heightValue) + rem;
+}
+// 18. LinearGradient()
+// Courtesy of Hugo Giraudel's article 
+// http://www.sitepoint.com/building-linear-gradient-mixin-sass/
+// Ex: background: -webkit-linear-gradient(to bottom, #f7f7f7 0%, #efefef 100%);
+// Syntax: background:linear-gradient(direction, color-stop1, color-stop2, ...);
+    // STEP 1 (@mixin linear-gradient)
+@mixin linearGradient($direction, $color-stops...) {
+  // Direction has been omitted and happens to be a color-stop
+  @if is-direction($direction) == false {
+    $color-stops: $direction, $color-stops;
+    $direction: 180deg;
+  }
+  background: nth(nth($color-stops, 1), 1);
+  background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+  background: linear-gradient($direction, $color-stops);
+}
+
+    //  STEP 2 (@function is-direction)
+    /// Test if `$value` is a valid direction
+    /// @param {*} $value - Value to test
+    /// @return {Bool}
+@function is-direction($value) {
+  $is-keyword: index((to top, to top right, to right top, to right, to bottom right, to right bottom, to bottom, to bottom left, to left bottom, to left, to left top, to top left), $value);
+  $is-angle: type-of($value) == 'number' and index('deg' 'grad' 'turn' 'rad', unit($value));
+  @return $is-keyword or $is-angle;
+}
+
+    //  STEP 3 (function legacy-direction)
+    /// Convert a direction to legacy syntax
+    /// @param {Keyword | Angle} $value - Value to convert
+    /// @require {function} is-direction
+    /// @require {function} convert-angle
+    /// @throw Cannot convert `#{$value}` to legacy syntax because it 
+    /// doesn't seem to be a direction.;
+@function legacy-direction($value) {
+  @if is-direction($value) == false {
+    @error "Cannot convert `#{$value}` to legacy syntax because it doesn't seem to be a direction.";
+  }
+  $conversion-map: (
+    to top          : bottom,
+    to top right    : bottom left,
+    to right top    : left bottom,
+    to right        : left,
+    to bottom right : top left,
+    to right bottom : left top,
+    to bottom       : top,
+    to bottom left  : top right,
+    to left bottom  : right top,
+    to left         : right,
+    to left top     : right bottom,
+    to top left     : bottom right
+  );
+  @if map-has-key($conversion-map, $value) {
+    @return map-get($conversion-map, $value);
+  }
+  @return 90deg - $value;
+}
+// 19. backgroundShorthand()
+// Example: background: #ffffff url("img_tree.png") no-repeat right top;
+// Syntax: background: gradient color repeat image position size attachment origin clip |initial|inherit;
+@mixin backgroundShorthand($background-color:#fff,$repeat-value:no-repeat,$background-image:none,$background-position: 0% 0%,$background-size:auto,$background-attachment:scroll,$background-origin:padding-box,$background-clip:border-box) {
+    background-color: $background-color;
+    background-repeat: $repeat-value;
+    background-image: $background-image;
+    background-position: $background-position;
+    background-size: $background-size;
+    background-attachment: $background-attachment;
+    background-origin: $background-origin;
+    background-clip: $background-clip;
+}
+// 20. Circle()
+// Create a circle
+// Example: border-radius:100%
+// Usage: @include circle();
+@mixin circle{
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    border-radius: 100%;
+}
+// 21. BoxShadow
+// Example: box-shadow: 10px 10px 5px #888888;
+// Syntax: box-shadow: none|h-shadow v-shadow blur spread color;
+// Usage: @include boxShadow(8px, 8px);
+@mixin boxShadow( $h: 10px , $v: 10px , $b: 0px , $s: 0px , $c: #000000 ) {
+    -webkit-box-shadow: $h $v $b $s $c;
+    -moz-box-shadow: $h $v $b $s $c;
+    -ms-box-shadow: $h $v $b $s $c;
+    -o-box-shadow: $h $v $b $s $c;
+    box-shadow: $h $v $b $s $c;
+ }
+// 22. xPosition
+// Provides a shorthand for positioning an element in the x axis
+// Usage: @include xPosition(50px);
+@mixin xPosition($x) {
+ -webkit-transform:translateX($x);
+ -moz-transform:translateX($x);
+ -ms-transform:translateX($x);
+ transform:translateX($x);
+ }
+ // 23. verticalAlign()
+ // Vertically align elements
+ // Usage: @include verticalAlign();
+ @mixin verticalAlign {
+     position: relative;
+ top: 50%;
+ -webkit-transform: translateY(-50%);
+ -ms-transform: translateY(-50%);
+ transform: translateY(-50%);
+ }
+ // 24. centeredNode()
+ // Layout: Center node in viewport
+ // Usage: @include centeredNode(300px,300px)
+@mixin centeredNode($width, $height, $correctTop: 0, $correctLeft: 0) {
+    width: $width;
+    height: $height;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: (-$height / 2) + $correctTop;
+    margin-left: (-$width / 2) + $correctLeft;
+}
+ 
+
+// CREATECOMPANYBOX PAGE SPECIFIC MIXINS
+
+// 1. createCompanyBoxContent()
+// This mixin will add styles needed for each content box on the createCompanyBox page
+// So these styles will apply to the createCompanyBox content
+@mixin createCompanyBoxContent() {
+    background: -webkit-linear-gradient(to right, #f7f7f7 0%, #efefef 100%);
+    background: -moz-linear-gradient(to right, #f7f7f7 0%, #efefef 100%);
+    background: -ms-linear-gradient(to right, #f7f7f7 0%, #efefef 100%);
+    background: -o-linear-gradient(to right, #f7f7f7 0%, #efefef 100%);
+    background: linear-gradient(to right, #f7f7f7 0%, #efefef 100%);
+    position: relative;
+    width: 320px;
+    max-width: 320px;
+    min-width: 320px;
+    @include allSidesBorder(1px,solid,#505050);
+    @include borderRadius(2.4px);
+    @include displayFlex();
+    @include flexFlow(row,wrap);
+    height: auto;
+}
+// 2. createCompanyBoxHeader()
+@mixin createCompanyBoxHeader() {
+    background: -webkit-linear-gradient(to bottom, #f7f7f7 0%, #efefef 100%);
+    background: -moz-linear-gradient(to bottom, #f7f7f7 0%, #efefef 100%);
+    background: -ms-linear-gradient(to bottom, #f7f7f7 0%, #efefef 100%);
+    background: -o-linear-gradient(to bottom, #f7f7f7 0%, #efefef 100%);
+    background: linear-gradient(to bottom, #f7f7f7 0%, #efefef 100%);
+    @include borderTopRadius(3.4px);
+    @include borderRightRadius(2.7px);
+    @include borderBottomRadius(0.6px);
+    @include boxSizing(border-box);
+    border-bottom: 2px solid #a0a0a0;
+    height: 43px;
+    position: relative;
+    top: 1px;
+    width: 100%;
+}
+// 3. createCompanyBoxHeaderSpan()
+@mixin createCompanyBoxHeaderSpan() {
+    display: block;
+    padding-top: 10px;
+    text-align: center;
+    @include fontSize(1.6);
+}
+// 4. innerContentDefaults()
+@mixin innerContentDefaults() {
+    height: 230px;
+    @include boxSizing(border-box);
+    position: relative;
+}
+
+// Defaults
+html,
+body {
+    height: 100%;
+}
+.sprite-input-container {
+    text-align: center;
+}
+input:not([type='submit']) {
+    @include padding(3px,3px,3px,10px);
+    margin-bottom: 10px;
+}
+
+// Defaults
+html,
+body {
+    height: 100%;
+}
+.sprite-input-container {
+    text-align: center;
+}
+input:not([type='submit']) {
+    @include padding(3px,3px,3px,10px);
+    margin-bottom: 10px;
+}
+
+// 's custom styles for createCompanyBox page
+#content-wrapper {
+    @include displayFlex();
+    @include flexFlow(row,wrap);
+    margin: auto;
+    height:auto;
+    width: 100%;
+    min-width:300px;
+    max-width:700px;
+    @include justifyContent(space-around);
+
+    #createCompanyBox-content {
+        @include displayFlex();
+        @include flex(1);
+        @include createCompanyBoxContent();
+        margin-bottom: 40px;
+
+        #createCompanyBox-header {
+            @include createCompanyBoxHeader();
+
+            span {
+                @include createCompanyBoxHeaderSpan();
+            } // end of #signup-header, #createCompanyBox-header span styles
+
+        } // end of #createCompanyBox-header styles
+
+        #createCompanyBox-inner-content {
+            @include displayFlex();
+            @include innerContentDefaults();
+            width: 100%;
+
+            form {
+                @include displayFlex();
+                @include flexFlow(column);
+                margin: auto;
+
+                #createCompanyBox-submit {
+                    @include icon('grey-button');
+                } // end of #signup-submit styles 
+
+            } // end of form styles
+
+        } // end of #createCompanyBox-inner-content styles
+
+    } // end of #createCompanyBox-content styles
+
+} // end of #content-wrapper styles

@@ -1,0 +1,308 @@
+@mixin vita-list-position( $position ) { 
+	$side: null;
+
+	@if ( $position == left ) {
+		$side: right;
+	} @elseif ( $position == right ) {
+		$side: left;
+	}
+	@if ( $side ) {
+		// border-#{ $side }: solid $color1 $border-size;
+		// asdf: vita-list-position-#{ $side };
+		@at-root %vita-list-position-#{ $side } {
+			border-#{ $side }: solid $color1 $border-size;
+		}
+
+		@extend %vita-list-position-#{ $side };
+	}
+}
+
+
+@mixin vita-list-header( $config, $element: "" ) {
+
+	&#{ $element } {
+		$align: null;	
+		@if ( map-has-key( $config, align ) ) {
+			$align: map-get( $config, align );
+		} @else {
+			$align: getDefault( options, align );
+		}
+		@include vita-list-text-align( $align );
+
+		@if ( map-has-key( $config, spacing ) ) {
+			@if ( map-get( $config, spacing ) == crunch ) {
+				@extend %vita-list-header-crunch;
+			}
+		}
+		@if ( map-has-key( $config, size ) ) {
+			@include vita-list-header-size( map-get( $config, size ) );
+		}
+	}
+}
+
+@mixin vita-list-content( $config, $element: "" ) {
+
+	&#{ $element } {
+
+		&>ul{
+
+			&>li {
+				$size: getDefault( options, spacing ) !default;
+				$spacing: getDefault( options, spacing ) !default;
+				$align: getDefault( options, align ) !default;
+				@if ( map-has-key( $config, size ) ) {
+					$size: map-get( $config, size );
+				}
+				@if ( map-has-key( $config, spacing ) )  {
+					$spacing: map-get( $config, spacing );
+					// @extend %vita-list-content-crunch;
+				}
+				@if ( map-has-key( $config, align ) ) {
+					$align: map-get( $config, align );
+				}
+				@if ( map-has-key( $config, minRows ) ) {
+					@include vita-list-li-min-rows( /* map-get( $config, minRows ), $size, $spacing, */ $config );
+				}	
+				@include vita-list-li-size( $size, $spacing );
+				@include vita-list-li-spacing( $spacing ); //map-get( $config, spacing ), $size );
+				@include vita-list-text-align( $align );
+
+				$classCollisions: ( 	// these are classes that may need extra information
+								// if other classes are present. this map may be appended 
+								// as long as the appropriate placeholder is available
+					selectable: null,
+					interactive:
+						selectable,
+					divider:
+						selectable
+						interactive,
+				);
+
+				@each $exception, $affectedQualities in $classCollisions {
+					@if ( map-get( $config, $exception ) ) {
+						@extend %vita-list-#{ $exception };
+						@each $quality in $affectedQualities {
+							@if ( map-get( $config, $quality ) ) {
+								@extend %vita-list-#{ $exception }-#{ $quality };
+							}
+						}
+					}
+				}
+
+				@if( map-has-key( $config, divider ) ) { //sets up the divider
+					$divider: map-get( $config, divider );
+					$position: center !default;
+					$divider-size: normal;
+
+					@if( length( $divider ) == 1 ) {
+						$divider-size: map-get( $config, divider );
+						@if( map-has-key( $config, divider-position ) ) {
+							$position: map-get( $config, divider-position );
+						}	
+					} @elseif( length( $divider ) > 1 ) {
+						@each $item in $divider {
+							@if( $item == left or $item == right or $item == center ) {
+								$position: $item;
+							} @else {
+								$divider-size: $item; 
+							}
+						}
+					}  
+					@include vita-list-divider-size( $divider-size, $position );
+					@if( map-has-key( $config, useWidget ) ) {
+						$widgetName: map-get( $config, useWidget );
+						@include useListWidget( $widgetName );
+					}
+				}				
+
+				@if( map-has-key( $config, extendable ) and map-get( $config, extendable ) ) { //make sure it's truthy
+					@include vita-list-extendable();
+				}
+			}
+		}
+	}
+}
+
+@mixin vita-list-footer( $config, $element: "" ) {
+	$size: getDefault( options, size );
+	$spacing: getDefault( options, spacing );
+	$align: getDefault( options, align );
+
+	&#{ $element } {
+
+		@if ( map-has-key( $config, spacing ) ) {
+			$spacing: map-get( $config, spacing );
+			@if ( $spacing == crunch ) {
+				@extend %vita-list-footer-crunch;
+			}
+		}
+		@if ( map-has-key( $config, align ) ) {
+			$align: map-get( $config, align );
+		}		
+		@if ( map-has-key( $config, size ) ) {
+			$size: map-get( $config, size );
+		}
+		@if( map-get( $config, useButton ) && map-get( $config, useButton ) == true ) {
+			$icon: "white-right-arrow";
+			$activeIcon: "blue-right-arrow";
+			@if( map-get( $config, buttonIcon ) ) {
+				$icon: map-get( $config, buttonIcon );
+			}
+			@if( map-get( $config, buttonActiveIcon ) ) {
+				$activeIcon: map-get( $config, buttonActiveIcon );
+			}
+			&>div.button>div {
+				@include custom-button( $icon, $activeIcon );
+			}		
+		}
+		@include vita-list-footer-size( $size, $spacing );
+		@include vita-list-text-align( $align );
+	}
+}
+
+@mixin vita-list-text-align( $align ) {
+	$positions: left right center;
+
+	@each $position in $positions {
+		@if ( $align == $position ) {
+			@extend %text-align-#{ $align };
+		}
+	}
+}
+
+// there is a valid argument for this mixin belonging in
+// the placeholders file. I like it here for now
+@mixin vita-list-divider-size( $size, $position: center ) { 
+	// this generates placeholders for divider-size and
+	// extends them as needed
+
+	@if( type-of( $size ) == string ) {
+		// if it's a string we need to make sure it exists in
+		// config then get the associated value
+		$defaultConfig: map-get( $vita-list-default-config, divider-sizes ); 
+		@if ( map-has-key( $defaultConfig, $size ) ) {
+			$size: map-get( $defaultConfig, $size );
+		} @else {
+			@warn( "\"#{$size}\" is not a divider width in the default config" );
+			$size: 0;
+		}
+	}
+	@if ( type-of( $size ) == number ) {
+		$width: $size * 10%;
+		$prop: left;
+		$val: 0;
+		@if( $position == left ) {
+			$prop: left;
+			$val: 0;
+		} @elseif( $position == right ) {
+			$prop: right;
+			$val: 0;
+		} @else {
+			$prop: left;
+			$val: ( 100 - $width ) / 2;
+		}
+
+		// create placeholder, then extend it.
+		@at-root %vita-list-divider-size-#{ $size } {
+			&:not(:first-child):before, &:last-child:after  {
+				width: $width;
+				#{ $prop }: #{ $val };
+				// position: $position;
+				// left: $left;
+				// extending: vita-list-divider-size-#{ $size };
+			}
+		}	
+
+		@extend %vita-list-divider-size-#{ $size } !optional;
+
+	} @else { // catch any other typos
+		@warn( "\"#{ $size }\" is not a valid value for the divider size" );
+	}
+}
+
+@mixin vita-list-header-size( $size ) {
+	@at-root %vita-list-header-size-#{ $size } {
+		span {
+			$newSize: $size * 3 + 12;
+			font-size: #{ $newSize / 16 }rem;
+		}
+	}
+	@extend %vita-list-header-size-#{ $size };
+}
+
+@mixin vita-list-li-size( $size, $spacing: 5 ) {
+
+	@at-root %vita-list-li-size-#{ $size } {
+		$newSize: $size * 2 + 7;
+		font-size: #{ ( $newSize + 4 ) / 16 }rem;
+		letter-spacing: #{ ( ( $size * 2 + 7 ) / 9 ) / 16}rem;
+		line-height: #{ getLineHeight( $size, $spacing ) }em;
+	}
+	@extend %vita-list-li-size-#{ $size };
+}
+
+@mixin vita-list-footer-size( $size, $spacing ) {
+	@at-root %vita-list-footer-size-#{ $size } {
+		span {
+			$newSize: $size * 2 + 12;
+			font-size: #{ $newSize / 16 }rem;
+		}
+	}
+	@extend %vita-list-footer-size-#{ $size };
+}
+
+@mixin vita-list-li-spacing( $spacing, $size: 0 ) {
+	$name: vita-list-li-spacing-#{ $spacing };
+	@at-root %#{ $name } {
+		$line-height: getLineHeight( $spacing, $size );
+		padding: #{ $line-height*$line-height / 16 + $line-height/2 }em;
+	}
+	@extend %#{$name};
+	
+	// blah: getGlobal( size );
+}
+
+@mixin vita-list-li-min-rows( /* $min-rows, $size, $spacing, */ $config: () ) {
+	$line-height: 1;
+	$min-rows: 0;
+	$size: getDefault( options, size );
+	$spacing: getDefault( options, spacing );
+
+	@if( $config ) {
+		// $min-rows: map-get()
+
+		@if( map-has-key( $config, size ) ) {
+			$size: map-get( $config, size );
+		}
+
+		@if( map-has-key( $config, spacing ) ) {
+			$size: map-get( $config, spacing );
+		}
+	}
+
+	$line-height: getLineHeight( $size, $spacing );	
+	min-height: #{ $line-height * $min-rows + $spacing/16 }em ; 
+
+	// $line-height
+	// this is a toughie...it should mimic the vita-list-divider-size mixin above			
+
+	// get line-height from content section then multiply by rows,
+	// might need to check spacing
+}
+
+@mixin useListWidget( $widgetName ) {
+	@extend %vita-list-widgets-#{ $widgetName }; // that's it
+	// a more elegant solution is hard to come by, since
+	// there is no way to test if a placeholder exists or
+	// hold css within a variable, like a map
+	// maybe in the future it will be possible to do this the right way with sass
+
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// scratch that last comment, and check out the widget library for gallery-template;
+	// this should mimic that self-aware mixin method rather than implicitly defining placeholders
+	// because of the @at-root and @keyframes issue
+}
+
+@mixin vita-list-extendable() {
+	@extend %vita-list-widgets-extender;
+}

@@ -1,0 +1,271 @@
+%vita-list-base {
+	position: relative; // for fixing the footer
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+	font-family: Montserrat, Helvetica, Arial;
+	// overflow: visible;
+	min-width: 260px;
+	max-width: 320px;
+	height: 100%;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	// min-width: 300px;
+	// max-width: 350px; // temp
+	// @include liSize( 1 ); // 1 = large = default
+	// todo this will get replaced by the sizing system
+}
+
+%vita-list-cap-base {
+	box-sizing: inherit;
+	display: inline-block;
+	width: 100%;
+	flex: 0 0 1;
+	overflow: visible;
+
+	&>*  {
+		display: inline-block;
+		margin: $vita-list-standard-padding;
+	}
+
+}
+
+%vita-list-header-base {
+	@extend %vita-list-cap-base;
+	border-top: $border-size/2 solid white; // spacing for visual depth
+	border-bottom: $divider-size solid $color1;
+	@include linear-gradient( $color2, 0%, $color3, 100%); 
+
+	&>* {
+		@include font-size( 18pt );
+		letter-spacing: 2px;
+	}
+}
+
+%vita-list-footer-base {
+	@extend %vita-list-cap-base;
+	@include linear-gradient( $color3, 0%, $color2, 100%); 
+	left: 0;
+	border-top: solid $divider-size $color1;
+	width: 100%;
+	z-index: 10;
+	flex-basis: 1;
+
+	&>div {
+
+		margin: $vita-list-standard-padding/2;
+	}
+}
+
+
+%vita-list-content-base {
+
+	box-sizing: inherit;
+	border-top: 0;
+	position: relative;
+	overflow-y: hidden;
+	display: block;
+	width: auto;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	// flex: 1000 1 10%;
+	flex: 1 0 0;
+	// flex: 0 0 auto;
+	// height: 100%;
+	
+	&>* {
+		padding: 0;
+		margin: 0 0;	
+	}
+	
+	&>ul {
+		width: 100%;
+		// flex-flow: column nowrap;
+		// display: block;
+		position: relative;
+		overflow: hidden;
+		box-sizing: border-box;
+		margin-bottom: 2px;
+		// display: flex;
+		// flex-flow: column wrap;
+		// align-items: center;
+		// justify-content: center;
+		// align-content: center;
+
+		&>li{
+			width: 100%;
+			height: 100%;
+			list-style-type: none;
+			display: flex;
+			// display: block;
+			box-sizing: border-box;
+			// align-self: center;
+			flex: 1 0 0;
+			justify-content: center; 
+			align-items: center;
+			border: $vita-list-border-height solid transparent;
+			border-left: $vita-list-border-width solid transparent;
+			border-right: $vita-list-border-width solid transparent;
+			position: relative;
+			text-overflow: hidden;
+
+			padding: $list-padding;
+			// span {
+			// 	// display: flex;
+			// }
+		}
+		// &:last-child {
+		// }
+	}
+}
+
+%vita-list-colors-base {
+	
+}
+
+%vita-list-cap-crunch {
+	&>* {
+		margin: 0 auto;
+		asdf: what;	
+	}
+}
+
+%vita-list-header-crunch {
+	@extend %vita-list-cap-crunch;
+}
+
+%vita-list-content-crunch {
+	padding: 0;
+}
+
+%vita-list-footer-crunch {
+	@extend %vita-list-cap-crunch;
+}
+
+%text-align-right {
+	text-align: right;
+	justify-content: flex-end;
+	// span {
+	// 	align-self: flex-end;
+	// }
+}
+
+%text-align-left {
+	text-align: left;
+	justify-content: flex-start;
+	// width: 100%;
+	// span {
+	// 	align-self: flex-start;
+	// 	text-align: left;
+	// 	float: left;
+	// }
+	// background-color: red;
+	// &:first-child {
+	// 	background-color: blue;
+	// }
+}
+
+%text-align-center {
+	text-align: center;
+	justify-content: center;
+	// span {
+	// 	align-self: center;
+	// }
+}
+
+%vita-list-selectable {
+	&.selected {
+		background-color: lighten( $color1, 17.7% );
+		border: $vita-list-border-height solid $color5;
+		border-left: $border-size solid $color5;
+		border-right: $border-size solid $color5;
+	}
+}
+
+%vita-list-interactive {
+	$transition-values: 
+		border-color $standard-transition-time linear,
+		text-shadow $standard-transition-time, linear;
+
+		@include addCustomTransition( $transition-values );
+	
+	&:last-child:hover:after {
+		background-color: transparent;
+	}
+	&:hover {
+		background-color: lighten( $color1, 25% );
+		border: $vita-list-border-height solid $hover-blue;
+		border-left: $vita-list-border-width solid $hover-blue;
+		border-right: $vita-list-border-width solid $hover-blue;
+		cursor: pointer;
+
+		@include addTextShadow( 2px, $color1 );
+	}
+	&:active {
+		@include addTransition( all, 0ms );
+		@include addTextShadow( 4px, darken( $color1, 10% ) );
+		background-color: lighten( $color1, 23% );
+		border-color: $color5;
+	}
+}
+
+%vita-list-interactive-selectable {
+	&.selected {
+		&:hover { 
+			$hover-border-color: lighten( $color5, 8% );
+			background-color: lighten( $color1, 21% );
+			border: $vita-list-border-height solid $hover-border-color;
+			border-left: $vita-list-border-height*4 solid $hover-border-color;
+			border-right: $vita-list-border-height*4 solid $hover-border-color;
+		}	
+	}	
+}
+
+%vita-list-interactive-divider {
+	&:hover {
+		@extend %hideDivider;
+	}
+}
+
+%vita-list-divider {
+	&:not(:first-child):before, &:last-child:after {
+		// this is where the horizontal border between filter names is generated
+		display: block;
+		position: absolute;
+		margin: 0 auto;
+		height: $vita-list-border-height;
+		content: "\00a0 ";
+		background-color: $color1;
+	}
+
+	&:not(:first-child) {
+		&:before {	
+			top: -1px;
+		}
+		&:last-child:after {
+			bottom: -1px;
+		}
+	}
+}
+
+%vita-list-divider-selectable {
+	&.selected {
+		@extend %hideDivider;
+	}
+}
+
+%vita-list-divider-interactive {
+	&:hover {
+		@extend %hideDivider;
+	}
+}
+
+%hideDivider {
+	&:before, &+li:before {
+		background-color: transparent;
+		// prevents border from displaying in the :hover li and the li after :hover
+	}
+}

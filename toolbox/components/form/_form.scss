@@ -1,0 +1,106 @@
+
+//@import ('defaults/form');
+
+@import "form-mixins";
+@import "form-functions";
+@import "form-placeholders";
+@import "form-config";
+
+@mixin form( $config: $form-default-config, $element: "&" ) {
+
+    $blocks: 0;
+    $options: ();
+    // @if( $element == "" ) {
+    //     $element: &;  
+    // }
+
+    @at-root #{ $element }{
+        $count: 0;
+
+        @extend %form-base;
+
+        $optlists: header content footer;
+
+        @if map-has-key( $config, options ) {
+            $options: map-merge(
+                map-get( $form-default-config, options ),
+                    map-get( $config, options )
+                ); // store global vita-list options
+            @include form-base( $options );
+                       // @if map-has-key( $options, location ) {
+            //      @include form-location( map-get( $options, location ) );
+            // }
+
+            // @if map-has-key( $options, border ) {
+            //      @include form-border( map-get( $options, border ) );
+            // }
+
+        }
+
+
+        @each $optlist in $optlists {
+            $optconfig: map-get( $config, $optlist );
+            @if map-has-key( $config, $optlist ) {
+
+                $blocks: $blocks + 1;
+
+                &>div:nth-child( #{ $blocks } ) {
+
+                    // @extend %vita-list-#{ $optlist }-base;  //extend the base placeholder for each options group
+
+                    $properties:
+                        map-merge( 
+                            map-get(
+                                $form-default-config,
+                                $optlist
+                            ),
+                            map-merge(
+                                $options,
+                                $optconfig
+                            )
+                        );
+                    @if map-get( $optconfig, styles ) {
+                        // @warn ( "optlist " + $optlist + " has styles" );
+                        $properties: map-merge( $properties, map-get( $optconfig, styles ) );
+                    } @else {
+                        // @warn( "no styles in " + $optlist );
+                        $properties: map-remove( $properties, styles );
+                    }
+
+                    // $properties: 
+                    //     map-merge( map-get( $form-default-config,
+                    //         map-merge( map-get( $config, options ), map-get( $config, $optlist ))
+                    //         )
+
+
+            //         // map-merge argument order matters!
+            //         // the second map arguments' values take
+            //         // precendent over the first
+            //         // which is essential to the desired effect here
+            //         // (overwriting)
+
+                    // @warn( "we've arrived at " + $optlist ); //temp todo fixme
+                    
+
+                    // reached: #{ $optlist };
+                    @if ( $optlist == header ) { // must update with $optlists
+                        //call header mixin
+                        @include form-header( $properties );
+
+                    } @elseif ( $optlist == content ) { // must update with $optlists
+                        // todo call content mixin
+                        @include form-content( $properties );
+
+                    } @elseif ( $optlist == footer ) { // must update with $optlists
+                        // todo call footer mixin
+                        // @warn ("optlist == footer" );
+                        @include form-footer( $properties );
+
+                    }
+                }
+            } // End @if map-has-key( $config, $optlist ) 
+        }  // End @each  
+
+    }      
+} // End @mixin form
+

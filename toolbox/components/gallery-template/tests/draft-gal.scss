@@ -1,0 +1,1067 @@
+@import "../../../../toolbox";
+
+$gallery-title-height: 60px;
+
+.hidden {
+	display: none !important;
+	// visibility: hidden !important;
+	// position: absolute !important;
+}
+
+@-webkit-keyframes warning {
+	50% {
+		text-shadow: 	1px 3px 4px black,
+						1px 3px 4px black;
+		transform: scale( 1.1 );
+		color: #F00000;
+	}
+}
+@-moz-keyframes warning {
+	50% {
+		text-shadow: 	1px 3px 4px black,
+						1px 3px 4px black;
+		transform: scale( 1.1 );
+		color: #F00000;
+	}
+}
+@keyframes warning {
+	50% {
+		text-shadow: 	1px 3px 4px black,
+						1px 3px 4px black;
+		transform: scale( 1.1 );
+		color: #F00000;
+	}
+}
+.warning>div:nth-of-type( 1 )>div:nth-of-type(2) {
+	position: relative;
+	-webkit-animation: warning 2s 3;
+	-moz-animation: warning 2s 3;
+	animation: warning 2s 3;
+}
+// .shown {
+// 	display: initial !important;
+// }
+
+#print {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	visibility: hidden;
+}
+
+
+
+#divisions.hideable.hide .hideMe {
+	margin-right: -7px;
+}
+
+.hideable #current-filters .hideMe {
+	margin-right: -4px;
+}
+
+.gallery-container {
+	height: 100%;
+	overflow: hidden;
+	position:relative;
+	background-color: inherit;
+
+	&>div {
+
+		height: 100%;
+		justify-content: center;
+		// overflow: hidden;
+		position: relative;
+		background-color: inherit;
+
+		&:nth-of-type( 1 ) {
+			float: left;
+			width: 284px;
+			transition: margin 250ms linear; 
+
+		}
+		&:nth-of-type( 2 ) {
+			display: block;
+			overflow: hidden;
+			height: 100%;
+			min-width: 300px;
+
+			.gallery-banner>div {  // tabs banner
+				&#gallery-nav { // view tabs
+					height: 64px;
+					border-bottom: 1px solid $color1;
+					display: flex;
+					justify-content: center;
+					z-index: 30;
+
+					&>div {
+						margin: auto 2%;
+						padding: 0px 2px;
+						overflow: hidden;
+						word-wrap: break-word;
+						text-align: center;
+						hyphens: auto;
+						display: block;
+						letter-spacing: -1px;
+						font-size: 18px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						height: 100%;
+						align-self: center;
+						box-sizing: border-box;
+						flex: 1 0 0;
+						// transition: margin 250ms linear;
+
+						border-bottom: 4px solid transparent;
+						border-top: 4px solid transparent;
+						transition: border 150ms linear;
+
+						&.selected {
+							border-top: 0px solid transparent;
+							border-bottom: 4px solid $color5;
+						}
+						&:hover {
+							cursor: pointer;
+							border-top: 0px solid transparent;
+							border-bottom: 4px solid lighten( $color5, 20% );
+							transition: border 25ms linear;
+
+							&.selected {
+								border-top: 0px solid transparent;
+								border-bottom: 4px solid darken( $color5, 15% );
+							}
+						}
+						&:active {
+							border-bottom: 4px solid $color5;
+						}
+
+
+					}
+				}
+				&:nth-of-type( 2 ) { // blue sun/current item title
+					position: relative;
+					z-index: 50;
+					height: $gallery-title-height;
+					// height: 60px;
+					// background-color: red;
+					width: 100%;
+
+					margin-bottom: 5px;
+					&:before {
+						position: absolute;
+						width: 100%;
+						height: 25px;
+						@include linear-gradient( #ececec, 68%, rgba( 255, 255, 255, 0), 100% );
+						content: " ";
+						// background-color: red;
+
+					}
+
+					&>div { // id/title
+						display: inline-block;
+						font-size: 24px;	
+						&:nth-of-type( 1 ) {
+							background-color: $color5;	
+							position: relative;
+							width: 60px;
+							height: 60px;
+							border-bottom-right-radius: 100%;
+							border: 1px solid $color1;
+							box-sizing: border-box;
+							z-index: 10;
+							box-shadow: 2px 2px 10px $color4;
+							padding-top: 14px;
+							padding-left: 11px;
+
+							&.char1 {
+								padding-left: 16px;
+							}
+
+							&.char2 {
+								padding-left: 10px;
+							}
+
+							&.char3 {
+								padding-left: 4px;
+								font-size: 22px;
+							}
+
+							&.char4 {
+								padding-left: 4px;
+								font-size: 17px;
+							}
+						}
+						&:nth-of-type( 2 ) {
+							span {
+								display: inline-block;
+								margin-left: 10%;
+								width: 100%;
+								position: relative;
+								// top: 10px; //padding/margin move nth-of-type(1) also for some reason
+							}
+						}
+					}
+				}
+			}
+		}
+
+		& #gallery-template-container { //for perfect scrollbar
+
+			position:relative;
+			overflow: hidden;
+			height: 100%;
+			margin-top: -$gallery-title-height;
+			// padding-top: 48px;
+			// padding: 55px 0 45px 0;
+			padding-top: 55px;
+			// margin-bottom: -60px;
+			background-color: inherit;
+			&>div:first-of-type {
+				padding-bottom: 70px;
+				// padding-bottom: 0px;
+				background-color: inherit;
+			}
+
+			&>.ps-scrollbar-y-rail {
+				position: absolute;
+				z-index: 50;
+
+				&>div {
+					margin: 0;
+					padding: 0;
+				}
+			}
+		}
+
+		@media only screen and (max-width: 563px) {
+			.gallery-banner>div:first-of-type>div {
+				font-size: 14px !important;
+			}
+			.gallery-banner {
+				&>div:first-child>div {
+					font-size: 10px;
+				}
+			}	
+		}
+		// @media only screen and (max-width: 1023px) {
+		// 	&:nth-of-type( 1 ) {
+		// 		margin-left: -280px;
+		// 	}
+    
+		// } 
+
+	}
+}
+
+$resultsConfig: (
+	options: (
+		position: left,
+		// size: 8,
+		// spacing: 1,
+		extendable: true,
+		scrollable: true,
+		color: #f7f7f7,
+	),
+	header: (
+		align: left,
+	),
+	content: (
+		minRows: 2,
+		divider: 9 center,
+		useWidget: info,
+		interactive: true,
+		selectable: true,
+	),
+	footer: (
+		useButton: true,
+		buttonIcon: usb-active,
+		buttonActiveIcon: usb,
+	)
+);
+
+@include vita-list( $resultsConfig, #current-filters );
+
+$divisionsConfig: (
+	options: (
+		// align: left,
+		columns: 1,
+	),
+	wrappers: (
+		wrapper1: (
+			column1: (
+				panel1: (
+					size: 100,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: list,
+							config: (
+								options: (
+									divider: 9,
+									interactive: true,
+									size: 2,
+									minRows: 1,
+									spacing: 10,
+									extendable: true,
+									scrollable: true,
+									useWidget: checkbox, 
+									selectable: true,
+								),
+								content: (),
+							),
+						),
+					),
+				),
+			),	
+		),
+	),
+);
+
+#tasks-padding {
+	height: 180px;
+	display: none;
+}
+#tasks-content-container {
+	// width: auto;
+}
+$tasksConfig: (
+	options: (
+		// align: center,
+		columns: 3,
+	),
+	wrappers: (
+		wrapper1: (
+			
+			column1: (
+				// panel: (
+				// 	size: 33,
+				// ),
+				panel1: (
+					size: 33,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: side-by-side,
+							config: (
+								left: percentageCircle,
+								right: descriptionWFooter,
+							),
+						),
+					),
+				),
+				panel2: (
+					size: 33,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: side-by-side,
+							config: (
+								left: percentageCircle,
+								right: descriptionWFooter,
+							),
+						),
+					),
+				),
+			),
+			column2: (
+				panel1: (
+					size: 33,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: side-by-side,
+							config: (
+								left: percentageCircle,
+								right: descriptionWFooter,
+							),
+						),
+					),
+				),
+				panel2: (
+					size: 33,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: side-by-side,
+							config: (
+								left: percentageCircle,
+								right: descriptionWFooter,
+							),
+						),
+					),
+				),
+			),
+			column3: (
+				panel1: (
+					size: 66,
+					addStyles: (
+						"&>div:nth-of-type( 1 )": (
+							height: 165px,
+						),
+					),
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: side-by-side,
+							config: (
+								left: percentageCircle,
+								right: descriptionWFooter,
+								addStyles: (
+									"&": (
+										// background-color: lightblue,
+										max-height: 100px,
+										height: 250px,
+									),
+									"&>div>div:nth-of-type(2)>div:nth-of-type(2)": (
+										// background-color: orange,
+										// bottom: -24px,
+										// height: 27px,
+										top: 83px,
+									),
+								),
+
+							),
+						),
+						widget2: (
+							name: footerBar,
+							config: (
+								widget1: (
+									name: side-by-side,
+									config: (
+										left: description,
+										right: description,
+
+									),
+								),
+								addStyles: (
+									"&": (
+										// background-color: "blue !important",
+										height: 90px,
+									),
+									"&>div:nth-of-type( 2 )": (
+										height: 65px !important,
+										// background-color: pink,
+									),
+									// "&>div:nth-of-type( 2 )>div:nth-of-type( 1 )>div": (
+									// 	height: 100px !important,
+									// ),
+								),
+							),
+						),
+
+						widget4: (
+							name: footerBar,
+							config: (
+								widget1: (
+									name: side-by-side,
+									config: (
+										left: description,
+										right: description,
+									),
+								),
+								addStyles: (
+									"&": (
+										// background-color: "blue !important",
+										height: 90px,
+									),
+									"&>div:nth-of-type( 2 )": (
+										height: 65px !important,
+										// background-color: pink,
+									),
+								),
+							),
+						),
+						widget5: (
+							name: side-by-side,
+							config: (
+								left: description,
+								right: description,
+							),
+						),
+					),
+					// addStyles: (
+						// "&>div:nth-of-type(1)>div:nth-of-type(2)": (
+						// 	background-color: pink,
+						// 	max-height: 100%,
+						// 	height: 317px,
+						// ),
+						// "&>div:nth-of-type(1)>div:nth-of-type(2)>div": (
+						// 	// background-color: transparent,
+						// 	max-height: 200px,
+						// 	// height: 100%,
+						// 	height: 130px,
+						// 	min-height: 130px,
+						// ),
+					// ),
+				),
+
+			),
+		),
+	),
+);
+
+
+#gallery-container {
+	display: flex;
+	flex-flow: row wrap;
+	background-color: inherit;
+	transition: height 1s linear;
+	overflow: hidden;
+	position: relative;
+	height: 100%;
+
+	&>div {
+		background-color: inherit;
+		&:nth-of-type( 1 ) {
+			flex: 0 0 auto;
+			// margin: 0 auto;
+		}
+
+		&#viewContainer { //:nth-of-type(3) {
+			min-width: 280px;
+			flex: 3 0 0%;
+			overflow: hidden;
+			position: relative;
+			height: 100%;
+			&>div {
+				background-color: inherit;
+				// &>div>div>div {
+					// background-color: pink !important;
+				// }
+			}
+		}
+	}
+
+	#tasksTableContainer {
+		width: 100%;
+		min-width: 280px;
+		background-color: inherit;
+		height: 180px;
+		margin: 0;
+		position: relative;
+		transition: height 100ms ease;
+		max-width: 1000px;
+		margin: auto;
+
+		&.shrunk {
+			margin-bottom: 30px;
+			height: 400px !important;
+			&>div:first-of-type {
+				height: 400px !important;
+				&>div:nth-of-type(2) {
+					padding-bottom: 160px;
+				}
+			}
+		}
+
+		&>div {
+			&:nth-of-type( 1 ) {
+				height: 140px;
+				max-height: 100%;
+				overflow: hidden;
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: space-around;
+				align-items: center;
+
+
+				&>div {
+					text-align: center;
+					margin: 3%;
+
+					&:nth-of-type( 1 ) { //button/control panel container
+						// button
+						flex: 1 1 280px;
+						display: flex;
+						flex-flow: row wrap;
+						// background-color: pink;
+
+						&>div {
+							&:nth-of-type( 1 ) {
+								width: 100%;
+								max-width: 240px;
+								@include custom-button( "pencil" );
+								min-width: 160px;
+								margin: auto;
+								margin-bottom: 15px;
+								// &:active>span:nth-of-type( 2 ) {
+								// 	-webkit-filter: invert( 100% );
+								// 	-moz-filter: invert( 100% );
+								// 	filter: invert( 100% );
+								// }
+							}
+							&:nth-of-type( 2 ) {
+								margin: auto;
+								// margin: 0 10px 15px 10px;
+								padding-left: 10px;
+							}
+						}
+					}
+					&:nth-of-type( 2 ) {
+						// table	
+						// margin: 0 auto;
+						// margin-left: 0;
+						flex: 2 2 280px;
+						// align-self: flex-start;
+						// max-height: 100%;
+						overflow: hidden;
+						// background-color: $color5;
+						height: 100%;
+						min-height: 65px;
+						max-height: 100%;
+						position: relative;
+						// background-color: red;
+					}
+				}
+			}
+
+			&:nth-of-type( 2 ) {
+				// flex: 1 1 60px;
+				// height: 50px;
+				height: 20%;
+				background-color: inherit;
+				overflow: hidden;
+				position: relative;
+				top: 10px;
+				// bottom: 0px;
+				width: 90%;
+				left: 5%;
+				// display: flex;
+				// align-items: center;
+				&>div {
+					// margin: 15px;
+					margin-bottom: 0px;
+					// transform: scale( 1.6 );
+					// margin: 0 auto;
+					// background-color: inherit;
+					@extend %strike-through-heading;
+				}
+			}
+		}
+	}
+}
+
+#divisions {
+	@include gallery-template( $divisionsConfig );
+	position: relative;
+}
+
+#tasksViewGallery {
+	// float: left;
+	// display: inline-block;
+	min-width: 280px !important;
+	// width: 100%;
+	@include gallery-template( $tasksConfig );
+	// display: none;
+}
+
+#tasksView {
+	// display: none;
+}
+
+// #tasks-view-extra {
+// 	// float: left;
+// 	background-color: orange;
+// 	position: absolute;
+// 	left: 300px;
+// 	top: 80px;
+// 	display: none;
+
+// 	z-index: 100;
+// }
+
+
+$infoConfig: (
+	options: (
+		requireColors: none,
+		columns: 3,
+	),
+	wrappers: (
+		wrapper1: (
+			column1: (
+				panel1: (
+					size: 60,
+					backdrop: clear,
+					widgets: (
+						widget1: (
+							name: fullSizeIMG,
+							hasHeader: false,
+						),
+					)
+				),
+
+			),
+			column2: (
+				panel1: (
+					size: auto,
+					backdrop: clear,
+					widgets: (
+						widget1: (
+							name: data-columns,
+							hasHeader: true,
+							headerConfig: (align:left),
+						),
+					)
+				),
+
+			),
+			column3: (
+				panel1: (
+					size: 40,
+					backdrop: clear,
+					widgets: (
+						widget1: (
+							headerConfig: (align:left),
+							hasHeader: true,
+							name: data-columns,
+						),
+					),
+				), /* panel */
+				panel2: (
+					size: auto,
+					backdrop: clear,
+					widgets: (
+						widget1: (
+							name: controlButtons,
+							config: (
+								buttonIcon: pencil,
+								// buttonActiveIcon: pencil-active,
+							),
+						),
+					),
+				),
+			), /* column */
+
+			column4: (
+				panel1: (
+					size: 40,
+					backdrop: clear,
+					widgets: (
+						widget1: (
+							name: checkOrX,
+							hasHeader: true,
+							headerConfig: (
+								align: left
+							),
+						),
+					),
+				), /* panel1 */
+			), /* column1 */
+
+			column5: (
+				panel1: (
+					size: 40,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: xlFont,
+						),
+
+						widget2: (
+							name: footerBar,
+						),
+					),
+				),
+			),
+			column6: (
+				panel1: (
+					size: 40,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: xlFont,
+						),
+
+						widget2: (
+							name: footerBar,
+						),
+					),
+				), /* panel */
+			), /* column */
+		) /* wrapper1 */
+	), /* wrappers */
+);
+
+#infoView {
+	@include gallery-template( $infoConfig );
+	@extend %green-text;
+	@extend %red-text;
+	// clear: both;
+	// display: none;
+}
+
+$statisticsConfig: (
+	options: (
+		requireColors: none,
+		columns: 3,
+	),
+	wrappers: (
+		wrapper1: (
+			column2: (
+				panel1: (
+					size: 66,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: barGraph,
+						),
+						widget2: (
+							hasHeader: false,
+							name: footerBar,
+						),
+					),
+				),
+				panel2: (
+					size: 33,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: percentageCircle,
+						),
+					),
+				),
+			),
+			column3: (
+				panel1: (
+					size: 66,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: barGraph,
+						),
+						widget2: (
+							hasHeader: false,
+							name: footerBar,
+						),
+					),
+				),
+				panel2: (
+					size: 33,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: percentageCircle,
+						),
+					),
+				),
+			),
+			column4: (
+				panel1: (
+					size: 66,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: barGraph,
+						),
+						widget2: (
+							hasHeader: false,
+							name: footerBar,
+						),
+					),
+				),
+				panel2: (
+					size: 33,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: percentageCircle,
+						),
+					),
+				),
+			),
+		),
+	),
+);
+
+#statsView {
+	@include gallery-template( $statisticsConfig );
+	// display: none;
+	// clear: both;
+}
+
+$customPercentCircleWidget: (
+	widget1: (
+		name: side-by-side,
+		hasHeader: true,
+		config: (
+			left: percentageCircle,
+			right: description,
+			addStyles: (
+				"&": (
+					height: 130px,
+				),
+			),
+		),
+	),
+	widget2: (
+		name: footerBar,
+		config: (
+			widget1: (
+				name: percentageCircle,
+				config: (
+					addStyles: (
+						".percentageCircle": (
+							transform: scale(.8),
+							bottom: 25px,
+						),
+						"&": (
+							height: 130px,
+							background-color: inherit,
+						),
+					),
+				),
+			),
+		),
+	),
+);
+
+$costsConfig: (
+	options: (
+		requireColors: none, // red blue green orange or all
+		columns: 3,
+ 	),
+
+ 	wrappers: (
+		wrapper1: (
+
+			col2: (
+
+				panel1: (
+					size: 50, 
+					// backdrop: clear,
+					widgets: $customPercentCircleWidget,
+				),
+
+				panel2: (
+					size: 50,
+					widgets: $customPercentCircleWidget,
+				),
+			),
+
+			col3: (
+				panel1: (
+					size: 33,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: side-by-side,
+							config: (
+								left: description,
+								right: description,
+								addStyles: (
+									"&": (
+										height: 50px,
+									),
+								),
+							),	
+						),
+						widget2: (
+							name: footerBar,
+							config: (
+								widget1: (
+									name: percentageCircle,
+									config: (
+										addStyles: (
+											".percentageCircle": (
+												transform: scale(.5),
+												top: 4px,
+											),
+											"&": (
+												max-height: 40px,
+												background-color: inherit,
+												position: relative,
+												left: 25px,
+											),
+										),
+									),
+								),
+							),
+						),
+					),
+				),
+
+				panel2: (
+					size: 33,
+					widgets: (
+						widget1: (
+							name: controlButtons,
+							hasHeader: true,
+							config: (
+								buttonIcon: pencil documents,
+								buttonActiveIcon: pencil documents-active,
+							),
+						),
+					),
+				),	
+
+				panel3: (
+					size: 33,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: side-by-side,
+							config: (
+								left:
+								 percentageCircle,
+								right:
+								 description,
+							),	
+						),
+					),
+				),
+			),
+
+
+			col4: (
+				panel1: (
+					size: 50,
+					widgets: $customPercentCircleWidget,
+				),
+
+				panel2: (
+					size: 50,
+					widgets: $customPercentCircleWidget, 
+				),
+			), // column
+		), // wrapper
+ 	),
+);
+
+#costsView {
+	@include gallery-template( $costsConfig );
+	// display: none;
+}
+
+
+$formConfig: (
+	options: (
+		elementsUsed: all,
+		containerHeight: 100%,
+		containerWidth: 100%,
+		boxed: true,
+		border: false,
+		accent: 2,
+		shadow: true,
+		rounded: false,
+	),
+	header: (),
+	content: (),
+	footer: (
+		useButton: true,
+	),
+);
+
+@include form( $formConfig, "#new-contract-form, #new-client-form, #new-division-form, #new-user-form, #new-project-form");
+@include modal( (), "#new-contract, #new-client, #new-division, #new-user, #new-project" );
+
+// #gallery-template {
+	// display: none;
+// }
+// @include gallery-template( $config, #gallery-template );
+
+
+
+
+// @warn( "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" );
+// @warn( stringify( $statisticsConfig, ", " ) );
+// @warn( "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" );

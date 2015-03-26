@@ -1,0 +1,280 @@
+@mixin barGraph() {
+
+	display: table;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	align-items: stretch;
+
+	&>div:nth-of-type( 1 ) { //graphContainer
+		display: table-row;
+		flex-flow: column nowrap;
+		height: 100%;
+		position: relative;
+		top: 0px;
+
+		&>div {
+			height: 100%;
+
+			&:nth-of-type( 1 ) { //graphBoxContainer
+				width: 100%;
+				max-width: 275px;
+				flex-flow: row nowrap;
+
+
+				&>div:nth-of-type( 1 ) { //graphBG
+					position: relative;
+					box-sizing: border-box;
+					align-self: flex-start;
+					background-color: rgb( 215, 215, 215 );
+					border: 2px solid rgb( 80, 80, 80 );
+					height: 100%;
+					width: 80%;
+					// margin-right: 10%;
+					margin-left: 12%;
+					border-radius: 10px;
+					@extend %no-select;
+
+					&>div:nth-of-type( 1 ) { //graphLinesContainer
+						display: flex;
+						flex-flow: column-reverse nowrap;
+						justify-content: space-between;
+						align-items: center;
+						height: 100%;
+						padding: 0;
+						border-radius: 10px;
+
+						&>div { // graphLines
+
+							margin: 0;
+							padding: 0;
+							box-sizing: border-box;
+							height: 100%;
+							width: 100%;
+							border-top: 1px solid rgb( 175, 175, 175 );
+							position: relative;
+							border-radius: 3px;
+							&:last-of-type {
+								border-top-right-radius: 10px;
+								border-top-left-radius: 10px;
+							}
+							&:first-of-type {
+								border-bottom-right-radius: 10px;
+								border-bottom-left-radius: 10px;
+							}
+							
+							&:last-of-type {
+								border-top: 0;
+							}
+
+
+							&>div { //graphScaleValues
+								display: block;
+								background-color: transparent;
+								position: absolute;
+								bottom: -5px;
+								right: 103%;
+								text-align: right;
+								font-size: 12px;
+								letter-spacing: -1.4px;
+								word-wrap: break-word;
+								// word-break: break-all;
+								// width: 3em;
+								max-width: 13%;
+								width: auto;
+								line-height: 9px;
+							}
+						}
+					}
+
+					&>div:nth-of-type( 2 ) { //graphBarsContainer
+						position: absolute;
+						bottom: 0px;
+						display: flex;
+						flex-flow: row nowrap;
+						height: 100%;
+						width: 100%;	
+						justify-content: space-around;
+						align-items: flex-end;
+						overflow: hidden;
+						box-shadow: 0px 0px 13px inset;
+						border-radius: 7px;
+
+						&>div { //bars
+							min-width: 14px;
+							max-width: 30px;
+							margin: 0 2%;
+							flex: 1 0 auto;
+							position: relative;
+							bottom: 0px;
+							align-self: flex-end;
+							&>div { // barAnimation 
+								position: absolute;
+								bottom: 0px;
+								border-top-right-radius: 5px;
+								border-top-left-radius: 5px;
+								border: 1px solid black;
+								border-bottom: 2px solid white; //0px;
+								height: 100%;
+								box-sizing: border-box;
+								width: 100%;
+								position: absolute;
+								bottom: 0px;
+								-webkit-animation: growBar 1.2s ease 1;
+								-ms-animation: growBar 1.2s ease 1;
+								animation: growBar 1.2s ease 1;
+								@include custom-box-shadow( "4px 10px 15px rgba( 0, 0, 0, .5 ), -4px 10px 15px rgba( 0, 0, 0, .5 )" );
+								&:after { // white overlay
+									@extend %white-overlay;
+								}
+							}
+							&:nth-of-type( 5n-4 ) {
+								&>div {
+									@extend %blue;
+								}
+							}
+							&:nth-of-type( 5n-3 ) {
+								&>div {
+									@extend %green;
+								}
+							}
+							&:nth-of-type( 5n-2 ) {
+								&>div {
+									@extend %orange;
+								}
+							}
+							&:nth-of-type( 5n-1 ) {
+								&>div {
+									@extend %red;
+								}
+							}
+							&:nth-of-type( 5n ) {
+								&>div {
+									@extend %purple;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	///////////////////////////////////////////////////////////////
+	&>div:nth-of-type( 2 ) { //graphKeyContainer
+		display: flex;
+		justify-content: space-between;
+		line-height: 24px;
+		box-sizing: border-box;
+		margin: 8px;
+		margin-left: 9%;
+		margin-right: 9%;	
+		max-width: 81%;
+		&>div {
+		display: flex;
+		letter-spacing: -1.1px;
+
+			&:nth-of-type( 1 ) { // graphKeyTitles
+
+				flex-flow: column nowrap;
+				overflow: hidden;
+
+				&>div { // graphKeyTitle
+					display: flex;
+					flex-flow: row nowrap;
+
+					&>div { // title/icon 
+						display: flex;
+						justify-content: flex-start;
+						text-align: left;
+						position: relative;
+						overflow: hidden;
+
+						&:nth-of-type( 1 ) { //Icon
+							width: 15px;
+							min-width: 15px;
+							height: 15px;
+							margin: 1px;
+							border-radius: 4px;
+							overflow: hidden;
+							margin-right: 10px;
+							box-sizing: border-box;
+							border: 1px solid black;
+							@include box-shadow( 0px, 0px, 10px, rgba( 0, 0, 0, .5 ) );
+
+							&:after { // white overlay
+
+								@extend %white-overlay;
+							}
+						}
+
+						&:nth-of-type( 2 ) { // graphKeyTitleText
+							padding-right: 1px;
+							display: inline-block;
+							text-overflow: ellipsis;
+							white-space: nowrap;
+							width: auto;
+							height: 15px;
+							line-height: 15px;
+						}
+
+					}
+
+					&:nth-of-type( 5n-4 )>div:nth-of-type( 1 ) {
+						@extend %blue;
+					}
+					&:nth-of-type( 5n-3 )>div:nth-of-type( 1 ) {
+						@extend %green;
+					}
+					&:nth-of-type( 5n-2 )>div:nth-of-type( 1 ) {
+						@extend %orange;
+					}
+					&:nth-of-type( 5n-1 )>div:nth-of-type( 1 ) {
+						@extend %red;
+					}
+					&:nth-of-type( 5n )>div:nth-of-type( 1 ) {
+						@extend %purple;
+					}
+
+				}
+			}
+
+			&:nth-of-type( 2 ) { // graphKeyValues
+				display: flex;
+				flex-flow: column nowrap;
+				border-left: 2px solid $color1;
+				font-size: 15px;
+				line-height: 17px;
+				text-align: right;
+				width: auto;
+				padding-left: 4px;
+			} //graphKeyValues
+		}
+	} // graphKeyContainer
+
+	@-webkit-keyframes growBar {
+		0% {
+			transform: scaleY(0) translateY(100%);
+		}
+		100% {
+			transform: scaleY(1.01) translateY(0%);
+		}
+	}
+
+	@keyframes growBar {
+		0% {
+			transform: scaleY(0) translateY(100%);
+		}
+		100% {
+			transform: scaleY(1.01) translateY(0%);
+		}
+	}
+
+	@-ms-keyframes growBar {
+		0% {
+			transform: scaleY(0) translateY(100%);
+		}
+		100% {
+			transform: scaleY(1.01) translateY(0%);
+		}
+	}
+}

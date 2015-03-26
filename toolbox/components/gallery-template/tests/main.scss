@@ -1,0 +1,607 @@
+@import "../../../../toolbox";
+//@import "mixins";
+
+$gallery-title-height: 90px;
+
+.gallery-container {
+	height: 100%;
+	overflow: hidden;
+	position:relative;
+	&>div {
+
+		height: 100%;
+		justify-content: center;
+		overflow: hidden;
+
+		&:nth-of-type( 1 ) {
+			float: left;
+			width: 284px;
+			transition: margin 250ms linear; 
+			// min-height: 100%;	
+			// background-color: red !important;
+
+		}
+		&:nth-of-type( 2 ) {
+			display: block;
+			// overflow: auto;
+			// width: auto;
+			overflow: hidden;
+			height: 100%;
+			// top: 0px;
+			// bottom: 0px;
+			// margin: 0 auto;
+			// height: 100%;
+			// overflow: auto;
+			// max-height: 100%;
+			// height: 50%;
+			// margin: 0 20%;
+			// top: -30px;
+			// margin-bottom: 30px;
+
+
+
+			.gallery-banner>div { 
+				&:first-of-type {
+					height: 64px;
+					// background-color: #e6e6e6;
+					border-bottom: 1px solid $color1;
+					display: flex;
+					justify-content: center;
+					// z-index: 30;
+					// margin: 0 auto;
+
+					&>div {
+						margin: auto 2%;
+						padding: 0px 2px;
+						overflow: hidden;
+						// text-wrap: word-wrap;
+						word-wrap: break-word;
+						// word-break: break-word;
+						hyphens: auto;
+						// text-overflow: ellipsis;
+						display: block;
+						// font-weight: 0;
+						letter-spacing: -1px;
+						font-size: 18px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						height: 100%;
+						align-self: center;
+						box-sizing: border-box;
+						transition: margin 250ms linear;
+						// background-color: rgba( 155, 20, 20, .3 );
+						// border: 1px solid black;
+
+						&.selected {
+							border-top: 4px solid transparent;
+							border-bottom: 4px solid $color5;
+						}
+						&:hover {
+							cursor: pointer;
+							// border-top: 4px solid transparent;
+							border-top: 0px;
+							border-bottom: 4px solid lighten( $color5, 20% );
+							&.selected {
+								border-bottom: 4px solid lighten( $color5, 10% );
+							}
+						}
+						&:active {
+							border-bottom: 4px solid $color5;
+						}
+
+
+					}
+				}
+				&:nth-of-type( 2 ) {
+					position: relative;
+					z-index: 50;
+					height: $gallery-title-height;
+					@include linear-gradient( #ececec, 43%, rgba( 255, 255, 255, 0), 100% );
+					width: 100%;
+
+					margin-bottom: 5px;
+
+					&>div { // id/title
+						display: inline-block;
+						font-size: 24px;	
+						&:nth-of-type( 1 ) {
+							background-color: $color5;	
+							position: relative;
+							width: 60px;
+							height: 60px;
+							// height: 76px;
+							// height: 100%;
+							border-bottom-right-radius: 100%;
+							border: 1px solid $color1;
+							box-sizing: border-box;
+							z-index: 10;
+							padding-top: 5px;
+							padding-left: 5px;
+							// padding-top: 0px;
+
+							// text-align: center;
+							// margin-top: auto;
+						}
+						&:nth-of-type( 2 ) {
+							span {
+								display: inline-block;
+								margin-left: 10%;
+								width: 100%;
+								position: relative;
+								top: 5px; //padding/margin move nth-of-type(1) also for some reason
+								// padding-top: 15px;
+								// margin-top: 100px;	
+								// background-color: red;
+							}
+							// background-color: red;
+							// margin-top: 5px;
+							// padding-top: 5px;
+							// background-color: $color5;
+							// width: 100%;
+						}
+					}
+				}
+			}
+			// align-self: center;
+			// justify-content: center;
+			// &>div {
+			// 	overflow: hidden;
+			// }
+		}
+
+		& .gallery-template-container { //for perfect scrollbar
+
+			// &>div:first-child {
+				position:relative;
+				overflow: hidden;
+				height: 100%;
+				// margin-top: -30px;
+				margin-top: -$gallery-title-height;
+				padding-top: 64px;
+				&>div {
+					padding-bottom: 64px;
+				}
+				// padding-top: 129px;
+				// padding-bottom: 70px;
+
+				// bottom: 64px;
+				// top: 52px;
+				// margin-bottom: -100px;
+				// bottom: 100px;
+				// padding-bottom: 30px;
+				// margin-bottom: 30px;
+				// margin-bottom: 129px;
+
+				// margin-top: -64px;
+				& .ps-scrollbar-y-rail {
+					// margin-bottom: -15px;
+					position: absolute;
+					z-index: 50;
+					// padding: 0px !important;
+					// padding: -16px;
+					// background-color: red;
+					&>div {
+						// padding-bottom: 0px;
+						// margin-bottom: -64px;
+						// background-color: blue;
+						margin: 0;
+						padding: 0;
+					}
+				}
+
+			// }
+		}
+
+		@media only screen and (max-width: 563px) {
+			.gallery-banner>div:first-of-type>div {
+				font-size: 14px !important;
+			}
+			.gallery-banner {
+				// display: none;	
+				// visibility: hidden;
+				// position: relative;
+				// top: -64px;
+				// margin: 0px;
+				&>div:first-child>div {
+					font-size: 10px;
+				// margin: 0;
+				// padding: 0;
+				// height: 100%;
+					// margin-top: 109px;
+					// background-color: red;
+				}
+			}	
+		}
+
+		@media only screen and (max-width: 1023px) {
+   		 
+			&:nth-of-type( 1 ) {
+				// display: none;
+				// float:right;
+
+				
+				margin-left: -280px;
+				// margin-right: -280px;
+			}
+    
+		} // temporary...
+
+	}
+}
+
+$config: (
+	options: (
+		// max-width: 400,
+		position: left,
+		// align: left,
+		size: 4,
+		spacing: 1,
+		extendable: true,
+		scrollable: true,
+		color: #f7f7f7,
+	),
+	header: (
+		// spacing: crunch,
+		align: left,
+	),
+	content: (
+		minRows: 2,
+		divider: 9 center,
+		useWidget: info,
+		// divider-position: right, //optional. for clarity
+		interactive: true,
+		selectable: true,
+		// align: right,
+		// rows: 1,
+		// spacing: crunch,
+	),
+	footer: (
+		// align: right,
+		// spacing: crunch,
+		// align: left,
+		includeButton: true,
+		buttonIcon: usb-active,
+		buttonActiveIcon: usb,
+	)
+);
+
+
+@include vita-list( $config, #current-filters );
+
+$config: (
+	options: (
+		requireColors: none, // red blue green orange or all
+ 	),
+
+ 	wrappers: (
+		wrapper1: (
+			// wrapper1, column1, panel1, etc, can be named anything as, as long as each
+			// name is unique to their scope within the map.
+			// wrappers, widgets, options, etc, must be called by those pre-defined names
+
+			column1: (
+
+
+				panel1: (
+					size: 66, 
+
+					addStyles: (
+						"&>div:first-child>div:nth-of-type(2)": (
+							max-height: 92%,
+						)
+					),
+					widgets: (
+						widget1: (
+							name: barGraph,
+							hasHeader: true,
+						),
+						// widget2: (
+						// 	name: exWidget,
+						// 	hasHeader: true,
+						// 	// color: yellow,
+						// ),
+					),
+				),
+
+				panel2: (
+					size: 33,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: side-by-side,
+							config: (
+								left: percentageCircle,
+								right: xlFont,
+							),
+						),
+					),
+				),
+
+			),
+
+
+			col2: (
+
+				panel1: (
+					size: 33, 
+					widgets: (
+						widget1: (
+							name: percentageCircle,
+							hasHeader: true,
+							// config: (
+							// 	left:
+							// 	right:
+							// 	 xlFont,
+							// ),
+						),
+					),
+				),
+				panel2: (
+					size: 66,
+					widgets: (
+						widget1: (
+							name: data-columns,
+							hasHeader: true,
+							config: (
+								addStyles: (
+									"&>div>span": (
+										font-size: "16px !important",
+									)
+								)
+							)
+						),
+					)
+		
+				// panel2: (
+				// 	size: 66,
+				// 	widgets: (
+				// 		widget1: (
+				// 			name: percentageCircle,
+				// 			hasHeader: true,
+				// 			// color: blue,
+				// 		),
+				// 	),
+				),
+
+				// panel3: (
+				// 	size: 33,
+				// 	widgets: (
+				// 		widget1: (
+				// 			name: percentageCircle,
+				// 			hasHeader: true,
+				// 		),
+				// 	),	
+				// ),
+
+				// panel4: (
+				// 	size: 25,
+				// 	widgets: (
+				// 		widget1: (
+				// 			name: exWidget4,
+				// 			hasHeader: true,
+				// 		),
+				// 	),
+				// ),
+			),
+
+			col3: (
+				panel1: (
+					size: 66,
+					addStyles: (
+						"&>div:nth-of-type( 1 )": (
+							height: 165px,
+						),
+					),
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: side-by-side,
+							config: (
+								left: percentageCircle,
+								right: descriptionWFooter,
+								addStyles: (
+									"&": (
+										// background-color: lightblue,
+										max-height: 100px,
+										height: 250px,
+									),
+									"&>div>div:nth-of-type(2)>div:nth-of-type(2)": (
+										background-color: orange,
+										// bottom: -24px,
+										// height: 27px,
+										top: 83px,
+									),
+								),
+
+							),
+						),
+						widget2: (
+							name: footerBar,
+							config: (
+								widget1: (
+									name: data-columns,
+									// hasHeader: true,
+									config: (
+										addStyles: (
+											"&>div>span": (
+												font-size: "16px !important",
+											)
+										)
+									)								),
+								addStyles: (
+									"&": (
+										// background-color: "blue !important",
+										height: 90px,
+									),
+									"&>div:nth-of-type( 2 )": (
+										height: 185px !important,
+										// background-color: pink,
+									),
+									// "&>div:nth-of-type( 2 )>div:nth-of-type( 1 )>div": (
+									// 	height: 100px !important,
+									// ),
+								),
+							),
+						),
+
+						widget3: (
+							name: data-columns,
+							hasHeader: true,
+							config: (
+								addStyles: (
+									"&>div>span": (
+										font-size: "16px !important",
+									)
+								)
+							),
+						),
+						// widget5: (
+						// 	name: side-by-side,
+						// 	config: (
+						// 		left: description,
+						// 		right: description,
+						// 	),
+						// ),
+					),
+					// addStyles: (
+						// "&>div:nth-of-type(1)>div:nth-of-type(2)": (
+						// 	background-color: pink,
+						// 	max-height: 100%,
+						// 	height: 317px,
+						// ),
+						// "&>div:nth-of-type(1)>div:nth-of-type(2)>div": (
+						// 	// background-color: transparent,
+						// 	max-height: 200px,
+						// 	// height: 100%,
+						// 	height: 130px,
+						// 	min-height: 130px,
+						// ),
+					// ),
+				
+				),
+
+				panel2: (
+					size: 33,
+					widgets: (
+						widget1: (
+							hasHeader: true,
+							name: side-by-side,
+							config: (
+								left: percentageCircle,
+								right: descriptionWFooter,
+							),
+						),
+					),
+				),	
+			),
+
+
+			col4: (
+				panel1: (
+					size: 100,
+					widgets: (
+						widget1: (
+							// color: yellow,
+							name: list,
+							hasHeader: true,
+							config: ( //vita-list config starts here
+								options: (
+									divider: 9,
+									interactive: true,
+									size: 1,
+									minRows: 1,
+									spacing: 10,
+									extendable: true,
+									scrollable: true,
+									useWidget: checkbox, 
+									selectable: true,
+									// align: left,
+
+
+								),
+								// header: (
+								// 	// align: right,
+								// 	// spacing: normal,
+								// 	// size: 10,
+								// 	// spacing: 10,
+								// 	// align: center,
+								// ),
+								content: (
+								),
+								// footer: (),
+								// options: (
+								// 	// max-width: 400,
+								// 	// position: left,
+								// 	// align: left,
+								// 	size: 2,
+								// 	spacing: 6,
+								// 	extendable: true,
+								// 	scrollable: true,
+								// ),
+								// header: (
+								// 	// spacing: crunch,
+								// ),
+								// content: (
+								// 	minRows: 1,
+								// 	divider: 9 center,
+								// 	// useWidget: info,
+								// 	// divider-position: right, //optional. for clarity
+								// 	interactive: true,
+								// 	selectable: true,
+								// 	// align: right,
+								// 	// rows: 1,
+								// 	// spacing: crunch,
+								// ),
+								// footer: (
+								// 	// align: right,
+								// 	// spacing: crunch,
+								// 	// align: left,
+								// 	// includeButton: true,
+								// 	// buttonIcon: search,
+								// )
+							),
+						),
+						// widget2: (
+						// 	color: yellow,
+						// 	name: exWidget3,
+						// 	hasHeader: true,
+						// ),
+						// widget3: (
+						// 	color: yellow,
+						// 	name: exWidget4,
+						// ),
+						// widget4: (
+						// 	color: yellow,
+						// 	name: exWidget4,
+						// ),
+					), //widgets
+				), //panel
+			), // column
+		), // wrapper
+
+		wrapper2: (
+			col1: (
+				panel1: (
+					backdrop: clear,
+					size: 50,
+				),
+				panel2: (
+					size: 50,
+				),
+			),
+			col2: (
+				panel1: (
+					size: 100,
+				),
+			),
+		),
+ 	),
+);
+
+
+#gallery-template {
+	@include gallery-template( $config );
+}
+
+// @include gallery-template( $config, #gallery-template );

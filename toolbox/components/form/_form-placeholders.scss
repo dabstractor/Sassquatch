@@ -1,0 +1,645 @@
+%form-base {
+	position: relative;
+	overflow: hidden;
+	margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: $color3;
+}
+
+
+%form-border {
+    border: 2px solid $color2;
+}
+
+%form-cap-base {
+	flex: 0 0 1;
+	height: 10%;
+	display: flex;
+	align-items: center;	
+	justify-content: center;
+	box-sizing: border-box;
+}
+
+%form-cap-darken {
+	background-color: rgba( 0, 0, 0, .03 );
+}
+
+%form-content-base {
+	height: 100%;
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	display: flex;
+	flex-flow: column nowrap;	
+	justify-content: flex-start;
+	align-items: center;
+	position: relative;
+	background-color: inherit; //this travels all the way down to title spans,
+							   // so their background hides the line-through and
+							   // matches the background from the content section
+	&>section { // form section
+		position: relative;
+		flex: 1 0 auto;
+		width: 100%;
+		display: flex;
+		flex-flow: column nowrap;
+		// justify-content: space-around;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 10px 0 20px;
+		background-color: inherit; //from content-base
+		
+
+		&:nth-of-type(1) {
+			padding-top: 30px;
+		}
+
+		&:nth-of-type(2n) {
+			// background-color: darken($color3, 4%);
+		}
+
+		&>div { //title/content of each section
+			background-color: inherit; //from content-base>section
+			position: relative;
+			&:nth-of-type( 1 ) { //section title
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: space-around;
+				width: 100%;
+				z-index: 0;
+				position: relative;
+				&>span { //section title text
+					// flex: 1 0 153px;
+					position: relative;
+					display: block;
+					background-color: inherit;// from content-base>section>div;
+					padding: 0 3%;
+					margin: 0;
+					z-index: 2;
+					border-left: 2px solid $color2;
+					border-right: 2px solid $color2;
+					text-align: center;
+					margin: 0 1%;
+					min-width: 153px;
+					// text-wrap: nowrap;
+					// width: 0%;
+					align-self: center;
+					flex: 0 0 1;
+					// width: 30%;
+					// top: 50%;
+				}
+				&:before { //section title strike-through bar
+					// align-self: center;
+					// display: flex;
+					display: block;
+					height: 2px;
+					width: 100%;
+					background-color: $color2;
+					content: "\00a0 ";
+					position: relative;
+					left: 0;
+					z-index: -1;
+					// top: 12px;
+					top: 50%;
+					// bottom: 50%;
+					// height: 100%;
+					line-height: 100%;
+					@media screen and ( -webkit-min-device-pixel-ratio: 0 ) {
+						position: absolute;
+					}
+				}
+
+			}
+			&:not(:nth-of-type( 1 )) { //content
+				display: flex;
+				flex-flow: row wrap;
+				align-self: center;
+				align-items: center;
+				// justify-content: space-around; 
+				justify-content: center;
+				margin: 10px auto;
+				width: 100%;
+				// max-width: 80%;	
+				text-align: center;
+				// max-width: 40%;
+				// background-color: purple;
+				& input {
+					// margin:  1vh;
+					margin: 10px;// auto;
+					padding-left: 3px;
+
+					// margin: auto;
+					// flex: 1 0 auto;
+					// text-align: center;
+					// align-self: center;
+					// margin: auto;
+					// margin: auto;
+					// max-width: 40%;
+
+					// &:invalid {
+						// box-shadow: inherit;	
+					// }
+
+				}
+
+				& label {
+					// background-color: blue;
+					// max-width: 10%;
+					// align-self: flex-start;
+					// float: left;
+					&::after {
+						content: ":";
+					}
+				}
+
+
+				&>div { //input container
+					max-width: 80%;
+					width: 80%;
+					display: flex;
+					justify-content: space-around;
+					margin: 5px 0;
+					display: flex;
+					flex-flow: row wrap;
+
+
+					// &>span { //label+input container
+					// 	width: 45%;
+					// 	display: flex;
+					// 	align-self: flex-end;
+					// 	justify-content: center;
+					// }
+
+					// background-color: red;
+
+					&>label { //sometimes we won't use a label (just placeholder text instead)
+						width: 50%;
+						// text-align: right;
+						padding-right: 10px;
+						flex: 0 0 auto;
+					}
+					&>label+input,&>label+select,textarea { //when input comes with a label, style it like:
+
+						// min-width: 300px;
+						max-width: 100%;
+						align-self: center;
+						margin: auto;
+					}
+
+					&>input,select,textarea { //when input does not come with label, style it like:
+						max-width: 80%;
+						min-width: 40%;
+						width: 160px;
+						// display: inline-flex;
+						// &:nth-of-type( 2n-1 ) {
+						// 	display: inline-flex;
+						// 	// float: left;
+						// }
+						// &:nth-of-type( 2n ) + input {
+						// 	display: inline-flex;
+						// 	// clear: left;
+
+						// }
+					}
+				}
+
+				&>section { //double-column form section
+					// display: flex;
+					// flex-flow: column nowrap;
+					// justify-content: center;
+					// align-items: center;
+					// align-self: center;
+					// width: 50%;
+					// justify-content: space-between;
+
+					// width: 50%;
+					width: 100%;
+					// background-color: purple;
+					// border: 1px solid orange;
+					display: flex;
+					flex-flow: row wrap;
+					justify-content: space-around;
+					align-items: center;
+
+					
+					&>div { //each column of double-column form section 
+						// background-color: brown;
+						// width: 50%;
+						min-width: 160px;
+						// display: flex;
+						flex-flow: column nowrap;
+						// align-self: center;
+						align-items: center;
+						justify-content: stretch;
+						// flex: 0 0 auto;
+						// align-self: center;
+						overflow: hidden;
+
+						&>input {
+							// display: flex;
+							// text-align: center;
+							min-width: 0;
+							width: 70%;
+							max-width: 100%;
+						}
+
+						&>span { //for label/span together
+
+							display: flex;
+							flex-flow: row wrap;
+							justify-content: flex-start;
+							// width: 100%;
+							// align-items: flex-start;
+							flex: 0 0 0;
+							margin: 10px 0;
+							
+							&>label {
+								// background-color: blue;
+								// float: left;
+								// display: inline;
+								// max-width: 50%;
+								// min-width: 35%;
+								// width: 35%;
+								width: auto;
+								align-self: flex-start;
+								text-align: left;
+								flex: 0 0 40%;
+								margin: 0 6px;
+								min-width: 8em;
+								// width: 47%;
+								// clear: left;
+
+								// 	&::before {
+								// 		clear: both;
+								// 		display: block;
+								// 		@extend %blank-content;
+								// 		width: 100%;
+								// 		// content: "asdf";
+								// 	}
+							}
+
+							&>label~input {
+								// background-color: green;
+								// max-width: 100%;
+								// width: 50%;
+								flex: 0 0 80px;
+								min-width: 10em;
+								margin: 0 auto;
+								// max-width: 160px;
+								// min-width: 100px;
+								// min-width: 80%;
+								// max-width: 100%;
+								// width: auto;
+								// align-self: flex-end;
+								// float: left;
+								// display: inline;
+								// clear: none;
+								// float: right;
+								// width: 20%;
+
+
+							}
+
+							&>label~span {
+								flex: 1 1 auto;
+								// background-color: red;
+								// text-align: right;
+							}
+							&>span+input {
+								
+							}
+
+							// &>* {
+							// 	flex: 0 0 auto;
+							// }
+						}
+					}
+
+					&>div {
+
+						// align-self: center;
+						// min-width: 0;
+						// width: 100%;
+						// margin: 0 auto;
+						max-width: 45%;
+					}
+				}
+			}
+
+		}
+	}
+	// @extend %lineBreak;
+}
+
+%form-header-base {
+	// background-color: orange;
+	@extend %form-cap-base;
+	font-size: 19px;
+	// height: 100%;
+//header styles here
+	// display: block;
+	// padding: 10px;
+	// height: 50px;
+}
+
+%form-footer-base {
+	@extend %form-cap-base;	
+}
+
+
+%form-cap-color {
+
+}
+
+%form-shadow {
+   box-shadow: 5px 5px 5px rgba( 0, 0, 0, .3 );
+}
+
+%form-input {
+    background-color: #fff;
+    border: 1px solid #adadad;
+    border-radius: 3px;
+    height: 22px;
+	background-color: lighten($color5, 32%);
+
+    &:focus {
+        border-color: #505050;
+        background-color: $color3;
+        @include box-shadow( 0px, 0px, 4px, $color5 );
+        // color: $color3;
+    }
+}
+
+%form-radio-checkbox {
+	// display: none; //temp, for debugging
+	&+label {
+        color: rgb( 80, 80, 80 );
+	}
+}
+
+%form-radio {
+	reached: form-radio;
+    & input[type="radio"] {
+    	@extend %form-radio-checkbox;
+
+        &:checked + label span {
+            background: url("../img/sprites/sprites_reg_2.svg") no-repeat -105px -134px;
+        }
+
+
+    }
+    & input[type="radio"] + label span {
+        display: inline-block;
+        background: url("../img/sprites/sprites_reg_2.svg") no-repeat -105px -118px; 
+        width: 15px; 
+        height: 15px;
+        cursor: pointer;
+        margin: 0px 2px -2px 1px;
+    }
+}
+
+%form-checkbox {
+	reached: form-checkbox;
+    & input[type="checkbox"] {
+    	@extend %form-radio-checkbox;
+
+        & + label span {
+            display: inline-block;
+            background: url("../img/sprites/sprites_reg_2.svg") no-repeat -86px -118px;
+            width: 15px;
+            height: 14px;
+            cursor: pointer;
+            margin: 0 1px -2px 2px;
+        }
+
+	    &:checked + label span {
+	        background: url("../img/sprites/sprites_reg_2.svg") no-repeat -105px -134px;
+	    }
+    }
+
+}
+
+%form-text {
+	& input[type="text"] {
+	   	@extend %form-input;
+	}
+}
+
+%form-number {
+	& input[type="number"], & input[pattern="[\\$\\.0-9]*"] {
+		@extend %form-input;
+		padding-right: 3px;
+		text-align: right;
+
+		&::-webkit-inner-spin-button,&::-webkit-outer-spin-button {
+			-webkit-appearance: none;
+		}
+	}
+}
+
+%form-email {
+   & input[type="email"] {
+       	@extend %form-input;
+   }
+}
+
+%form-password {
+	// reached: form-password;
+   & input[type="password"] {
+       	@extend %form-input;
+   }
+}
+
+%form-textarea {
+    & textarea {
+    	@extend %form-input;
+    }
+}
+
+%form-tel {
+	& input[type="tel"] {
+       	@extend %form-input;
+   }
+}
+
+%form-dropdown-select {
+	& select {
+		@extend %form-text;
+		min-width: 50px;
+		// width: 100%;	
+		// width: 240px;
+		// margin: auto;
+	}
+	& .dropdown-select { //needs javascript to work anyway
+		// asdf: dropdown asdf;
+	    position: relative;
+	    width: 100% !important;
+	    // display: block;
+	    // margin: 0 auto;
+	    // background-color: red;
+	    // height: 10px;
+	    // width: 10px;
+	        
+	        &>div:nth-of-type( 1 ) { // #vita-select {
+	            background: none repeat scroll 0 0 rgb(244, 244, 244);
+	            border: 1px solid #ccc;
+	            border-radius: 4px;
+	            height: 34px;
+	            overflow: hidden;
+	            max-width: 240px;
+	            width: auto;
+	            margin: 0 auto;
+
+	            &>div:nth-of-type( 1 ) { // .dropdown-button {
+	                background: #40afff; /* Old browsers */
+	                background: -moz-linear-gradient(top,  #40afff 45%, #407dff 100%); /* FF3.6+ */
+	                background: -webkit-gradient(linear, left top, left bottom, color-stop(45%,#40afff), color-stop(100%,#407dff)); /* Chrome,Safari4+ */
+	                background: -webkit-linear-gradient(top,  #40afff 45%,#407dff 100%); /* Chrome10+,Safari5.1+ */
+	                background: -o-linear-gradient(top,  #40afff 45%,#407dff 100%); /* Opera 11.10+ */
+	                background: -ms-linear-gradient(top,  #40afff 45%,#407dff 100%); /* IE10+ */
+	                background: linear-gradient(to bottom,  #40afff 45%,#407dff 100%); /* W3C */
+	                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40afff', endColorstr='#407dff',GradientType=0 ); /* IE6-9 */
+	                border-bottom-right-radius: 3px;
+	                border-left: 1px solid rgb(17, 181, 255);
+	                border-top-right-radius: 3px;
+	                float: right;
+	                height: 100%;
+	                position: relative;
+	                right: 0;
+	                top: 0;
+	                width: 36px;
+
+	                &:hover {
+	                	// style button hover here
+	                	// background: #407dff; /* Old browsers */
+		                // background: -moz-linear-gradient(top,  #407dff 45%, #40afff 100%); /* FF3.6+ */
+		                // background: -webkit-gradient(linear, left top, left bottom, color-stop(45%,#40afff), color-stop(100%,#40afff)); /* Chrome,Safari4+ */
+		                // background: -webkit-linear-gradient(top,  #40afff 45%,#40afff 100%); /* Chrome10+,Safari5.1+ */
+		                // background: -o-linear-gradient(top,  #40afff 45%,#40afff 100%); /* Opera 11.10+ */
+		                // background: -ms-linear-gradient(top,  #40afff 45%,#40afff 100%); /* IE10+ */
+		                // background: linear-gradient(to bottom,  #40afff 45%,#40afff 100%); /* W3C */
+		                // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40afff', endColorstr='#40afff',GradientType=0 ); /* IE6-9 */
+
+	                }
+
+	                &>span {// .arrow {
+	                    background: none repeat scroll 0 0 transparent;
+	                    border-left: 8px solid transparent;
+	                    border-right: 8px solid transparent;
+	                    border-top: 12px solid rgb(200,200,200);
+	                    height: auto;
+	                    margin: 0 auto;
+	                    position: absolute;
+	                    right: 11px;
+	                    top: 12px;
+	                    width: auto;
+	                    &>span {
+	                        background: none repeat scroll 0 0 transparent;
+	                        border-left: 6px solid transparent;
+	                        border-right: 6px solid transparent;
+	                        border-top: 9.9px solid rgb(244, 244, 244);
+	                        height: auto;
+	                        margin: 0 auto;
+	                        position: absolute;
+	                        right: -5.5px;
+	                        top: -11px;
+	                        width: auto;
+	                    } // End .inner-arrow
+
+	                }// End arrow
+	            }// End .dropdown-button
+	        }// End #vita-select
+	        
+	        &>div:nth-of-type( 2 ) {// #vita-dropdown {
+	            background: none repeat scroll 0 0 #f4f4f4;
+	            border: 2px solid #40afff;
+	            border-radius: 4px;
+	            height: 160px;
+	            left: 8px;
+	            position: absolute;
+	            top: 55px;
+	            width: 227px;
+
+	            &>div:nth-of-type( 1 ) {// .dropdown-arrow {
+	                background: none repeat scroll 0 0 transparent;
+	                border-bottom: 19px solid rgb(64, 175, 255);
+	                border-left: 11px solid transparent;
+	                border-right: 11px solid transparent;
+	                height: 0;
+	                position: absolute;
+	                right: 4px;
+	                top: -20px;
+	                width: 0;
+	            }
+
+	            &>ul {
+	                float: left;
+	                height: 100%;
+	                list-style: outside none none;
+	                margin: 0;
+	                overflow: hidden;
+	                padding: 0;
+	                position: absolute;
+	                top: 0;
+	                width: 100%; 
+
+	                &>li {
+	                    position: relative;
+	                    width: 223px;
+	                    height: 30px;
+
+	                    &:hover {
+	                        background: rgb(230,230,230);
+	                        border-left: 5px solid rgb(64, 175, 255);
+	                    }
+	                    span {
+	                        font-family: montserrat;
+	                        height: 100%;
+	                        left: 5px;
+	                        position: absolute;
+	                        top: 4px;
+	                    } // End span
+	                } // End li
+	            } // End .dropdown-list
+	        }// End #vita-dropdown
+    }  
+}
+
+           // & input[type="text"], & input[type="password"], & input[type="email"]{
+	          //  	@extend %form-input;
+           // } //done
+
+            // & input[type="radio"], & input[type="checkbox"]{
+            //     display: none;
+            // } //done
+
+            // & input[type="checkbox"] + label, & input[type="radio"] + label {
+            //     color: rgb(80,80,80);
+            // }//done
+
+            // & input[type="checkbox"] + label span {
+            //     display: inline-block;
+            //     background: url("../img/sprites/sprites_reg_2.svg") no-repeat -86px -118px;
+            //     width: 15px;
+            //     height: 14px;
+            //     cursor: pointer;
+            //     margin: 0 1px -2px 2px;
+            // }//done
+
+            // & input[type="checkbox"]:checked + label span {
+            //     background: url("../img/sprites/sprites_reg_2.svg") no-repeat -86px -135px;
+            // }
+
+
+            // & input[type="radio"]:checked + label span {
+            //     background: url("../img/sprites/sprites_reg_2.svg") no-repeat -105px -134px;
+            // }
+
+            // & input[type="textarea"]{
+
+            // }}
+// }

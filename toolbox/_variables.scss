@@ -1,0 +1,60 @@
+/////////////////
+/// REM
+/////////////////
+
+
+/////////////////
+/// Color Palette
+/////////////////
+
+$main-blue: #faa;
+$main-white: #fff;
+$main-black: #000;
+$main-grey: #afafaf;
+$main-green: #afafaf;
+
+/////////////////
+/// Paths
+/////////////////
+
+
+$imageRoot : "/Draft/frontend/web/common/img/"; //absolute path seems to work fine
+										  //this value relies on the vhost configuration
+										  //DocumentRoot must be set to "/var/www/Draft" or "/www/Draft"
+										  //rather than "/var/www/Draft/frontend/web"
+										  //
+										  //If the latter vhost config is needed, remove the "/frontend/web"
+										  //from the $imageRoot variable defined above.
+
+// Sprites
+$vitacon_path_old : "../img/sprites/sprites_reg_2.svg";
+$vitacon_path_new : "../img/sprites/sprites_reg_3.svg";
+$icons_sprite : $imageRoot + "sprites/Mock Designs/icons.svg";
+
+
+
+// Fonts
+
+
+/////////////////
+/// Break Points
+/////////////////
+
+// _config.scss
+$breakpoints: (
+  small-phone: 20em,
+  large-phone: 30em, 
+  small-tab: 37.5em,
+  medium-tab: 48em,
+  large-tab: 56.25em,
+  small-desktop: 64em,
+  medium-desktop: 68.75em,
+  large-desktop:  81.25em,
+);
+
+$custom-breakpoints: (
+    
+);
+ 
+
+// $usedWidgets: ();

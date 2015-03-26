@@ -1,0 +1,70 @@
+$gallery-template-config: (
+	prefix: "gallery-template",
+	containerSize: 540px,
+	panelSizes: 0 25 33 40 50 60 66 100 auto,
+	widgetColors: red blue green orange,		
+	panelMargin: 5px,
+	panelWidth: 280px,
+);
+
+$gallery-template-gray: rgb( 236, 236, 236 );
+$gallery-template-white: rgb( 244, 244, 255 );
+$gallery-template-blue: rgb( 0, 175, 255 );
+$gallery-template-green: rgb( 12, 201, 4 );
+$gallery-template-red: rgb( 230, 24, 24 );
+$gallery-template-orange: rgb( 255, 112, 0 );
+
+
+$gallery-template-default-config: (
+	options: (
+		columns: 4, // how many columns wide (max-width)
+ 	),
+
+ 	wrappers: (
+		wrapper1: (
+			column1: (
+				panel1: (
+					size: 33, 
+					widgets: (
+						exWidget,
+						exW2,
+						exW3
+					),
+				),
+				panel2: (
+					size: 66,
+				),
+				panel3: (
+					stuff: here
+				),
+			),
+
+			column2: (
+				panel1: (
+					size: 33, 
+					widgets: (
+						exWidget,
+						exW2,
+						exW3
+					),
+				),
+				panel2: (
+					size: 66,
+				),
+				
+			),
+
+			column3: (
+			
+			),
+			
+			column4: (
+				
+			)
+		),
+		wrapper2: (
+			// column1: (
+			// )
+		),
+ 	),
+);
