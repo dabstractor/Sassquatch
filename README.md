@@ -1,1 +1,1 @@
-# Sassquatch
+# SASSquatch
