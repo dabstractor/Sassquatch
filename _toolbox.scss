@@ -1,16 +1,8 @@
-	/*
-	*****************************
-		Reset
-	*****************************
-	*/
+		// Reset
 
 @import "toolbox/variables";
 
-	/*
-	*****************************
-		Tools
-	*****************************
-	*/
+		// Tools
         
 @import "toolbox/mixins.scss";
 @import "toolbox/sprites.scss";
@@ -19,20 +11,12 @@
 @import "toolbox/placeholders.scss";
 @import "toolbox/icons.scss";
 
-	/*
-	*****************************
-		Team
-	*****************************
-	*/
+		// Team
         
 @import "toolbox/team/dustin.scss";
 @import "toolbox/team/jason.scss";
 @import "toolbox/team/jim.scss";
 
-        /*
-	*****************************
-		Theme Components
-	*****************************
-	*/
+		// Theme Components
    
 @import "toolbox/components/components.scss";

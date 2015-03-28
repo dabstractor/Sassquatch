@@ -34,9 +34,9 @@ $usedIcons: "" !default !global;
 // name: ( background-position1, background-position2, width, height ),
 // "px" should not be
 $default-sprite-map: (
-    small-dark-logo:  (-6, -7, 17, 16),
-    medium-dark-logo:  (-30, -2, 29, 29),
-    large-dark-logo:  (-61, 0, 42, 42),
+    small-dark-logo:  (-7, -1, 17, 17),
+    medium-dark-logo:  (-30, -1, 27, 27),
+    large-dark-logo:  (-63, -1, 40, 40),
 
  //Buttons
     grey-button:  (0, -332, 129, 31),
@@ -87,7 +87,7 @@ $default-sprite-map: (
 
  // Calendar
     calendar:  (0, -163,  16, 16),
-    calendar-active:  (-25, -163,  16, 16),
+    calendar-active:  (-25, -163,  17, 16),
 
  // Plus Button
     plus-button:  (-48, -104,  18, 18),
@@ -116,7 +116,7 @@ $default-sprite-map: (
     wireless:  (-51, -255,  11, 13),
     wireless-active:  (-78, -254,  11, 14),
  // checklist
-    checklist:  (-51, -278,  12, 16),
+    checklist:  (-51, -278,  13, 16),
     checklist-active:  (-78, -278,  12, 16),
  // usb
     usb:  (-50, -303,  18, 16),
@@ -140,4 +140,11 @@ $default-sprite-map: (
     checkbox-hand:  (-105, -303,  10, 14),
     checkbox-hand-active:  (-127, -303,  9, 14),
     dollar-sign:  (-6, -7, 17, 16),
+
+// agent
+    agent: (-127, -80, 12, 15),
+    agent-active: (-103, -80, 12, 15),
+//chatbox
+    chatbox: (-48, -80, 17, 15),
+    chatbox-active: (-73, -80, 17, 15),
 );
