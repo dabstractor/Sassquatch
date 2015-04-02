@@ -34,6 +34,21 @@ $usedIcons: "" !default !global;
 // name: ( background-position-X, background-position-Y, width, height ),
 // "px" should not be
 $default-sprite-map: (
+//min/max
+   max: (-1px, -158px, 15px, 15px),
+   max-active: (-24px, -158px, 15px, 15px),
+   min: (-48px, -158px, 15px, 15px),
+   min-active: (-74px, -158px, 15px, 15px),
+
+//contact
+    phone: (-99px, -158px, 19px, 14px),
+    phone-active: (-124px, -158px, 19px, 14px),
+    cell: (-1px, -71px, 14px, 21px),
+    cell-active: (-24px, -71px, 14px, 21px),
+    fax: (-43, -70, 24px, 23px),
+    fax-active: (-68, -70, 24px, 23px),
+
+
     small-dark-logo:  (-7, -101, 17, 17),
     medium-dark-logo:  (-30, -101, 27, 27),
     large-dark-logo:  (-63, -101, 40, 40),
