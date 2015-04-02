@@ -31,120 +31,120 @@ $usedIcons: "" !default !global;
 }
 
 // sprite maps are constructed as
-// name: ( background-position1, background-position2, width, height ),
+// name: ( background-position-X, background-position-Y, width, height ),
 // "px" should not be
 $default-sprite-map: (
-    small-dark-logo:  (-7, -1, 17, 17),
-    medium-dark-logo:  (-30, -1, 27, 27),
-    large-dark-logo:  (-63, -1, 40, 40),
+    small-dark-logo:  (-7, -101, 17, 17),
+    medium-dark-logo:  (-30, -101, 27, 27),
+    large-dark-logo:  (-63, -101, 40, 40),
 
  //Buttons
-    grey-button:  (0, -332, 129, 31),
-    blue-button:  (0, -370, 129, 30),
+    grey-button:  (0, -432, 129, 31),
+    blue-button:  (0, -470, 129, 30),
 
  // Arrows
-    white-left-arrow:  (0, -132,  17, 21),
-    blue-left-arrow:  (0, -103,  17, 21),
+    white-left-arrow:  (0, -232,  17, 21),
+    blue-left-arrow:  (0, -203,  17, 21),
 
  // Arrows 
-    white-right-arrow:  (-24, -132,  17, 21),
-    blue-right-arrow:  (-24, -103,  17, 21),
+    white-right-arrow:  (-24, -232,  17, 21),
+    blue-right-arrow:  (-24, -203,  17, 21),
 
  // Left End Arrows
-    white-left-end-arrow:  (-100, -133,  20, 18),
-    blue-left-end-arrow:  (-100, -162,  20, 18),
+    white-left-end-arrow:  (-100, -233,  20, 18),
+    blue-left-end-arrow:  (-100, -262,  20, 18),
 
  // Right End Arrows
-    white-right-end-arrow:  (-124, -133,  19, 18),
-    blue-right-end-arrow:  (-124, -162,  19, 18),
+    white-right-end-arrow:  (-124, -233,  19, 18),
+    blue-right-end-arrow:  (-124, -262,  19, 18),
 
  // Warning
-    warning:  (0, -84,  17, 16),
+    warning:  (0, -184,  17, 16),
 
     
  // Filter
-    add-filter:  (-24, -84,  16, 16),
+    add-filter:  (-24, -184,  16, 16),
 
  // Magnifying Glass
-    search:  (0, -300, 17, 19 ),
-    search-active:  (-25, -300, 18, 19 ),
+    search:  (0, -400, 17, 19 ),
+    search-active:  (-25, -400, 18, 19 ),
 
  // User
-    user:  (0, -278,  17, 15),
-    user-active:  (-26, -278,  17, 15),
+    user:  (0, -378,  17, 15),
+    user-active:  (-26, -378,  17, 15),
  // Key
-    key:  (0, -258,  16, 8),
-    key-active:  (-26, -258,  16, 8),
+    key:  (0, -358,  16, 8),
+    key-active:  (-26, -358,  16, 8),
  // Gear 
-    gear:  (0, -232,  15, 15),
-    gear-active:  (-26, -232,  15, 15),
+    gear:  (0, -332,  15, 15),
+    gear-active:  (-26, -332,  15, 15),
  // Trash   
-    trash:  (0, -210,  13, 16),
-    trash-active:  (-26, -209,  13, 17),
+    trash:  (0, -310,  13, 16),
+    trash-active:  (-26, -309,  13, 17),
  // Lock   
-    lock:  (0, -187,  11, 15),
-    lock-active:  (-25, -187,  17, 15),
+    lock:  (0, -287,  11, 15),
+    lock-active:  (-25, -287,  17, 15),
 
  // Calendar
-    calendar:  (0, -163,  16, 16),
-    calendar-active:  (-25, -163,  17, 16),
+    calendar:  (0, -263,  16, 16),
+    calendar-active:  (-25, -263,  17, 16),
 
  // Plus Button
-    plus-button:  (-48, -104,  18, 18),
-    plus-button-active:  (-100, -104,  18, 18),
+    plus-button:  (-48, -204,  18, 18),
+    plus-button-active:  (-100, -204,  18, 18),
 
  // Minus Button
-    minus-button:  (-74, -104,  18, 18),
-    minus-button-active:  (-125, -104,  17, 18),
+    minus-button:  (-74, -204,  18, 18),
+    minus-button-active:  (-125, -204,  17, 18),
 
  // xmark
-    xmark:  (-51, -136,  12, 12),
-    xmark-active:  (-77, -135,  13, 13),
+    xmark:  (-51, -236,  12, 12),
+    xmark-active:  (-77, -235,  13, 13),
  // checkmark
-    checkmark:  (-51, -166,  14, 11),
-    checkmark-active:  (-77, -166,  14, 11),
+    checkmark:  (-51, -266,  14, 11),
+    checkmark-active:  (-77, -266,  14, 11),
  // pin
-    pin:  (-52, -188,  12, 15),
-    pin-active:  (-78, -188,  13, 15),
+    pin:  (-52, -288,  12, 15),
+    pin-active:  (-78, -288,  13, 15),
  // pencil
-    pencil:  (-51, -212,  12, 13),
-    pencil-active:  (-78, -211,  11, 14),
+    pencil:  (-51, -312,  12, 13),
+    pencil-active:  (-78, -311,  11, 14),
  // mail
-    mail:  (-52, -236,  11, 8),
-    mail-active:  (-78, -236,  11, 8),
+    mail:  (-52, -336,  11, 8),
+    mail-active:  (-78, -336,  11, 8),
  // wireless
-    wireless:  (-51, -255,  11, 13),
-    wireless-active:  (-78, -254,  11, 14),
+    wireless:  (-51, -355,  11, 13),
+    wireless-active:  (-78, -354,  11, 14),
  // checklist
-    checklist:  (-51, -278,  13, 16),
-    checklist-active:  (-78, -278,  12, 16),
+    checklist:  (-51, -378,  13, 16),
+    checklist-active:  (-78, -378,  12, 16),
  // usb
-    usb:  (-50, -303,  18, 16),
-    usb-active:  (-76, -303,  18, 16),
+    usb:  (-50, -403,  18, 16),
+    usb-active:  (-76, -403,  18, 16),
  // reports
-    reports:  (-103, -188,  14, 12),
-    reports-active:  (-127, -188,  15, 12),
+    reports:  (-103, -288,  14, 12),
+    reports-active:  (-127, -288,  15, 12),
  // documents
-    documents:  (-105, -211,  10, 12),
-    documents-active:  (-130, -211,  11, 12),
+    documents:  (-105, -311,  10, 12),
+    documents-active:  (-130, -311,  11, 12),
  // user group
-    user-group:  (-101, -236,  16, 8),
-    user-group-active:  (-127, -236,  16, 8),
+    user-group:  (-101, -336,  16, 8),
+    user-group-active:  (-127, -336,  16, 8),
  // radio
-    radio:  (-102, -255,  13, 13),
-    radio-active:  (-126, -255,  13, 13),
+    radio:  (-102, -355,  13, 13),
+    radio-active:  (-126, -355,  13, 13),
  // checkbox
-    checkbox:  (-102, -282,  13, 12),
-    checkbox-active:  (-126, -281,  13, 13),
+    checkbox:  (-102, -382,  13, 12),
+    checkbox-active:  (-126, -381,  13, 13),
  // checkbox-hand
-    checkbox-hand:  (-105, -303,  10, 14),
-    checkbox-hand-active:  (-127, -303,  9, 14),
-    dollar-sign:  (-6, -7, 17, 16),
+    checkbox-hand:  (-105, -403,  10, 14),
+    checkbox-hand-active:  (-127, -403,  9, 14),
+    dollar-sign:  (-6, -107, 17, 16),
 
 // agent
-    agent: (-127, -80, 12, 15),
-    agent-active: (-103, -80, 12, 15),
+    agent: (-127, -180, 12, 15),
+    agent-active: (-103, -180, 11, 15),
 //chatbox
-    chatbox: (-48, -80, 17, 15),
-    chatbox-active: (-73, -80, 17, 15),
+    chatbox: (-48, -180, 17, 15),
+    chatbox-active: (-73, -180, 17, 15),
 );
