@@ -1,6 +1,6 @@
 @mixin useFormElements( $elementsUsed: all ) {
 	@if ( $elementsUsed == all ) {
-		$elementsUsed: radio checkbox text email password tel textarea dropdown-select number;
+		$elementsUsed: radio checkbox text email password tel textarea dropdown-select select number;
 	}
 	@if ( type-of $elementsUsed == list ) {
 		@each $element in $elementsUsed {

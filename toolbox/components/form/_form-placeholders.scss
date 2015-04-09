@@ -466,6 +466,40 @@
    }
 }
 
+%form-select {
+	& select {
+		// background-color: red;
+		border-radius: 2px;
+		margin: 5px;
+		height: 22px;
+		color: $color4;
+		font-size: 16px;
+		background-color: #dddddd;//lighten($color5,42%);
+
+		&:hover {
+			background-color: $color5;
+			color: lighten($color2, 10%);
+		}
+
+		option {
+			background-color: lighten($color5,32%);
+			color: $color4;
+			border: 3px solid blue;
+			&:after {
+				content: " ";
+				display: block;
+				width: 100px;
+				height: 20px;
+			}
+
+			&:hover {
+				background-color: white;
+			}
+		}
+
+	}
+}
+
 %form-dropdown-select {
 	& select {
 		@extend %form-text;

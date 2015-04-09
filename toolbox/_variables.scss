@@ -18,7 +18,7 @@ $main-green: #afafaf;
 /////////////////
 
 
-$imageRoot : "/Draft/frontend/web/common/img/"; //absolute path seems to work fine
+$imageRoot : "/frontend/web/common/img/" !default; //absolute path seems to work fine
 										  //this value relies on the vhost configuration
 										  //DocumentRoot must be set to "/var/www/Draft" or "/www/Draft"
 										  //rather than "/var/www/Draft/frontend/web"
@@ -29,7 +29,7 @@ $imageRoot : "/Draft/frontend/web/common/img/"; //absolute path seems to work fi
 // Sprites
 $vitacon_path_old : "../img/sprites/sprites_reg_2.svg";
 $vitacon_path_new : "../img/sprites/sprites_reg_3.svg";
-$icons_sprite : $imageRoot + "sprites/Mock Designs/icons.svg";
+$icons_sprite : $imageRoot + "sprites/Mock Designs/icons.svg" !default;
 
 
 

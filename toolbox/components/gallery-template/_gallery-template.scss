@@ -55,6 +55,14 @@
 				@include addStyles( map-get( $options, addStyles ) );
 			}
 			
+			$colWidth: 280px !default; //todo fixme put this somewhere I can find it
+			@if( map-has-key( $options, colWidth ) ) {
+				$colWidth: map-get( $options, colWidth )
+			}
+			&>div>div { // column
+				width: $colWidth;
+			}
+
 		}
 
 		@if( map-has-key( $config, wrappers ) ) {
@@ -99,6 +107,7 @@
 @mixin buildColumn( $columnValue, $count: 1 ) {
 	&>div {
 		@extend %gallery-template-column-base;
+
 	}
 	$panels: map-get( $columnValue, panels );
 	

@@ -62,6 +62,10 @@ $usedWidgets: null !default !global;
 				color: green;
 			}
 
+			@elseif ( $widgetName == add-button ) {
+				color: green;
+			}
+
 			@elseif ( $widgetName == list ) {
 				display: flex;
 				@include vita-list( $config );

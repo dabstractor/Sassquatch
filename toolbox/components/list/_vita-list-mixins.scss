@@ -7,8 +7,6 @@
 		$side: left;
 	}
 	@if ( $side ) {
-		// border-#{ $side }: solid $color1 $border-size;
-		// asdf: vita-list-position-#{ $side };
 		@at-root %vita-list-position-#{ $side } {
 			border-#{ $side }: solid $color1 $border-size;
 		}

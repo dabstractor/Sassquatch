@@ -51,6 +51,9 @@
 			@if map-has-key( $options, color ) {
 				background-color: #{ map-get( $options, color ) };
 			}
+			@if map-has-key( $options, border ) {
+				border: #{ map-get( $options, border ) };
+			}
 			// handle other choices for entire vita-list here
 		}
 				

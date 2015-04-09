@@ -32,22 +32,26 @@ $usedIcons: "" !default !global;
 
 // sprite maps are constructed as
 // name: ( background-position-X, background-position-Y, width, height ),
-// "px" should not be
+// "px" should not be included
+
 $default-sprite-map: (
-//min/max
-   max: (-1px, -158px, 15px, 15px),
-   max-active: (-24px, -158px, 15px, 15px),
-   min: (-48px, -158px, 15px, 15px),
-   min-active: (-74px, -158px, 15px, 15px),
+//minimize/maximize
+   max: (-1, -158, 15, 15),
+   max-active: (-24, -158, 15, 15),
+   min: (-48, -158, 15, 15),
+   min-active: (-74, -158, 15, 15),
 
 //contact
-    phone: (-99px, -158px, 19px, 14px),
-    phone-active: (-124px, -158px, 19px, 14px),
-    cell: (-1px, -71px, 14px, 21px),
-    cell-active: (-24px, -71px, 14px, 21px),
-    fax: (-43, -70, 24px, 23px),
-    fax-active: (-68, -70, 24px, 23px),
+    phone: (-99, -158, 19, 14),
+    phone-active: (-124, -158, 19, 14),
+    cell: (-1, -71, 14, 21),
+    cell-active: (-24, -71, 14, 21),
+    fax: (-43, -70, 24, 23),
+    fax-active: (-68, -70, 24, 23),
 
+//starz
+    star: (-120,-70,24,24),
+    star-active: (-95,-70,24,24),
 
     small-dark-logo:  (-7, -101, 17, 17),
     medium-dark-logo:  (-30, -101, 27, 27),
