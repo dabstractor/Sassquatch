@@ -203,7 +203,10 @@ $color5: $border-blue;
 
 	&:active {
 
-		@include linear-gradient(#408aff , 0%, #40afff, 100% );
+		// @include linear-gradient(#408aff , 0%, #40afff, 100% );
+		@include linear-gradient(#70baff , 0%, #70cfff, 100% );
+		// @include linear-gradient( #40afff, 0%, #4caefd, 100% );
+		// $border-blue: #4caefd;
 		@include box-shadow( 0px, 2px, 2px, $color1 );
 
  		&>span {

@@ -2,13 +2,18 @@
 
 	justify-content: flex-start;
 	text-align: left;
+	cursor: pointer;
+
+	span {
+		font-size: 12px;
+		letter-spacing: -0.5px;
+	}
 
 	&:not(.listExtender) {
-		&>div {
+		&>div:nth-of-type(1) {
 			box-sizing: content-box;
 			display: inline-block;
 			position: relative;
-			// background-color: $color4;
 			margin: 5px;
 			border: 2px solid $color4;
 			@include addCornerRadius( all, 2px );
@@ -59,6 +64,141 @@
 		}
 	}
 } // end checkbox
+%vita-list-widgets-none {
+	content: none;
+}
+
+%vita-list-widgets-contacts {
+	&:not(.listExtender) {
+		
+		display: block;
+		&:last-child {
+			margin-bottom: 75px;
+		}
+		&>div {
+		&:nth-of-type(1) { // name/title
+			font-size: 16px;
+			display: block;
+			text-align: left;
+			margin-bottom: 8px;
+			max-width: 60%;
+		}
+
+		&:nth-of-type(2) { // numbers
+			font-size: 14px;	
+			text-align: right;
+			letter-spacing: -0.1px;
+			line-height: 20px;
+			margin-bottom: 10px;
+
+			// transition: all 200ms linear;
+
+			// transition-delay: 400ms;
+
+			&>div {
+				// transition: all 200ms linear;
+				// transition-delay: 400ms;
+				&>div {
+					// display: none;
+					position: absolute;
+					opacity: 0;
+					// transition: all 200ms linear;
+					// transition-delay: 400ms;
+				}
+				&>span {
+					display: inline-block;
+					margin-left: 10px;
+				}
+			}
+			&>div {
+				position: absolute;
+				top: 6px;
+				right: 8px;
+
+				&.email>span {
+					@include icon( "mail", 2 );
+					margin-right: 65px;
+				}
+				&.phone>span {
+					@include icon( "phone", 1.6 );
+					margin: 6px 40px 0 0;
+				}
+				&.cell>span {
+					@include icon( "cell", 1.4 );
+					margin: 4px 22px 0 0;
+				}
+				&.fax>span {
+					@include icon( "fax", 1.6 );
+					margin-top: 2px;
+				}
+			}
+		}
+
+		&:nth-of-type(3) { // pin
+			display: none;
+		}
+	}
+}
+
+	&:hover, &.selected, &.pinned {
+		&>div {
+			&:nth-of-type(1) { // name/title
+				font-size: 23px;
+				letter-spacing: -1.4px;
+				max-width: 100%;
+			}
+			&:nth-of-type(2) {
+				&>div {
+					position: relative;
+
+					&>div {
+						position: relative;
+						display: inline-block;
+						opacity: 1;
+						cursor: text;
+					}
+					&.email>span {
+						@include icon( "mail", 2 );
+						margin: 0 -1px 0 12px;
+					}
+					&.phone>span {
+						@include icon( "phone", 1.6 );
+						margin: 0 -1px 0 11px;
+					}
+					&.cell>span {
+						@include icon( "cell", 1.4 );
+						margin: 0 0 0 14px;
+					}
+					&.fax>span {
+						@include icon( "fax", 1.6 );
+						margin: 0 -3px 0 11px;
+					}
+				}
+			}
+			&:nth-of-type(3) {
+				display: block;
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				cursor: pointer;
+				@extend %no-select;
+				@include icon("pin-active",1.5);
+
+				&:hover {
+					@include icon("pin-active", 1.8);
+				}
+
+				&:active {
+					@include icon("pin", 1.6);
+				}
+
+				&.pinned {
+					@include icon("pin", 1.7);
+				}
+			}
+		}
+	}
+}
 
 %vita-list-widgets-info {
 	flex-direction: column;

@@ -36,6 +36,13 @@
 			&>div {
 				justify-content: $justify;
 			}
+
+			@if( map-has-key( $options, border ) ) {
+				$border: map-get( $options, border );
+				&>div>div>div { //panel
+					border: $border !important;
+				}
+			}
 			
 			@if ( map-has-key( $options, requireColors ) ) {
 				// @warn( " colors: #{ map-get( $options, requireColors ) }");
@@ -51,6 +58,7 @@
 					// @extend %#{ getPrefix() }-columns-#{ map-get( $options, columns ) };
 				}
 			}
+			
 			@if( map-has-key( $options, addStyles ) ) {
 				@include addStyles( map-get( $options, addStyles ) );
 			}

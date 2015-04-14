@@ -18,7 +18,8 @@ $main-green: #afafaf;
 /////////////////
 
 
-$imageRoot : "/frontend/web/common/img/" !default; //absolute path seems to work fine
+// $imageRoot : "/Draft/frontend/web/common/img/" !default; //server
+// $imageRoot : "/Draft/frontend/web/common/img/" !default; //local
 										  //this value relies on the vhost configuration
 										  //DocumentRoot must be set to "/var/www/Draft" or "/www/Draft"
 										  //rather than "/var/www/Draft/frontend/web"

@@ -49,21 +49,113 @@ $usedWidgets: null !default !global;
 				// @at-root %#{ $configSelector } {
 				// }
 			}
+
 			@if ( $widgetName == exWidget ) {
 				color: blue;
 			}
 
-			@elseif ( $widgetName == exWidget2 ) {
-				color: purple;
-				background-color: lightblue;
-			}
+			// @elseif ( $widgetName == exWidget2 ) {
+			// 	color: purple;
+			// 	background-color: lightblue;
+			// }
 
-			@elseif ( $widgetName == exWidget4 ) {
-				color: green;
+			// @elseif ( $widgetName == exWidget4 ) {
+			// 	color: green;
+			// }
+
+			@if ( $widgetName == dashboard-info ) {
+				div:first-of-type {
+					input {
+						margin-top: 10px;
+						width: 60%;
+
+					}
+
+					&:after {
+						position: relative;
+						display: block;
+						content: " ";
+						@include icon( "search" );
+					}
+
+					&:hover {
+						&:after {
+							@include icon( "search-active" );
+						}
+					}
+				}
+				asdf: asdf;	
 			}
 
 			@elseif ( $widgetName == add-button ) {
-				color: green;
+
+				@extend %no-select;
+
+				position: relative;
+				display: flex;
+				flex-flow: row nowrap;
+				align-items: center;
+				justify-content: space-between;
+				height: 100%;
+				cursor: pointer;
+
+				&:hover {
+					&>div {
+						&:nth-of-type(1) {
+							@include icon("documents",1.05);
+						}	
+					}
+				}
+
+
+				&:active {
+					// background-color: $color4;
+					// background-color: #ddd;
+					// border: 2px solid lighten($color4, 20%);
+
+					&>div {
+						&:nth-of-type(1) {
+							&>div {
+								@include icon("documents-active",9);
+							}
+						}
+						&:nth-of-type(3) {
+							@include icon("plus-button-active",3);
+						}
+					}
+				}
+
+				&>div {
+					&:nth-of-type(1) {
+						position: relative;
+						left: 20%;
+
+						&>div {
+							align-self: center;
+							@include icon("documents",10);
+						}
+					}
+					&:nth-of-type(2) {
+
+						position: relative;
+						// top: 10%;
+						max-width: 55%;
+						// align-self: flex-end;
+						color: $color5;
+						text-align: left;
+						font-size: 30px;
+						line-height: 30px;
+					}
+
+					&:nth-of-type(3) {
+
+						// background-color: orange;
+						position: absolute;
+						top: 29px;
+						right: 29px;
+						@include icon("plus-button",3);
+					}
+				}
 			}
 
 			@elseif ( $widgetName == list ) {
@@ -173,7 +265,7 @@ $usedWidgets: null !default !global;
 					
 					@if( $config ) {
 						// background-color: red !important;
-						@warn( "??????????????????????????????????asdfkljasf?????????????????????????????????" );
+						// @warn( "??????????????????????????????????asdfkljasf?????????????????????????????????" );
 						// asdf: stringify( $config );
 						//handle footer config here
 						// $footerConfig: map-get( $config, footerConfig );
@@ -187,7 +279,7 @@ $usedWidgets: null !default !global;
 							// @warn( type-of( $footerConfig ) );
 
 							@if( map-has-key( $footerConfig, name ) ) {
-								@warn( "found footer config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" );
+								// @warn( "found footer config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" );
 								// & {
 									// asdf: asdf asdf;
 									// scope: #{ & };
@@ -196,9 +288,6 @@ $usedWidgets: null !default !global;
 							}
 						}
 					}
-
-
-
 				}
 			}
 
@@ -209,6 +298,7 @@ $usedWidgets: null !default !global;
 				// 	}
 				// }
 				@include useWidget( side-by-side, $config );
+
 				&>div {
 					&:nth-of-type(1) {
 						max-height: 75%;
@@ -277,6 +367,7 @@ $usedWidgets: null !default !global;
 						}
 					}
 				}
+				
 				@if( $config != null ) {
 
 					// @at-root .#{ $configSelector } {

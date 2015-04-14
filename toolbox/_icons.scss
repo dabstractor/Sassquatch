@@ -42,12 +42,12 @@ $default-sprite-map: (
    min-active: (-74, -158, 15, 15),
 
 //contact
-    phone: (-99, -158, 19, 14),
-    phone-active: (-124, -158, 19, 14),
-    cell: (-1, -71, 14, 21),
-    cell-active: (-24, -71, 14, 21),
-    fax: (-43, -70, 24, 23),
-    fax-active: (-68, -70, 24, 23),
+    phone: (-102, -162, 13, 10),
+    phone-active: (-126, -162, 13, 10),
+    cell: (-3, -75, 9, 13),
+    cell-active: (-27, -75, 9, 13),
+    fax: (-48, -74, 15, 14),
+    fax-active: (-73, -74, 15, 14),
 
 //starz
     star: (-120,-70,24,24),
@@ -79,7 +79,6 @@ $default-sprite-map: (
 
  // Warning
     warning:  (0, -184,  17, 16),
-
     
  // Filter
     add-filter:  (-24, -184,  16, 16),
@@ -105,8 +104,12 @@ $default-sprite-map: (
     lock-active:  (-25, -287,  17, 15),
 
  // Calendar
-    calendar:  (0, -263,  16, 16),
-    calendar-active:  (-25, -263,  17, 16),
+    calendar: (-1, -55, 11, 11),
+    calendar-active: (-15, -55, 11, 11),
+
+ // Layout
+    layout:  (0, -263,  16, 16),
+    layout-active:  (-25, -263,  17, 16),
 
  // Plus Button
     plus-button:  (-48, -204,  18, 18),

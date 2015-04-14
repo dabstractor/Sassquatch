@@ -64,8 +64,8 @@
 }
 
 %#{ getPrefix() }-panel-clear {
-	background-color: transparent;
-	border-color: transparent;
+	background-color: transparent !important;
+	border-color: transparent !important;
 }
 
 %#{ getPrefix() }-panel-with-header {
