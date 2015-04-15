@@ -42,6 +42,12 @@
 
 	&#{ $element } {
 
+		@if( map-has-key( $config, scrollable ) ) {
+			@if( map-get( $config, scrollable ) == true ) {
+				overflow-y: auto;
+			}
+		}
+
 		&>ul{
 
 			&>li {
@@ -87,6 +93,7 @@
 					}
 				}
 
+
 				@if( map-has-key( $config, divider ) ) { //sets up the divider
 					$divider: map-get( $config, divider );
 					$position: center !default;
@@ -98,11 +105,11 @@
 							$position: map-get( $config, divider-position );
 						}	
 					} @elseif( length( $divider ) > 1 ) {
-						@each $item in $divider {
-							@if( $item == left or $item == right or $item == center ) {
-								$position: $item;
+						@each $align in $divider {
+							@if( $align == left or $align == right or $align == center ) {
+								$position: $align;
 							} @else {
-								$divider-size: $item; 
+								$divider-size: $align; 
 							}
 						}
 					}  

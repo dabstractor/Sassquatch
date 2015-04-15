@@ -64,27 +64,48 @@ $usedWidgets: null !default !global;
 			// }
 
 			@if ( $widgetName == dashboard-info ) {
-				div:first-of-type {
-					input {
-						margin-top: 10px;
-						width: 60%;
+				&>div {
+					&:nth-of-type(1) {
+						width: 100%;
+						display: inline-block;
 
+						// &:hover {
+						// 	input+div {
+						// 		@include icon( "search-active", 0.8 );
+						// 	}
+						// }
 					}
 
-					&:after {
-						position: relative;
-						display: block;
-						content: " ";
-						@include icon( "search" );
-					}
+					&:nth-of-type(2) {
+						margin-top: 15px;
+						// background-color: red;
+						width: 100%;
+						height: 100%;
 
-					&:hover {
-						&:after {
-							@include icon( "search-active" );
+						&>div {
+							margin: 0;
+							text-align: left;
+
+							&>span {
+								&:nth-of-type(1) {
+									width: 50px;
+									font-size: 16px;
+									text-align: right;
+									margin: 0 5px 0 35px;
+									color: $color5;
+								}
+								&:nth-of-type(2) {
+									position: relative;
+									bottom: 1px;
+									color: $color4;
+									font-size: 14px;
+									line-height: 16px;
+									padding-bottom: 2px;
+								}
+							}
 						}
 					}
 				}
-				asdf: asdf;	
 			}
 
 			@elseif ( $widgetName == add-button ) {
@@ -102,8 +123,16 @@ $usedWidgets: null !default !global;
 				&:hover {
 					&>div {
 						&:nth-of-type(1) {
-							@include icon("documents",1.05);
+							transition: all 400ms ease;
 						}	
+						&:nth-of-type(2) {
+							color: $color5;
+						}
+						&:nth-of-type(3) {
+							// @include icon("plus-button-active",3);
+							@include icon("plus-button",3.7);
+							transition: all 400ms ease;
+						}
 					}
 				}
 
@@ -115,13 +144,14 @@ $usedWidgets: null !default !global;
 
 					&>div {
 						&:nth-of-type(1) {
-							&>div {
-								@include icon("documents-active",9);
-							}
-						}
-						&:nth-of-type(3) {
-							@include icon("plus-button-active",3);
-						}
+							@include icon("documents",.95);
+							transition: none;
+						}	
+						// &:nth-of-type(1) {
+						// 	&>div {
+						// 		@include icon("documents-active",9);
+						// 	}
+						// }
 					}
 				}
 
@@ -145,6 +175,7 @@ $usedWidgets: null !default !global;
 						text-align: left;
 						font-size: 30px;
 						line-height: 30px;
+						// margin-right: 10px;
 					}
 
 					&:nth-of-type(3) {
@@ -154,6 +185,7 @@ $usedWidgets: null !default !global;
 						top: 29px;
 						right: 29px;
 						@include icon("plus-button",3);
+						transition: all 400ms ease;
 					}
 				}
 			}

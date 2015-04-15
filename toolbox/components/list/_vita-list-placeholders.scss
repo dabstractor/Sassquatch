@@ -37,10 +37,12 @@
 	border-top: $border-size/2 solid white; // spacing for visual depth
 	border-bottom: $divider-size solid $color1;
 	@include linear-gradient( $color2, 0%, $color3, 100%); 
+	// position: relative;
 
 	&>* {
 		@include font-size( 18pt );
 		letter-spacing: 2px;
+		position: relative;
 	}
 }
 
