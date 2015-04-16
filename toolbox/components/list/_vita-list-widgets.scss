@@ -159,22 +159,22 @@
 						opacity: 1;
 						cursor: text;
 					}
-					// .email>span {
-					// 	@include icon( "mail", 2 );
-					// 	margin: 0 -1px 0 12px;
-					// }
-					// .phone>span {
-					// 	@include icon( "phone", 1.6 );
-					// 	margin: 0 -1px 0 11px;
-					// }
-					// .cell>span {
-					// 	@include icon( "cell", 1.4 );
-					// 	margin: 0 0 0 14px;
-					// }
-					// .fax>span {
-					// 	@include icon( "fax", 1.6 );
-					// 	margin: 0 -3px 0 11px;
-					// }
+					&.email>span {
+						@include icon( "mail", 2 );
+						margin: 0 -1px 0 12px;
+					}
+					&.phone>span {
+						@include icon( "phone", 1.6 );
+						margin: 0 -1px 0 11px;
+					}
+					&.cell>span {
+						@include icon( "cell", 1.4 );
+						margin: 0 0 0 14px;
+					}
+					&.fax>span {
+						@include icon( "fax", 1.6 );
+						margin: 0 -3px 0 11px;
+					}
 				}
 			}
 			&:nth-of-type(3) {

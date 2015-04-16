@@ -69,6 +69,7 @@
 			}
 			&>div>div { // column
 				width: $colWidth;
+				min-width: $colWidth;
 			}
 
 		}
@@ -131,6 +132,21 @@
 $panelSizes: getOption( panelSizes );
 
 @mixin buildPanel( $panelValue, $count: 1 ) {
+	$selector: "div";
+
+	@if( map-has-key( $panelValue, setAsDefault ) == false or map-get( $panelValue, setAsDefault ) == false ) {
+		$selector: $selector + ":nth-of-type(" + $count + ")";
+		// @if() {
+			// &>div {
+		 // 		@extend %#{ getPrefix() }-panel-base;
+			// 	@extend %#{ $placeholderName } !optional;
+			// }
+		// }
+	}
+	// else {
+	// }
+
+
 	//generate placeholder name from panel values (size)
 	$size: 0 !default;
 	@if ( map-has-key( $panelValue, size ) ) {
@@ -142,7 +158,7 @@ $panelSizes: getOption( panelSizes );
 			@if ( map-has-key( $panelValue, widgetOrientation ) ) {
 				$widgetOrientation: map-get( $panelValue, widgetOrientation )
 			}
-			&>div:nth-of-type( #{ $count } ) {
+			&>#{ $selector } {
 				@include buildWidgets( $widgets );
 
 				@if( map-has-key( $panelValue, addStyles ) ) {
@@ -168,7 +184,7 @@ $panelSizes: getOption( panelSizes );
 	 
 	
 
-	&>div:nth-of-type( #{ $count } ) {
+	&>#{ $selector } {
  		@extend %#{ getPrefix() }-panel-base;
 		@if ( map-has-key( $panelValue, backdrop ) ) {
 			@if( map-get( $panelValue, backdrop ) == clear ) {
@@ -176,10 +192,15 @@ $panelSizes: getOption( panelSizes );
 			}
 		}
 	}
+
 	$placeholderName: #{ getPrefix() }-panel-#{ $size };
-	&>div:nth-of-type( #{ $count } ) {
+
+
+
+	&>#{ $selector } {
 		@extend %#{ $placeholderName } !optional;
 	}
+
 	// todo fixme: this needs to find a home
 	$orientation: row;
 	@if ( map-has-key( $panelValue, widgetOrientation ) ) {

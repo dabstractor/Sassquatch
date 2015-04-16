@@ -102,11 +102,11 @@ $modal-default-config: (
 			display: block;
 
 			&>span {
-				width: 100%;
-				height: 100%;
+				// width: 100%;
+				// height: 100%;
 				top: 6px;
 				left: 6px;
-				position: relative;
+				position: absolute;
 				padding: 0;
 				@include icon("xmark", 1.2);
 			}

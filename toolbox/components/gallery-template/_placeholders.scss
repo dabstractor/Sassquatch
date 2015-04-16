@@ -14,7 +14,9 @@
 			height: auto;
 			margin-bottom: 20px !important;
 		} @else {
-			height: getOption( containerSize )*$multiplier/100 - getOption( panelMargin )*2;
+			$height: getOption( containerSize )*$multiplier/100 - getOption( panelMargin )*2;
+			height: $height;
+			min-height: $height;
 		}
 	}
 }
