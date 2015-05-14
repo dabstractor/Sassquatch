@@ -39,7 +39,7 @@ $usedColors: "" !default !global;
 }
 
 @mixin gallery-maxColumns( $size ) {
-	@warn( "maxColumns running at " + $size );
+	// @warn( "maxColumns running at " + $size );
 	@at-root %#{ getPrefix() }-columns-#{ $size } {
 		max-width: (map-get( $gallery-template-config, panelWidth ) + 40) * $size;
 		// @warn( "max-width: " + (map-get( $gallery-template-config, panelWidth ) + 300 ) * $size );

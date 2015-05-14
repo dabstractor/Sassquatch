@@ -95,12 +95,10 @@
                         // todo call footer mixin
                         // @warn ("optlist == footer" );
                         @include form-footer( $properties );
-
                     }
                 }
             } // End @if map-has-key( $config, $optlist ) 
         }  // End @each  
-
     }      
 } // End @mixin form
 

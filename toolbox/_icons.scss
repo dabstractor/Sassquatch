@@ -35,6 +35,11 @@ $usedIcons: "" !default !global;
 // "px" should not be included
 
 $default-sprite-map: (
+//
+//refresh
+    refresh-doc: (-99, -36, 17, 14),
+    refresh-doc-active: (-124, -36, 15, 14),
+
 //minimize/maximize
    max: (-1, -158, 15, 15),
    max-active: (-24, -158, 15, 15),
@@ -90,13 +95,14 @@ $default-sprite-map: (
  // User
     user:  (0, -378,  17, 15),
     user-active:  (-26, -378,  17, 15),
+    user-white: (0, -18, 17, 15),
  // Key
     key:  (0, -358,  16, 8),
     key-active:  (-26, -358,  16, 8),
  // Gear 
     gear:  (0, -332,  15, 15),
     gear-active:  (-26, -332,  15, 15),
- // Trash   
+ // Trash 
     trash:  (0, -310,  13, 16),
     trash-active:  (-26, -309,  13, 17),
  // Lock   
@@ -120,8 +126,9 @@ $default-sprite-map: (
     minus-button-active:  (-125, -204,  17, 18),
 
  // xmark
-    xmark:  (-51, -236,  12, 12),
-    xmark-active:  (-77, -235,  13, 13),
+    xmark:  (-51, -236,  13, 13),
+    xmark-white:  (-77, -235,  13, 13),
+    xmark-active: (-32, -53, 13, 12),
  // checkmark
     checkmark:  (-51, -266,  14, 11),
     checkmark-active:  (-77, -266,  14, 11),

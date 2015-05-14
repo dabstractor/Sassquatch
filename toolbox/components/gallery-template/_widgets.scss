@@ -54,16 +54,6 @@ $usedWidgets: null !default !global;
 				color: blue;
 			}
 
-			// @elseif ( $widgetName == exWidget2 ) {
-			// 	color: purple;
-			// 	background-color: lightblue;
-			// }
-
-			// @elseif ( $widgetName == exWidget4 ) {
-			// 	color: green;
-			// }
-
-
 			@if ( $widgetName == favorites ) {
 							// main container
 				width: 100%;
@@ -148,17 +138,11 @@ $usedWidgets: null !default !global;
 				}
 			}
 
-			@if ( $widgetName == dashboard-info ) {
+			@elseif ( $widgetName == dashboard-info ) {
 				&>div {
 					&:nth-of-type(1) {
 						width: 100%;
 						display: inline-block;
-
-						// &:hover {
-						// 	input+div {
-						// 		@include icon( "search-active", 0.8 );
-						// 	}
-						// }
 					}
 
 					&:nth-of-type(2) {
@@ -170,6 +154,9 @@ $usedWidgets: null !default !global;
 						&>div {
 							margin: 0;
 							text-align: left;
+							display: flex;
+							flex-flow: row nowrap;
+							align-items: center;
 
 							&>span {
 								&:nth-of-type(1) {
@@ -178,6 +165,7 @@ $usedWidgets: null !default !global;
 									text-align: right;
 									margin: 0 5px 0 35px;
 									color: $color5;
+									flex: 1 1 30%;
 								}
 								&:nth-of-type(2) {
 									position: relative;
@@ -186,6 +174,7 @@ $usedWidgets: null !default !global;
 									font-size: 14px;
 									line-height: 16px;
 									padding-bottom: 2px;
+								flex: 5 0 70%;
 								}
 							}
 						}
@@ -223,24 +212,17 @@ $usedWidgets: null !default !global;
 
 
 				&:active {
-					// background-color: $color4;
-					// background-color: #ddd;
-					// border: 2px solid lighten($color4, 20%);
 
 					&>div {
 						&:nth-of-type(1) {
 							@include icon("documents",.95);
 							transition: none;
 						}	
-						// &:nth-of-type(1) {
-						// 	&>div {
-						// 		@include icon("documents-active",9);
-						// 	}
-						// }
 					}
 				}
 
 				&>div {
+					flex: 1 0 auto;
 					&:nth-of-type(1) {
 						position: relative;
 						left: 20%;
@@ -252,15 +234,13 @@ $usedWidgets: null !default !global;
 					}
 					&:nth-of-type(2) {
 
-						position: relative;
-						// top: 10%;
+						// position: relative;
 						max-width: 55%;
-						// align-self: flex-end;
-						color: $color5;
-						text-align: left;
 						font-size: 30px;
 						line-height: 30px;
-						// margin-right: 10px;
+						color: $color5;
+						text-align: left;
+
 					}
 
 					&:nth-of-type(3) {

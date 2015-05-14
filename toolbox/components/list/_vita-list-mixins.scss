@@ -1,4 +1,4 @@
-@mixin vita-list-position( $position ) { 
+@mixin vita-list-position( $position ) {
 	$side: null;
 
 	@if ( $position == left ) {
@@ -32,6 +32,7 @@
 				@extend %vita-list-header-crunch;
 			}
 		}
+		
 		@if ( map-has-key( $config, size ) ) {
 			@include vita-list-header-size( map-get( $config, size ) );
 		}
@@ -48,7 +49,7 @@
 			}
 		}
 
-		&>ul{
+		&>ul {
 
 			&>li {
 				$size: getDefault( options, spacing ) !default;
@@ -147,18 +148,20 @@
 		@if ( map-has-key( $config, size ) ) {
 			$size: map-get( $config, size );
 		}
-		@if( map-get( $config, useButton ) && map-get( $config, useButton ) == true ) {
-			$icon: "white-right-arrow";
-			$activeIcon: "blue-right-arrow";
-			@if( map-get( $config, buttonIcon ) ) {
-				$icon: map-get( $config, buttonIcon );
+		@if( map-has-key( $config, useButton ) ) {
+			@if( map-get( $config, useButton ) == true ) {
+				$icon: "white-right-arrow";
+				$activeIcon: "blue-right-arrow";
+				@if( map-get( $config, buttonIcon ) ) {
+					$icon: map-get( $config, buttonIcon );
+				}
+				@if( map-get( $config, buttonActiveIcon ) ) {
+					$activeIcon: map-get( $config, buttonActiveIcon );
+				}
+				&>div.button>div {
+					@include custom-button( $icon, $activeIcon );
+				}		
 			}
-			@if( map-get( $config, buttonActiveIcon ) ) {
-				$activeIcon: map-get( $config, buttonActiveIcon );
-			}
-			&>div.button>div {
-				@include custom-button( $icon, $activeIcon );
-			}		
 		}
 		@include vita-list-footer-size( $size, $spacing );
 		@include vita-list-text-align( $align );

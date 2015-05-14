@@ -148,7 +148,11 @@ $color7: #007c9e;
 	}
 }
 
-%blank-content {
+%blank-content { // this is for short selectors
+	content: "\00a0 ";
+}
+
+@mixin blank-content { // this is for long selectors
 	content: "\00a0 ";
 }
 
@@ -190,7 +194,7 @@ $color7: #007c9e;
 	@extend %custom-button-base;
 
 	@include box-shadow( 0px, 1px, 3px, $color5 );
-	@include addTransition( all, 100ms );
+	@include addTransition( background-color, 100ms );
 	@include linear-gradient( #ffffff, 0%, #afafaf, 100% );
 	span {
 		font-size: 16px;

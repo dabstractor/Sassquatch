@@ -1,6 +1,6 @@
 @mixin useFormElements( $elementsUsed: all ) {
 	@if ( $elementsUsed == all ) {
-		$elementsUsed: radio checkbox text email password tel textarea dropdown-select select number;
+		$elementsUsed: radio checkbox checkbox-container text email password tel textarea dropdown-select select number output;
 	}
 	@if ( type-of $elementsUsed == list ) {
 		@each $element in $elementsUsed {
@@ -115,6 +115,12 @@
 		// boxed? : 0 || 1 (default)
 		// bot-border? : 0(default) || 1 
 	
+	@if map-has-key( $config, reset ) {
+		@if(map-get($config,reset) == true) {
+			@extend %form-reset;
+		}
+	}
+
 	@if map-has-key( $config, bg-color ) {
 		background-color: map-get( $config, bg-color );
 	}	
