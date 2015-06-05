@@ -26,6 +26,7 @@
 			max-height: 12px;
 			min-height: 12px;
 			margin-right: 9px;
+			transition: background-color 100ms linear;
 
 			&:before {
 				position: absolute;
@@ -40,6 +41,7 @@
 				min-width: 10px;
 				max-width: 10px;
 				width: 10px;
+				transition: background-color 350ms linear;
 			}
 		}
 

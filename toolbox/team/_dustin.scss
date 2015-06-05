@@ -124,12 +124,12 @@ $color7: #007c9e;
 	text-align: center;
 	
 	&>span {
-		border-left: 1px solid $color1;
-		border-right: 1px solid $color1;
+		border-left: 2px solid $color2;
+		border-right: 2px solid $color2;
 		padding: 0 5%;
 		background-color: inherit;
 		position: relative;
-		// margin: 0 auto;
+		margin: 0 auto;
 
 	}
 
@@ -139,7 +139,7 @@ $color7: #007c9e;
 		margin: auto;
 		right: 0;
 		left: 0;
-		background-color: $color1;
+		background-color: $color2;
 		content: " ";
 		position: absolute;
 		left: 0;

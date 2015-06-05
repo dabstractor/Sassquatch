@@ -4,28 +4,37 @@ $usedIcons: "" !default !global;
     background: url("#{$icons_sprite}") no-repeat;
 }
 
-@mixin icon( $sprite, $zoom: 1, $sprite-map: $default-sprite-map ) { // generates only one re-usable placeholder per icon per page
+@mixin icon( $sprite, $zoom: 1, $sprite-map: $default-sprite-map, $important: false) { // generates only one re-usable placeholder per icon per page
     @extend %sprite-bg;
     @if( $zoom and  $zoom != 1 ) {
        transform: scale( $zoom ); 
     } 
+    $append: "";
+    $spriteName: $sprite;
+
+    @if($important == true) {
+        $append: "!important";
+        $spriteName: $sprite + -important;
+        // @warn( $spriteName );
+        // asdf: fdsa;
+    }
 
     @each $key, $val in $sprite-map {
         @if ( $sprite == $key ) {
-            @if( not index( $usedIcons, $sprite ) ) { // be sure that it isn't already on the page...
-                $usedIcons: append( $usedIcons, $sprite ) !global;
+            @if( not index( $usedIcons, $spriteName ) ) { // be sure that it isn't already on the page...
+                $usedIcons: append( $usedIcons, $spriteName ) !global;
                 $curList: map-get( $sprite-map, $sprite );
-                
-                @at-root %icon-#{ $sprite } {
-                    background-position: #{nth( $curList, 1 )}px  #{nth( $curList, 2 )}px;
-                    width: #{nth( $curList, 3 )}px;
-                    height: #{nth( $curList, 4 )}px;
+
+                @at-root %icon-#{ $spriteName } {
+                    background-position: #{nth( $curList, 1 )}px  #{nth( $curList, 2 )}px #{ $append };
+                    width: #{nth( $curList, 3 )}px #{ $append };
+                    height: #{nth( $curList, 4 )}px #{ $append };
                 }
             }
-            @extend %icon-#{ $sprite };
+            @extend %icon-#{ $spriteName };
         }
     }
-    @if( not index( $usedIcons, $sprite ) ) {
+    @if( not index( $usedIcons, $spriteName ) ) {
         @warn ( "No icon " + $sprite + " found." )
     }
 }
@@ -95,7 +104,7 @@ $default-sprite-map: (
  // User
     user:  (0, -378,  17, 15),
     user-active:  (-26, -378,  17, 15),
-    user-white: (0, -18, 17, 15),
+    user-white: (0, -138, 17, 15),
  // Key
     key:  (0, -358,  16, 8),
     key-active:  (-26, -358,  16, 8),

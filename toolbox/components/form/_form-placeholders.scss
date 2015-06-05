@@ -34,8 +34,6 @@
 	overflow-y: auto;
 	overflow-x: hidden;
 	display: flex;
-	// flex-flow: column nowrap;	
-	// align-items: center;
 	justify-content: flex-start;
 	position: relative;
 	background-color: inherit; //this travels all the way down to title spans,
@@ -50,30 +48,22 @@
 
 	&>section { // form section
 		position: relative;
-		// flex: 0 0 auto;
-		// height: auto;
 		width: 100%;
 		display: flex;
 		flex-flow: row wrap;
-		// justify-content: space-around;
-		justify-content: flex-start;
-		// align-items: center;
 		padding: 10px 0 20px;
 		background-color: inherit; //from content-base
 		
 // new functionality
-		min-width: 320px;
+		min-width: 280px;
 		justify-content: flex-start;
-		// align-self: baseline;
-		// align-self: stretch;
-		// border-left: 2px solid $color2;
+		align-self: stretch;
 
 
+		flex: 1 0 auto;
 
 
-		flex: 1 0 30%;
-
-
+		align-content: flex-start;
 
 
 		&::before {
@@ -91,60 +81,17 @@
 			background-color: inherit; //from content-base>section
 			position: relative;
 			&:nth-of-type( 1 ) { //section title
+				@extend %strike-through-heading;
 				display: flex;
 				flex-flow: row wrap;
 				justify-content: space-around;
 				width: 100%;
-				z-index: 0;
 				position: relative;
 				align-self: flex-start;
-				&>span { //section title text
-					// flex: 1 0 153px;
-					position: relative;
-					display: block;
-					background-color: inherit;// from content-base>section>div;
-					padding: 0 3%;
-					margin: 0;
-					z-index: 2;
-					border-left: 2px solid $color2;
-					border-right: 2px solid $color2;
-					text-align: center;
-					margin: 0 1%;
-					min-width: 153px;
-					// text-wrap: nowrap;
-					// width: 0%;
-					align-self: center;
-					flex: 0 0 1;
-					// width: 30%;
-					// top: 50%;
-				}
-				&:before { //section title strike-through bar
-					// align-self: center;
-					// display: flex;
-					display: block;
-					height: 2px;
-					width: 100%;
-					background-color: $color2;
-					content: "\00a0 ";
-					position: relative;
-					left: 0;
-					z-index: -1;
-					// top: 12px;
-					top: 50%;
-					// bottom: 50%;
-					// height: 100%;
-					line-height: 100%;
-					@media screen and ( -webkit-min-device-pixel-ratio: 0 ) {
-						position: absolute;
-					}
-				}
-
 			}
 			&:not(:nth-of-type( 1 )) { //content
 				display: flex;
 				flex-flow: row wrap;
-				// align-self: center;
-				// align-items: center;
 				justify-content: center;
 				margin: 5px auto 0 auto;
 				width: 100%;
@@ -184,6 +131,7 @@
 					}
 
 				}
+
 				& input, & select, & textarea { //when input does not come with label, style it like:
 					max-width: 80%;
 					min-width: 40%;
@@ -256,14 +204,8 @@
 }
 
 %form-header-base {
-	// background-color: orange;
 	@extend %form-cap-base;
 	font-size: 19px;
-	// height: 100%;
-//header styles here
-	// display: block;
-	// padding: 10px;
-	// height: 50px;
 }
 
 %form-footer-base {
@@ -299,6 +241,12 @@
 %form-shadow {
    box-shadow: 5px 5px 5px rgba( 0, 0, 0, .3 );
 }
+
+%form-size {
+	width: 100%;
+	height: 100%;
+}
+
 
 %form-input {
     background-color: #fff;
@@ -339,15 +287,20 @@
     &[required]::before {
     	position: relative;
     	display: block;
-    	content: " ";
+    	content: "\0a00";
     	background-color: red;
     	width: 100px;
     	height: 100px;
     }
 }
 
+%form-file {
+	& input[type="file"] {
+		@extend %form-input;
+	}
+}
+
 %form-radio-checkbox {
-	// display: none; //temp, for debugging
 	&+label {
         color: rgb( 80, 80, 80 );
 	}
@@ -398,65 +351,56 @@
     }
 }
 
-%form-checkbox-container {
-	& div[data-input-type=checkbox-container] {
-		width: auto !important;
-		margin: auto !important;
-		// padding: 0 10%;
-		flex-flow: row wrap;
+%form-container-items {
+	width: auto !important;
+	margin: auto !important;
+	padding: 0 2px;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	
+	&>div, &::after {
+		min-width: 150px;
+		max-width: 200px;
+		flex: 1 0 0;
+	}
+
+	&::after {
+		display: block;
+		content: "\00a0";
+		height: 1px;
+		margin: auto;
+	}
+
+	&>div { // actual checkboxes
+		@extend %vita-list-widgets-checkbox;
+		display: inline-flex;
+		float: left;
+		align-self: flex-start;
 		justify-content: flex-start;
-		
-		&>div, &::after {
-			min-width: 150px;
-			max-width: 200px;
-			flex: 1 0 0;
-		}
+		align-items: center;
 
-		&::after {
-			display: block;
-			content: "\0a00";
-			width: auto;
-			height: 1px;
-			// background-color: orange;
-		}
-
-		// label {
-		// 	width: 100% !important;
-		// 	margin-bottom: 10px;
-		// }
-		&>div { // actual checkboxes
-			@extend %vita-list-widgets-checkbox;
-			display: inline-flex;
-			float: left;
-			align-self: flex-start;
-			// justify-content: center !important;
-			// flex: 1 1 100px;
-			// text-align: center !important;
-			justify-content: flex-start;
-			align-items: center;
-
-			// &:last-child:nth-of-type(odd) {
-			// 	border: 1px solid red;
-			// 	border-radius: 10px;
-			// 	// float: left;
-			// 	// height: 10px;
-			// 	// width: 100%;
-
-			// 	&::after {
-			// 		display: block;
-			// 		content: " ";
-			// 		position: relative;
-			// 	}
-			// }
-		}
 		&>span { // "label" text
 			display: inline-flex;
-			position: relative;
-			// top: 3px;
-			// bottom: 9px;
+			@extend %no-select;
 		}
 	}
 }
+
+%form-checkboxContainer {
+	& div[data-input-type="checkbox-container"] {
+		@extend %form-container-items;
+	}
+}
+
+%form-radio-container, %form-radioContainer {
+	& div[data-input-type="radio-container"] {
+		@extend %form-container-items;
+		&>div>div, &>div>div::before {
+			border-radius: 50% !important;
+		}
+	}
+}
+
 
 %form-text {
 	& input, & input[type="text"] {
@@ -464,7 +408,57 @@
 	}
 }
 
-%form-number {
+%form-searchContainer {
+	& [data-input-type="search"] {
+		position: relative;
+		@extend %form-search
+	}
+}
+
+%form-search {
+	&>input {
+		
+		@extend %form-input;
+
+		&+div {
+			position: absolute;
+			display: block;
+			@include icon( "search", 0.8, $important: true );
+			top: 12px !important;
+			right: 22px;
+
+			&:before {
+				position: relative;
+				display: block;
+				content: " ";
+				top: -3px;
+				left: -5px;
+				width: 1px;
+				height: 23px;
+				background-color: $color4;
+			}
+		}
+		&:focus {
+			border: 2px solid $color5;
+		}
+
+		&:focus+div {
+			@include icon( "search-active", $important: true );
+
+			&:before {
+				background-color: $color5;
+			}
+		}			
+	}
+}
+
+%form-date {
+	& [type="date"], & [data-input-type="date"] {
+		@extend %form-input;
+	}
+}
+
+%form-number, %form-numeric {
 	& input[type="number"], & input[type="numeric"], & input[pattern="[\\$\\.0-9]*"] {
 		@extend %form-input;
 		padding-right: 3px;
@@ -477,6 +471,12 @@
 			-webkit-appearance: none;
 		}
 
+	}
+}
+
+%form-monetary {
+	& [data-input-type="monetary"], & input[type="monetary"] {
+		@extend %form-input;
 	}
 }
 
@@ -496,6 +496,7 @@
 %form-textarea {
     & textarea {
     	@extend %form-input;
+    	height: 44px;
     }
 }
 
@@ -518,9 +519,7 @@
 %form-select {
 	& select {
 	   	@extend %form-input;
-		// background-color: red;
 		border-radius: 2px;
-		// margin: 5px;
 		height: 22px;
 		color: $color4;
 		font-size: 16px;
@@ -534,7 +533,7 @@
 		option {
 			background-color: lighten($color5,32%);
 			color: $color4;
-			// border: 3px solid blue;
+
 			&:after {
 				content: " ";
 				display: block;
@@ -554,128 +553,120 @@
 	& select {
 		@extend %form-text;
 		min-width: 50px;
-		// width: 100%;	
-		// width: 240px;
-		// margin: auto;
 	}
 	& .dropdown-select { //needs javascript to work anyway
-		// asdf: dropdown asdf;
 	    position: relative;
 	    width: 100% !important;
-	    // display: block;
-	    // margin: 0 auto;
-	    // background-color: red;
-	    // height: 10px;
-	    // width: 10px;
 	        
-	        &>div:nth-of-type( 1 ) { // #vita-select {
-	            background: none repeat scroll 0 0 rgb(244, 244, 244);
-	            border: 1px solid #ccc;
-	            border-radius: 4px;
-	            height: 34px;
-	            overflow: hidden;
-	            max-width: 240px;
-	            width: auto;
-	            margin: 0 auto;
+        &>div:nth-of-type( 1 ) { // #vita-select {
+            background: none repeat scroll 0 0 rgb(244, 244, 244);
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            height: 34px;
+            overflow: hidden;
+            max-width: 240px;
+            width: auto;
+            margin: 0 auto;
 
-	            &>div:nth-of-type( 1 ) { // .dropdown-button {
-	                background: #40afff; /* Old browsers */
-	                background: -moz-linear-gradient(top,  #40afff 45%, #407dff 100%); /* FF3.6+ */
-	                background: -webkit-gradient(linear, left top, left bottom, color-stop(45%,#40afff), color-stop(100%,#407dff)); /* Chrome,Safari4+ */
-	                background: -webkit-linear-gradient(top,  #40afff 45%,#407dff 100%); /* Chrome10+,Safari5.1+ */
-	                background: -o-linear-gradient(top,  #40afff 45%,#407dff 100%); /* Opera 11.10+ */
-	                background: -ms-linear-gradient(top,  #40afff 45%,#407dff 100%); /* IE10+ */
-	                background: linear-gradient(to bottom,  #40afff 45%,#407dff 100%); /* W3C */
-	                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40afff', endColorstr='#407dff',GradientType=0 ); /* IE6-9 */
-	                border-bottom-right-radius: 3px;
-	                border-left: 1px solid rgb(17, 181, 255);
-	                border-top-right-radius: 3px;
-	                float: right;
-	                height: 100%;
-	                position: relative;
-	                right: 0;
-	                top: 0;
-	                width: 36px;
+            &>div:nth-of-type( 1 ) { // .dropdown-button {
+                background: #40afff; /* Old browsers */
+                background: -moz-linear-gradient(top,  #40afff 45%, #407dff 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(45%,#40afff), color-stop(100%,#407dff)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  #40afff 45%,#407dff 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  #40afff 45%,#407dff 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  #40afff 45%,#407dff 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  #40afff 45%,#407dff 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40afff', endColorstr='#407dff',GradientType=0 ); /* IE6-9 */
+                border-bottom-right-radius: 3px;
+                border-left: 1px solid rgb(17, 181, 255);
+                border-top-right-radius: 3px;
+                float: right;
+                height: 100%;
+                position: relative;
+                right: 0;
+                top: 0;
+                width: 36px;
 
-	                &>span {// .arrow {
-	                    background: none repeat scroll 0 0 transparent;
-	                    border-left: 8px solid transparent;
-	                    border-right: 8px solid transparent;
-	                    border-top: 12px solid rgb(200,200,200);
-	                    height: auto;
-	                    margin: 0 auto;
-	                    position: absolute;
-	                    right: 11px;
-	                    top: 12px;
-	                    width: auto;
-	                    &>span {
-	                        background: none repeat scroll 0 0 transparent;
-	                        border-left: 6px solid transparent;
-	                        border-right: 6px solid transparent;
-	                        border-top: 9.9px solid rgb(244, 244, 244);
-	                        height: auto;
-	                        margin: 0 auto;
-	                        position: absolute;
-	                        right: -5.5px;
-	                        top: -11px;
-	                        width: auto;
-	                    } // End .inner-arrow
+                &>span {// .arrow {
+                    background: none repeat scroll 0 0 transparent;
+                    border-left: 8px solid transparent;
+                    border-right: 8px solid transparent;
+                    border-top: 12px solid rgb(200,200,200);
+                    height: auto;
+                    margin: 0 auto;
+                    position: absolute;
+                    right: 11px;
+                    top: 12px;
+                    width: auto;
+                    &>span {
+                        background: none repeat scroll 0 0 transparent;
+                        border-left: 6px solid transparent;
+                        border-right: 6px solid transparent;
+                        border-top: 9.9px solid rgb(244, 244, 244);
+                        height: auto;
+                        margin: 0 auto;
+                        position: absolute;
+                        right: -5.5px;
+                        top: -11px;
+                        width: auto;
+                    } // End .inner-arrow
 
-	                }// End arrow
-	            }// End .dropdown-button
-	        }// End #vita-select
-	        
-	        &>div:nth-of-type( 2 ) {// #vita-dropdown {
-	            background: none repeat scroll 0 0 #f4f4f4;
-	            border: 2px solid #40afff;
-	            border-radius: 4px;
-	            height: 160px;
-	            left: 8px;
-	            position: absolute;
-	            top: 55px;
-	            width: 227px;
+                }// End arrow
+            }// End .dropdown-button
+        }// End #vita-select
+        
+        &>div:nth-of-type( 2 ) {// #vita-dropdown {
+            background: none repeat scroll 0 0 #f4f4f4;
+            border: 2px solid #40afff;
+            border-radius: 4px;
+            height: 160px;
+            left: 8px;
+            position: absolute;
+            top: 55px;
+            width: 227px;
 
-	            &>div:nth-of-type( 1 ) {// .dropdown-arrow {
-	                background: none repeat scroll 0 0 transparent;
-	                border-bottom: 19px solid rgb(64, 175, 255);
-	                border-left: 11px solid transparent;
-	                border-right: 11px solid transparent;
-	                height: 0;
-	                position: absolute;
-	                right: 4px;
-	                top: -20px;
-	                width: 0;
-	            }
+            &>div:nth-of-type( 1 ) {// .dropdown-arrow {
+                background: none repeat scroll 0 0 transparent;
+                border-bottom: 19px solid rgb(64, 175, 255);
+                border-left: 11px solid transparent;
+                border-right: 11px solid transparent;
+                height: 0;
+                position: absolute;
+                right: 4px;
+                top: -20px;
+                width: 0;
+            }
 
-	            &>ul {
-	                float: left;
-	                height: 100%;
-	                list-style: outside none none;
-	                margin: 0;
-	                overflow: hidden;
-	                padding: 0;
-	                position: absolute;
-	                top: 0;
-	                width: 100%; 
+            &>ul {
+                float: left;
+                height: 100%;
+                list-style: outside none none;
+                margin: 0;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+                top: 0;
+                width: 100%; 
 
-	                &>li {
-	                    position: relative;
-	                    width: 223px;
-	                    height: 30px;
+                &>li {
+                    position: relative;
+                    width: 223px;
+                    height: 30px;
 
-	                    &:hover {
-	                        background: rgb(230,230,230);
-	                        border-left: 5px solid rgb(64, 175, 255);
-	                    }
-	                    span {
-	                        font-family: montserrat;
-	                        height: 100%;
-	                        left: 5px;
-	                        position: absolute;
-	                        top: 4px;
-	                    } // End span
-	                } // End li
-	            } // End .dropdown-list
-	        }// End #vita-dropdown
+                    &:hover {
+                        background: rgb(230,230,230);
+                        border-left: 5px solid rgb(64, 175, 255);
+                    }
+                    span {
+                        font-family: montserrat;
+                        height: 100%;
+                        left: 5px;
+                        position: absolute;
+                        top: 4px;
+                    } // End span
+                } // End li
+            } // End .dropdown-list
+        }// End #vita-dropdown
     }  
 }
+

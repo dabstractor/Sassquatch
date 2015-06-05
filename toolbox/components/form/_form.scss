@@ -5,6 +5,7 @@
 @import "form-functions";
 @import "form-placeholders";
 @import "form-config";
+@import "form-widgets";
 
 @mixin form( $config: $form-default-config, $element: "&" ) {
 
@@ -46,7 +47,6 @@
 
                 &>div:nth-child( #{ $blocks } ) {
 
-                    // @extend %vita-list-#{ $optlist }-base;  //extend the base placeholder for each options group
 
                     $properties:
                         map-merge( 
@@ -67,12 +67,6 @@
                         $properties: map-remove( $properties, styles );
                     }
 
-                    // $properties: 
-                    //     map-merge( map-get( $form-default-config,
-                    //         map-merge( map-get( $config, options ), map-get( $config, $optlist ))
-                    //         )
-
-
             //         // map-merge argument order matters!
             //         // the second map arguments' values take
             //         // precendent over the first
@@ -83,17 +77,15 @@
                     
 
                     // reached: #{ $optlist };
-                    @if ( $optlist == header ) { // must update with $optlists
+                    @if ( $optlist == header ) {
                         //call header mixin
                         @include form-header( $properties );
 
-                    } @elseif ( $optlist == content ) { // must update with $optlists
+                    } @elseif ( $optlist == content ) {
                         // todo call content mixin
-                        @include form-content( $properties );
+                        @include form-content( map-get( $config, content ) );
 
-                    } @elseif ( $optlist == footer ) { // must update with $optlists
-                        // todo call footer mixin
-                        // @warn ("optlist == footer" );
+                    } @elseif ( $optlist == footer ) {
                         @include form-footer( $properties );
                     }
                 }

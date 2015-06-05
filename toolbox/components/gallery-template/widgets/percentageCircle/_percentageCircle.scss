@@ -5,7 +5,7 @@
 
   @at-root #{ $element } {
     position: relative;
-    box-sizing: border-box;
+    // box-sizing: border-box;
     width: $size;
     height: $size;
     max-width: $size;
@@ -16,7 +16,7 @@
     padding: 0% ;
     align-self: center;
     box-sizing: content-box;
-    background-color: inherit; 
+    background-color: inherit;
   }
   
   @at-root #{ $element }>div:nth-of-type( 2 ),

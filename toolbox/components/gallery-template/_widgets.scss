@@ -204,7 +204,8 @@ $usedWidgets: null !default !global;
 						}
 						&:nth-of-type(3) {
 							// @include icon("plus-button-active",3);
-							@include icon("plus-button",3.5);
+							// @include icon("plus-button",3.5);
+							transform: scale(3.4);
 							transition: all 400ms ease;
 						}
 					}
@@ -389,11 +390,7 @@ $usedWidgets: null !default !global;
 			}
 
 			@elseif( $widgetName == side-by-side-with-footer ) {
-				// @at-root .#{ $configSelector } {
-				// 	&>div:nth-of-type( 2 ) {
 
-				// 	}
-				// }
 				@include useWidget( side-by-side, $config );
 
 				&>div {
@@ -402,13 +399,10 @@ $usedWidgets: null !default !global;
 					}
 					&:nth-of-type(2) {
 						max-height: 60%;
-						$footerConfig:();
+						// $footerConfig: ();
 						@if( map-has-key($config, footerConfig ) ) {
 							$footerConfig: map-get($config, footerConfig);
-							// fdsa: stringify($footerConfig);
 							@include useWidget( map-get( $config, footer ), map-get( $config, footerConfig ) );
-							// @if( map-has-key($footerConfig, name ) )  {
-							// }
 						}
 					}
 				}
@@ -454,31 +448,19 @@ $usedWidgets: null !default !global;
 
 
 						&:nth-of-type( 1 ) {
-								@include useWidget( map-get( $config, left ) );
+							@include useWidget( map-get( $config, left ) );
 						}
 						&:nth-of-type( 2 ) {
-								@include useWidget( map-get( $config, right ) );
+							@include useWidget( map-get( $config, right ) );
 							max-height: 70%;
 							height: 100%;
-							border-left: 2px solid $color1;
+							border-left: 2px solid $color2;
 						}
 					}
 				}
 				
-				@if( $config != null ) {
-
-					// @at-root .#{ $configSelector } {
-					// 	&>div>div {
-					// 		&:nth-of-type( 1 ) {
-					// 		}
-					// 		&:nth-of-type( 2 ) {
-
-					// 		}
-					// 	}
-
-					// }
-
-				}
+				// @if( $config != null ) {
+				// }
 			}
 			@elseif( $widgetName == controlButtons ) {
 				//controlButtonWidget gets built here

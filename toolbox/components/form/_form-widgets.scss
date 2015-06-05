@@ -1,0 +1,101 @@
+$usedFormWidgets: null !default !global;
+
+@mixin useFormWidget( $widgetName, $config: null ) {
+	$selector: #{ form }-widget-#{ $widgetName };
+
+	@if( index( $usedFormWidgets, $widgetName ) == null ) {
+
+		$usedFormWidgets: append( $usedWidgets, $widgetName ) !global; //wtf this is ridiculous
+
+		@at-root %#{ $selector } {
+
+			@if( $config and map-has-key( $config, addStyles ) ) {
+				@include addStyles( map-get( $config, addStyles ) );
+			}
+
+			@if ( $widgetName == exWidget ) {
+				exWidget: goes here;
+			} @elseif ($widgetName == strikeThroughHeader) {
+				background-color: inherit;
+				display: block;
+				max-width: 90%;
+				width: 90%;
+				margin-bottom: 20px;
+				@extend %strike-through-heading;
+			} @elseif ($widgetName == breakdown) {
+				// display: block !important;
+				// background-color: red;	
+				// width: 100% !important;
+				// height: 100% !important;
+				width: 75%;
+				margin: 5px 0;
+				display: flex;
+				justify-content: space-around;
+				flex-flow: row wrap;
+				align-items: stretch;
+				// width: 100px;
+				// height: 100px;
+				// douchey: doo at the widget;
+				background-color: inherit;
+				margin-left: -2px;
+				overflow: hidden;
+
+				&>div {
+					margin: 7px 0px;
+					padding: 0px 8px;
+					flex: 1 0 auto;
+				}
+				
+				&>div:not(:nth-of-type(3)) {
+					display: flex;
+					flex-flow: column nowrap;
+					border-left: 2px solid $color2;
+					justify-content: center;
+					margin-left: -2px;
+					margin-bottom: 15px;
+				}
+
+				&>div:nth-of-type(1), &>div:nth-of-type(2) {
+					// @extend %form-widget-breakdown-value-styles;
+					&>div:nth-of-type(1) {
+						font-size: 25px !important;
+					}
+					&>div:nth-of-type(2) {
+						font-size: 12px !important;
+					}
+				}
+
+				&>div:nth-of-type(3) {
+					// background-color: orange;
+
+					// width: 90px !important;
+					// height: 90px !important;
+					background-color: inherit;
+					@include useWidget("percentageCircle");
+					// @extend %gallery-widget-percentageCirle;
+					// flex: 0 0 0;
+					margin-top: -2px;
+					border-top: 2px solid $color2;
+					padding-top: 12px;
+					// margin-top: 12px;
+					&>div {
+						margin: auto;
+					}
+				}
+			} @elseif ($widgetName == totaler) {
+				// asdf: blah;
+				dungus: amongus;
+				// &>div {
+				// 	background-color: red;
+				// }
+				// background-color: red;
+				// width: 100px;
+				// height: 100px;
+			} @else {
+				widget: not found douchey doo doo;
+				@warn ( "Widget " + $widgetName + " does not exist" );
+			}
+		}
+	}
+	@extend %#{ $selector };
+}

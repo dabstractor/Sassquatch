@@ -50,6 +50,9 @@ $modal-default-config: (
 		}
 
 		&>div {
+			display: block;
+			margin: auto;
+			margin-top: 10px;
 			position: relative;
 			opacity: 0;
 			// top: 50%;
