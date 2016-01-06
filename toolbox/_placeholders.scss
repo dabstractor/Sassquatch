@@ -6,3 +6,9 @@
     background-size: 2px 2px;
     margin: auto;
 }
+
+%valid-content {
+	display: block;
+	position: relative;
+	content: "\0a00";
+}
