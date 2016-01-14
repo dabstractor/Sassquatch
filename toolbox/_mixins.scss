@@ -175,12 +175,13 @@
 	-o-transition: $values;
 }
 
-@mixin addTextStroke( $color: #000,	$width: 1px, $fade: 0 ) { //uses 4 text-shadows instead of text-stroke for cross-browser compatibility
+@mixin addTextStroke( $color: #000,	$width: 1px, $fade: 0, $textShadow: "" ) { //uses 4 text-shadows instead of text-stroke for cross-browser compatibility
 	text-shadow:
 		$width*-1 $width*-1 $fade $color,
 		$width $width*-1 $fade $color,
 		$width*-1 $width $fade $color,
-		$width $width $fade $color; 
+		$width $width $fade $color,
+        #{$textShadow};
 }
 
 @mixin addTextShadow( $depth: 2px, $color: #ddd, $pos: b-r, $fade: $depth*2 ) {
