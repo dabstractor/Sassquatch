@@ -239,6 +239,10 @@
     left: 50%;
 }
 
+@mixin showMyBox() {
+    border: 1px solid black;
+    background: white; 
+}
 
 @mixin vitaForm(){
     
