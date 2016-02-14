@@ -133,16 +133,56 @@
     text-shadow:addOpacity($color, $opacity) 0 1px 0;
 }
 
-@mixin linear-gradient($start: #f1f1f1, $from: 0%, $stop: #d9d9d9, $to: 100%) { 
+@mixin linear-gradient($start: #f1f1f1, $from: 0%, $stop: #d9d9d9, $to: 100%, $direction: to bottom) { 
+
+    $webkit-start: left top;
+    $webkit-end: left bottom;
+    $webkit-linear: bottom;
+    $moz-direction: center top;
+    $o-direction: top;
+    $ms-direction: top;
+
+    @if ($direction == "to top") {
+        $webkit-start: left bottom;
+        $webkit-end: left top;
+        $moz-direction: center bottom;
+        $webkit-linear: bottom;
+        $o-direction: top;
+        $ms-direction: top;
+    } @elseif ($direction == "to right") {
+        $webkit-start: top left;
+        $webkit-end: top right;
+        $webkit-linear: left;
+        $moz-direction: center left;
+        $o-direction: right;
+        $ms-direction: right;
+    } @elseif ($direction == "to left") {
+        $webkit-start: top right;
+        $webkit-end: top left;
+        $webkit-linear: right;
+        $moz-direction: center right;
+        $o-direction: left;
+        $ms-direction: left;
+    }
+
+
     @if (type-of $start != map) {
-        background: $start;
-        background: -webkit-gradient(linear, left top, left bottom, from($start), to($stop));
-        background: -moz-linear-gradient(center top, $start $from, $stop $to);
-        background: -moz-gradient(center top, $start $from, $stop $to);
-        background: -webkit-linear-gradient(top, $start $from,$stop $to);
-        background: -o-linear-gradient(top, $start $from,$stop $to);
-        background: -ms-linear-gradient(top, $start $from,$stop $to);
-        background: linear-gradient(to bottom, $start $from,$stop $to);
+        // background: $start;
+        background-color: $start;
+        // background: -webkit-gradient(linear, left top, left bottom, from($start), to($stop));
+        background: -webkit-gradient(linear, $webkit-start, $webkit-end, from($start), to($stop));
+        // background: -moz-linear-gradient(center top, $start $from, $stop $to);
+        background: -moz-linear-gradient($moz-direction, $start $from, $stop $to);
+        // background: -moz-gradient(center top, $start $from, $stop $to);
+        background: -moz-gradient($moz-direction, $start $from, $stop $to);
+        // background: -webkit-linear-gradient(top, $start $from,$stop $to);
+        background: -webkit-linear-gradient($webkit-linear, $start $from,$stop $to);
+        // background: -o-linear-gradient(top, $start $from,$stop $to);
+        background: -o-linear-gradient($o-direction, $start $from,$stop $to);
+        // background: -ms-linear-gradient(top, $start $from,$stop $to);
+        background: -ms-linear-gradient($ms-direction, $start $from,$stop $to);
+        // background: linear-gradient(to bottom, $start $from,$stop $to);
+        background: linear-gradient($direction, $start $from,$stop $to);
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$start}', endColorstr='#{$stop}',GradientType=0 );
     }
     // @else {
