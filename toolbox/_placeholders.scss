@@ -12,3 +12,8 @@
 	position: relative;
 	content: "\00a0";
 }
+
+%contain-contents {
+	overflow: hidden;
+	white-space: normal;
+}
