@@ -512,11 +512,16 @@
 @mixin scaleAndCenter($scale: 1, $direction: both, $transform: "") {
     position: absolute;
     @if ($direction == horizontal) or ($direction == both) {
+        $transformDrawBackAmount = -50%;
+        @if ($direction == both) {
+            top: 50%;
+            $transformDrawBackAmount = -25%;
+        }
         left: 50%;
-        transform: scale($scale) translateX(-25%) $transform;
+        transform: scale($scale) translateX($transformDrawBackAmount) #{$transform};
     }
-    @if ($direction == vertical) or ($direction == both) {
+    @if ($direction == vertical){
         top: 50%;
-        transform: scale($scale) translateY(-25%) $transform;
+        transform: scale($scale) translateY($transformDrawBackAmount) #{$transform};
     }
 }
