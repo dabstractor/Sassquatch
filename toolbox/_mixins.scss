@@ -509,14 +509,14 @@
 }
 
 
-@mixin scaleAndCenter($scale: 1, $direction: both) {
+@mixin scaleAndCenter($scale: 1, $direction: both, $transform: "") {
     position: absolute;
     @if ($direction == horizontal) or ($direction == both) {
         left: 50%;
-        transform: scale($scale) translateX(-25%);
+        transform: scale($scale) translateX(-25%) $transform;
     }
     @if ($direction == vertical) or ($direction == both) {
         top: 50%;
-        transform: scale($scale) translateY(-25%);
+        transform: scale($scale) translateY(-25%) $transform;
     }
 }
