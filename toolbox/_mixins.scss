@@ -511,11 +511,11 @@
 
 @mixin scaleAndCenter($scale: 1, $direction: both, $transform: "") {
     position: absolute;
+    $transformDrawBackAmount: -50%;
     @if ($direction == horizontal) or ($direction == both) {
-        $transformDrawBackAmount = -50%;
         @if ($direction == both) {
             top: 50%;
-            $transformDrawBackAmount = -25%;
+            $transformDrawBackAmount: -25%;
         }
         left: 50%;
         transform: scale($scale) translateX($transformDrawBackAmount) #{$transform};

@@ -1,0 +1,262 @@
+$buttonFullWidthHeight: 70px;
+$buttonTransitionTime: 200ms;
+$buttonBarTransitionDelay: 650ms;
+$buttonOffset: $buttonFullWidthHeight/-1.8;
+$buttonScaleAdjustment: $buttonFullWidthHeight / 60px;
+
+%navButton {
+	
+	.prev, .next {
+		position: absolute;
+		cursor: pointer;
+		max-width: 15%;
+		@include scaleAndCenter($direction: vertical);
+	}
+	.prev {
+		left: 0;
+	}
+	.next {
+		right: 0;
+	}
+
+	// these are the largest containing boxes (height 100%) for
+	// the next/back buttons
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	position: absolute;
+	height: 100%;
+	// cursor: pointer;
+	z-index: 1;
+	// background-color: rgba(150,0,0,0.2);
+	// transition: all $buttonTransitionTime linear;
+
+	.button-container {
+		// these are the smaller containers for the
+		// buttons' components
+		position: relative;
+		// background-color: rgba(0,150,0,0.4);
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: center;
+		align-items: center;
+		left: 0px;
+		right: 0px;
+		width: $buttonFullWidthHeight*1.1;
+		height: $buttonFullWidthHeight*1.1;
+		transition: all $buttonTransitionTime ease;
+
+
+		.semi { // semi base
+			position: absolute;
+			top: 0px;
+			// background-color: #f4f4f4;
+			// border: 4px solid #00afff;
+			width: $buttonFullWidthHeight;
+			height: $buttonFullWidthHeight;
+			display: flex;
+			flex-flow: column nowrap;
+			justify-content: center;
+			transition: all $buttonTransitionTime linear;
+			transform: scale(0.7 * $buttonScaleAdjustment);
+			transition-delay: $buttonBarTransitionDelay - ($buttonBarTransitionDelay/5);
+
+		}
+
+		.arrow { // semi base img semi img base
+			z-index: 1;
+			top: -4px;
+			position: relative;
+			transition: all $buttonTransitionTime*0.8 linear;
+			transition-delay: $buttonBarTransitionDelay - ($buttonBarTransitionDelay/5);
+		}
+
+		.bar { // bar base
+			z-index: 1;
+			position: absolute;
+			top: 15px;
+			font-size: 16px;
+			font-style: sans-serif, Arial;
+			width: 95px;
+			height: 38px; 
+			background-color: rgba( 30, 30, 30, 0.9);
+			color: white;
+			visibility: hidden;
+			opacity: 0;
+			transition: all 0.7s ease;
+			transition: all $buttonTransitionTime*3 ease;
+			transition-delay: $buttonBarTransitionDelay;
+
+			span {
+				position: absolute;
+				top: -6px;
+				padding: 14px 6px;
+				font-size: 22px;
+				text-shadow: 0px 0px 2px #F3FFDD;
+			}
+		}
+
+		&:hover { // button container hover button hover
+			cursor: pointer;
+			.bar {
+				visibility: visible;
+				opacity: 1;
+				transform: translateX( 0% );
+				transition:
+					opacity .7s ease,
+					transform .5s;
+				transition-delay: $buttonTransitionTime;
+			}
+			// .semi {
+			// 	// transform: scale(1);
+			// 	background-color: #ffffff;
+			// 	transition: all $buttonTransitionTime linear;
+			// 	// transition-delay: none;
+			// }
+			.arrow {
+				z-index: 2;
+
+				transition: all (/* $buttonBarTransitionDelay +  */$buttonTransitionTime*3) ease-out;
+				// transition-delay: $buttonTransitionTime;
+				// transition-delay: 0ms;
+			}
+		}
+
+		&:active { // button active
+			.semi {
+				transform: scale(0.9);
+				transition-delay: 0ms;
+				transition: none;
+			}
+			.arrow {
+				transition-delay: 0ms;
+				transition: none;
+			}
+			.bar {
+				background-color: rgba( 30, 30, 30, 0.8);
+				height: 36px;
+				top: 16px;
+				// span {
+				// 	padding: 9px 6px;
+				// }
+			}
+		}
+	}
+}
+
+@mixin navButtons($elem: '&') {
+	#{$elem} {
+		@extend %navButton;
+		// @include nextButton();
+		// @include nextButton();
+	}
+}
+
+@mixin nextButton($elem: '&') {
+	#{$elem} {
+		@include navButtons($elem);
+
+		.prev {
+			// left: -37px;
+			// left: $buttonOffset;
+			left: -10px;
+			.button-container:hover {
+				.semi {
+					transform: scale(1) translateX(10px);
+				}
+				.arrow { // arrow left hover 
+					// @include scaleAndCenter(
+					// 	$scale: 1,
+					// 	$direction: vertical,
+					// 	$transform: "rotateY(180deg) translateX(-56px)"
+					// );
+					transform: scale(1 * $buttonScaleAdjustment) translateX(20px) rotateY(180deg);
+				}
+			}
+			.button-container:active {
+				.arrow {
+					// @include scaleAndCenter(
+					// 	$scale: 0.9,
+					// 	$direction: vertical,
+					// 	$transform: "rotateY(180deg) translateX(-56px)"
+					// );
+					transform: scale(0.9 * $buttonScaleAdjustment) translateX(19px) rotateY(180deg);
+				}
+				.semi { // semi left
+					box-shadow: 1px 0px 5px black;
+				}
+			}
+			.semi { // semi left
+				box-shadow: 1px 0px 11px black;
+				border-radius: 0 50% 50% 0;
+			}
+			.arrow { // arrow left
+				// @include scaleAndCenter(
+				// 	$scale: 0.7 * $buttonScaleAdjustment,
+				// 	$direction: vertical,
+				// 	$transform: "rotateY(180deg) translateX(17px)"
+				// );
+
+				position: relative;	
+				left: -32px;
+				transform: scale(0.7 * $buttonScaleAdjustment) translateX(17px) rotateY(180deg);
+			}
+			.bar { // bar left
+				transform: translateX(-100%);
+				left: 10px;
+				& span { right: 0; }
+			}
+		}
+
+	}
+}
+
+@mixin prevButton($elem: '&') {
+	#{$elem} {
+		@include navButtons($elem);
+
+		.next {
+			// right: -37px;
+			right: $buttonOffset - ($buttonOffset * 0.002);
+			.button-container:hover { // right hover right button hover button right hover button hover right
+				// transition: right $buttonTransitionTime linear;
+				.semi { // semi hover right semi right hover
+					transform: scale(1) translateX(-10px);
+					// img { // semi hover right img semi img right hover semi img hover right 
+					// 	// transform: scale(1.2) translateX(9px);
+					// 	transform: scale(1) translateX(5px);
+					// }
+				}
+				.arrow {
+					transform: scale(1 * $buttonScaleAdjustment) translateX(-20px);
+				}
+			}
+			.button-container:active {
+				.arrow { // right hover right button hover button right hover button hover right
+					transform: scale(0.9 * $buttonScaleAdjustment) translateX(-20px);
+				}
+				.semi {
+					box-shadow: -1px 0px 7px black;
+				}
+			}
+			.semi { // semi right
+				box-shadow: -1px 0px 11px black;
+				border-radius: 50% 0 0 50%;
+				// border-right: 0;
+				// img { // semi img right semi right img
+				// 	transform: scale(0.9) translateX(3px);
+				// 	// transform: scale(0.9) translateX(1px);
+				// 	// transform: scale(1) translateX(-6px);
+				// 	align-self: flex-start;
+				// }
+			}
+			.arrow {
+				transform: scale(0.7 * $buttonScaleAdjustment) translateX(-15px);
+			}
+			.bar { // bar right
+				right: 37px;
+				transform: translateX( 100% );
+			}
+		}
+	}
+}
