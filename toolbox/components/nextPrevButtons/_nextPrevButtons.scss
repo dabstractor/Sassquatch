@@ -22,8 +22,7 @@ $buttonScaleAdjustment: $buttonFullWidthHeight / 60px;
 	// these are the largest containing boxes (height 100%) for
 	// the next/back buttons
 	display: flex;
-	flex-flow: column nowrap;
-	justify-content: center;
+	flex-flow: column nowrap; justify-content: center;
 	position: absolute;
 	height: 100%;
 	// cursor: pointer;
@@ -252,14 +251,24 @@ $buttonScaleAdjustment: $buttonFullWidthHeight / 60px;
 				transform: scale(0.7 * $buttonScaleAdjustment) translateX(-15px);
 			}
 			.bar { // bar right
-				right: 37px;
+				right: 38px;
 				transform: translateX( 100% );
 			}
 		}
 	}
 }
 
-@mixin navButtons($elem: '&') {
+@mixin navButtons($scale: 1, $elem: '&') {
+	.next, .prev {
+		transform: scale($scale) translateY(-50%/$scale);
+		// transform: scale(2);
+	}	
+	.next {
+		transform-origin: 50% 50%;
+	}
+	.prev {
+		transform-origin: 12% 50%;
+	}
 	#{$elem} {
 		@include nextButton();
 		@include prevButton();
