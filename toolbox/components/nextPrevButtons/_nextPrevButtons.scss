@@ -144,17 +144,15 @@ $buttonScaleAdjustment: $buttonFullWidthHeight / 60px;
 	}
 }
 
-@mixin navButtons($elem: '&') {
+@mixin navButtonsBase($elem: '&') {
 	#{$elem} {
 		@extend %navButton;
-		// @include nextButton();
-		// @include nextButton();
 	}
 }
 
 @mixin nextButton($elem: '&') {
 	#{$elem} {
-		@include navButtons($elem);
+		@include navButtonsBase($elem);
 
 		.prev {
 			// left: -37px;
@@ -213,7 +211,7 @@ $buttonScaleAdjustment: $buttonFullWidthHeight / 60px;
 
 @mixin prevButton($elem: '&') {
 	#{$elem} {
-		@include navButtons($elem);
+		@include navButtonsBase($elem);
 
 		.next {
 			// right: -37px;
@@ -258,5 +256,12 @@ $buttonScaleAdjustment: $buttonFullWidthHeight / 60px;
 				transform: translateX( 100% );
 			}
 		}
+	}
+}
+
+@mixin navButtons($elem: '&') {
+	#{$elem} {
+		@include nextButton();
+		@include prevButton();
 	}
 }
