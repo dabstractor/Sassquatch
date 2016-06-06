@@ -186,6 +186,7 @@ $buttonScaleAdjustment: $buttonFullWidthHeight / 60px;
 			.semi { // semi left
 				box-shadow: 1px 0px 11px black;
 				border-radius: 0 50% 50% 0;
+				left: -20px;
 			}
 			.arrow { // arrow left
 				// @include scaleAndCenter(
