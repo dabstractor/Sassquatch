@@ -18,19 +18,17 @@ $main-green: #afafaf;
 /////////////////
 
 
-// $imageRoot : "/Draft/frontend/web/common/img/" !default; //server
-$imageRoot : "/Draft/frontend/web/common/img/" !default; //local
+// $imageRoot : "/MRS/frontend/web/common/img/" !default; //server
+$imageRoot : "/app/media/svg/" !default; //loc/al
 										  //this value relies on the vhost configuration
-										  //DocumentRoot must be set to "/var/www/Draft" or "/www/Draft"
-										  //rather than "/var/www/Draft/frontend/web"
+										  //DocumentRoot must be set to "/var/www/MRS" or "/www/MRS"
+										  //rather than "/var/www/MRS/frontend/web"
 										  //
 										  //If the latter vhost config is needed, remove the "/frontend/web"
 										  //from the $imageRoot variable defined above.
 
 // Sprites
-$vitacon_path_old : "../img/sprites/sprites_reg_2.svg";
-$vitacon_path_new : "../img/sprites/sprites_reg_3.svg";
-$icons_sprite : $imageRoot + "sprites/Mock Designs/icons.svg" !default;
+$icons_sprite : $imageRoot + "icons.svg" !default;
 
 
 
@@ -44,13 +42,16 @@ $icons_sprite : $imageRoot + "sprites/Mock Designs/icons.svg" !default;
 // _config.scss
 $breakpoints: (
   small-phone: 20em,
+  sectional: 25em,
   large-phone: 30em, 
   small-tab: 37.5em,
   medium-tab: 48em,
   large-tab: 56.25em,
+  xlarge-tab: 60em,
   small-desktop: 64em,
   medium-desktop: 68.75em,
   large-desktop:  81.25em,
+  xlarge-desktop:  87em,
 );
 
 $custom-breakpoints: (

@@ -12,17 +12,49 @@
 }
 
 // _mixins.scss
-@mixin respond-to($breakpoint) {
-  @if map-has-key($breakpoints, $breakpoint) {
-    @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
-      @content;
-    }
-  }
- 
-  @else {
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+@mixin respond-to-px($breakpoint, $boundary) {
+
+    @if $boundary != null {
+
+        @if ($boundary == "min") {
+            @media (min-width: $breakpoint) {
+                @content;
+            }
+        } @else {
+            @media (max-width: $breakpoint) {
+                @content;
+            } 
+        }
+
+    } @else {
+        @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
         + "Please make sure it is defined in `$breakpoints` map.";
-  }
+    }
+}
+
+// _mixins.scss
+@mixin respond-to($breakpoint, $boundary) {
+
+    @if $boundary != null {
+
+        @if ($boundary == "min") {
+            @if map-has-key($breakpoints, $breakpoint) {
+                @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
+                    @content;
+                }
+            }
+        } @else {
+            @if map-has-key($breakpoints, $breakpoint) {
+                @media (max-width: #{map-get($breakpoints, $breakpoint)}) {
+                    @content;
+                }
+            }
+        }
+
+    } @else {
+        @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+    }
 }
 
 @mixin custom-respond-to($breakpoint) {
@@ -44,12 +76,46 @@
   }
 }
 
-@mixin mySize($width: auto, $min-width: auto, $height: auto, $min-height: auto){
-	
+
+@mixin respond-between($start, $end) {
+  // Retrieves the value from the key
+  $start: map-get($breakpoints, $start);
+  $end: map-get($breakpoints, $end);
+ 
+  // If the key exists in the map
+  @if $start != null && $end != null {
+    // Prints a media query based on the value
+    @media (min-device-width: $start) and (max-device-width: $end) {
+      @content;
+    }
+  }
+ 
+  // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+
+@mixin mySize(
+    $width: auto, 
+    $min-width: auto, 
+    $max-width: auto, 
+    $height: auto, 
+    $min-height: auto, 
+    $max-height: auto
+){
+    
+    // Set Width	
     width: $width;
     min-width: $min-width;
+    max-width: $max-width;
+    
+    // Set Height
     height: $height;
     min-height: $min-height;
+    max-height: $max-height;
 
 }
 
@@ -84,7 +150,6 @@
 
 @mixin addCornerRadius($corner, $rad) {
 
-
 	@if $corner == t-l {
 
              -moz-border-radius-topleft: $rad;
@@ -109,7 +174,24 @@
 	 -webkit-border-bottom-right-radius: $rad;
 	         border-bottom-right-radius: $rad;
 
-	}
+	} @else {
+        -moz-border-radius-topleft:         $rad;
+        -webkit-border-top-left-radius:     $rad;
+        border-top-left-radius:             $rad;
+
+        -moz-border-radius-topright:        $rad;
+        -webkit-border-top-right-radius:    $rad;
+        border-top-right-radius:            $rad;
+
+        -moz-border-radius-bottomleft:      $rad;
+        -webkit-border-bottom-left-radius:  $rad;
+        border-bottom-left-radius:          $rad;
+
+        -moz-border-radius-bottomright:     $rad;
+        -webkit-border-bottom-right-radius: $rad;
+        border-bottom-right-radius:         $rad;
+    }
+
 }
 
 @mixin box-shadow($top, $left, $blur, $color, $inset: false) {
@@ -121,7 +203,7 @@
     -webkit-box-shadow: $top $left $blur $color;
     -moz-box-shadow: $top $left $blur $color;
     box-shadow: $top $left $blur $color;
-  }
+  } 
 }
 
 @mixin font-size($size) {
@@ -457,6 +539,12 @@
 
     } //End .vita-form
       
+}
+
+@mixin modernizer {
+    @at-root {
+        article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block;}audio,canvas,video{display:inline-block;}audio:not([controls]){display:none;height:0;}[hidden]{display:none;}html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}body{margin:0;}a:focus{outline:thin dotted;}a:active,a:hover{outline:0;}h1{font-size:2em;margin:0.67em 0;}abbr[title]{border-bottom:1px dotted;}b,strong{font-weight:bold;}dfn{font-style:italic;}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0;}mark{background:#ff0;color:#000;}code,kbd,pre,samp{font-family:monospace,serif;font-size:1em;}pre{white-space:pre-wrap;}q{quotes:"\201C" "\201D" "\2018" "\2019";}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-0.5em;}sub{bottom:-0.25em;}img{border:0;}svg:not(:root){overflow:hidden;}figure{margin:0;}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:0.35em 0.625em 0.75em;}legend{border:0;padding:0;}button,input,select,textarea{font-family:inherit;font-size:100%;margin:0;}button,input{line-height:normal;}button,select{text-transform:none;}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer;}button[disabled],html input[disabled]{cursor:default;}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}textarea{overflow:auto;vertical-align:top;}table{border-collapse:collapse;border-spacing:0;}
+    }
 }
 
 @mixin reset {
